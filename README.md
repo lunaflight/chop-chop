@@ -18,6 +18,7 @@ relative path issues:
 
 2. `source venv/bin/activate`
     - This activates the virtual environment.
+    - To escape the environment, you can run `deactivate`.
 
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
