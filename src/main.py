@@ -4,9 +4,6 @@ import logging
 from argparse import ArgumentParser
 import platform_parsers.reddit
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 def mock(platform):
     platform = platform.lower()
