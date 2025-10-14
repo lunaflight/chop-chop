@@ -37,4 +37,7 @@ how to obtain a URL for the platform.
 
 | **Platform** | **Sample Link to Copy and Use** | **Notes** |
 |--------------|----------|-----------|
-| Reddit       | https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9euqx/ | Click `permalink` on the comment to obtain a direct link. |
+| HardwareZone | https://forums.hardwarezone.com.sg/threads/any-good-use-for-myactivesg-credits.7163585/#post-157582701 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
+| Reddit | https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9euqx/ | Click `permalink` on the comment to obtain a direct link. |
+| SingaporeBrides | https://singaporebrides.com/weddingforum/threads/any-clubbers-out-there.1305/page-396#post-730029 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
+| SingaporeMotherhood | https://singaporemotherhood.com/forum/threads/female-obgyn-recommendations.298237/post-8821891 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
