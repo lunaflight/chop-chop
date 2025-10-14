@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from platform_parsers import format, soup_cacher, url_fetcher
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
+import logging
 
 
 class T:
@@ -65,7 +66,19 @@ def modern_url_of_url(url: str) -> str:
     return replace_netloc_of_url(url, netloc="www.reddit.com")
 
 
+def is_permalink(url: str) -> bool:
+    path_with_empty_strs = urlparse(url).path.split("/")
+    path = [segment for segment in path_with_empty_strs if segment]
+    # Permalink paths are of the form:
+    # [r, subreddit, comments, id, title, comment_id]
+    return path.index("comments") + 4 == len(path)
+
+
 def of_url(url: str) -> T:
+    if not is_permalink(url):
+        logging.error("Expected a permalink to the comment.")
+        raise ValueError("Invalid URL: Expected a permalink to the comment.")
+
     old_url = old_url_of_url(url)
     modern_url = modern_url_of_url(url)
     soup_from_old = url_fetcher.get_soup(old_url)
