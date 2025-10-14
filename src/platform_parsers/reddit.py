@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
-from typing import Optional
-from platform_parsers import format, url_fetcher
+from platform_parsers import format, soup_cacher, url_fetcher
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 
@@ -66,20 +65,21 @@ def modern_url_of_url(url: str) -> str:
     return replace_netloc_of_url(url, netloc="www.reddit.com")
 
 
-def of_url(url: str, save_to_file: Optional[str] = None) -> T:
+def of_url(url: str) -> T:
     old_url = old_url_of_url(url)
     modern_url = modern_url_of_url(url)
-    soup_from_old = url_fetcher.get_soup(old_url, save_to_file=save_to_file)
+    soup_from_old = url_fetcher.get_soup(old_url)
     return T(modern_url=modern_url, soup_from_old=soup_from_old)
 
 
 def mock() -> T:
-    # TODO: Remove [--save-to-file] in [main.py] and have this populate the
-    # mock if it is empty.
     url = ("https://www.reddit.com/r/singapore/comments/1o58jy5/"
            "growing_old_alone_in_singapore_why_these_single/nj81rwn/")
-    with open("src/platform_parsers/htmls_for_testing/reddit.html",
-              'r',
-              encoding='utf-8') as file:
-        soup_from_old = BeautifulSoup(file.read(), 'html.parser')
-        return T(modern_url=url, soup_from_old=soup_from_old)
+    platform = "reddit"
+
+    cached_soup = soup_cacher.read(platform)
+    if not cached_soup:
+        cached_soup = of_url(url).soup_from_old
+        soup_cacher.cache(platform, cached_soup)
+
+    return T(modern_url=url, soup_from_old=cached_soup)

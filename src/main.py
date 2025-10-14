@@ -14,26 +14,19 @@ def mock(platform):
         raise ValueError("Unknown platform: " + platform)
 
 
-def read_url_from_stdin(save_to_file):
+def read_url_from_stdin():
     url = input()
     if 'reddit' in url:
-        credit = platform_parsers.reddit.of_url(
-            url,
-            save_to_file=save_to_file)\
-            .credit()
+        credit = platform_parsers.reddit.of_url(url).credit()
         print(credit)
 
 
 def main():
     parser = ArgumentParser()
     parser.add_argument(
-        '--save-to-file',
-        type=str,
-        help=("Specify a filename (without [.html]) to save the html to, "
-              "for testing purposes"))
-    parser.add_argument(
         '--test-with-mock',
         type=str,
+        metavar='PLATFORM',
         help='Use saved HTMLs instead of stdin, for testing purposes')
     parser.add_argument(
         '--enable-logging',
@@ -50,7 +43,7 @@ def main():
     if args.test_with_mock:
         mock(platform=args.test_with_mock)
     else:
-        read_url_from_stdin(save_to_file=args.save_to_file)
+        read_url_from_stdin()
 
 
 if __name__ == "__main__":
