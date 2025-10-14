@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup
-from platform_parsers import format, soup_cacher, url_fetcher
+from platform_parsers import (format,
+                              platform,
+                              soup_cacher,
+                              url_fetcher)
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 import logging
@@ -90,11 +93,11 @@ def of_url(url: str) -> T:
 def mock() -> T:
     url = ("https://www.reddit.com/r/singapore/comments/1o58jy5/"
            "growing_old_alone_in_singapore_why_these_single/nj81rwn/")
-    platform = "reddit"
+    platform_str = platform.to_plain_string(platform.T.REDDIT)
 
-    cached_soup = soup_cacher.read(platform)
+    cached_soup = soup_cacher.read(platform_str)
     if not cached_soup:
         cached_soup = of_url(url).soup_from_old
-        soup_cacher.cache(platform, cached_soup)
+        soup_cacher.cache(platform_str, cached_soup)
 
     return T(modern_url=url, soup_from_old=cached_soup)

@@ -2,22 +2,22 @@
 
 import logging
 from argparse import ArgumentParser
-from platform_parsers import xenforo, reddit
+from platform_parsers import platform, xenforo, reddit
 
 
-def mock(platform):
-    platform = platform.lower()
-    if platform == 'reddit':
+def mock(platform_str):
+    platform_str = platform_str.lower()
+    if platform_str == platform.to_plain_string(platform.T.REDDIT):
         post = reddit.mock().post()
         credit = reddit.mock().credit()
-    elif platform == 'hwz':
+    elif platform_str == platform.to_plain_string(platform.T.HARDWAREZONE):
         post = xenforo.mock_hardwarezone().post()
         credit = xenforo.mock_hardwarezone().credit()
-    elif platform == 'sgb':
+    elif platform_str == platform.to_plain_string(platform.T.SINGAPOREBRIDES):
         post = xenforo.mock_singaporebrides().post()
         credit = xenforo.mock_singaporebrides().credit()
     else:
-        raise ValueError("Unknown platform: " + platform)
+        raise ValueError("Unknown platform: " + platform_str)
 
     print(post)
     print(credit)
@@ -25,12 +25,16 @@ def mock(platform):
 
 def read_url_from_stdin():
     url = input()
-    if 'reddit.com' in url:
-        post = reddit.of_url(url).post()
-        credit = reddit.of_url(url).credit()
-    elif 'hardwarezone.com.sg' in url or 'singaporebrides.com' in url:
+    platform_type = platform.of_url(url)
+
+    if platform.is_xenforo(platform_type):
         post = xenforo.of_url(url).post()
         credit = xenforo.of_url(url).credit()
+    elif platform_type == platform.T.REDDIT:
+        post = reddit.of_url(url).post()
+        credit = reddit.of_url(url).credit()
+    else:
+        raise ValueError("Unknown platform")
 
     print(post)
     print(credit)
@@ -56,7 +60,7 @@ def main():
         logging.basicConfig(level=logging.WARNING)
 
     if args.test_with_mock:
-        mock(platform=args.test_with_mock)
+        mock(platform_str=args.test_with_mock)
     else:
         read_url_from_stdin()
 

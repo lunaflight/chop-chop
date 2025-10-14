@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup, NavigableString
-from platform_parsers import format, soup_cacher, url_fetcher
+from platform_parsers import (format,
+                              platform,
+                              soup_cacher,
+                              url_fetcher)
 from datetime import datetime
 from urllib.parse import urlparse
 import logging
@@ -78,14 +81,7 @@ def of_url(url: str) -> T:
         raise ValueError("Invalid URL: Expected a permalink to the comment.")
 
     soup = url_fetcher.get_soup(url)
-
-    # TODO: Create a new file that encompasses supported websites to stop
-    # reduplication of code with magic strings.
-    if "hardwarezone.com.sg" in url:
-        stylised_platform = "HardwareZone"
-    elif "singaporebrides.com" in url:
-        stylised_platform = "SingaporeBrides"
-
+    stylised_platform = platform.to_stylised_string(platform.of_url(url))
     return T(stylised_platform=stylised_platform, url=url, soup=soup)
 
 
@@ -104,20 +100,20 @@ def mock(mock_url: str, platform: str, stylised_platform: str) -> T:
 def mock_hardwarezone() -> T:
     mock_url = ("https://forums.hardwarezone.com.sg/threads/"
                 "any-good-use-for-myactivesg-credits.7163585/#post-157582701")
-    platform = "hardwarezone"
-    stylised_platform = "HardwareZone"
+    platform_str = platform.to_plain_string(platform.T.HARDWAREZONE)
+    stylised_platform = platform.to_stylised_string(platform.T.HARDWAREZONE)
 
     return mock(mock_url=mock_url,
-                platform=platform,
+                platform=platform_str,
                 stylised_platform=stylised_platform)
 
 
 def mock_singaporebrides() -> T:
     mock_url = ("https://singaporebrides.com/weddingforum/threads/"
                 "any-clubbers-out-there.1305/page-396#post-730029")
-    platform = "singaporebrides"
-    stylised_platform = "SingaporeBrides"
+    platform_str = platform.to_plain_string(platform.T.SINGAPOREBRIDES)
+    stylised_platform = platform.to_stylised_string(platform.T.SINGAPOREBRIDES)
 
     return mock(mock_url=mock_url,
-                platform=platform,
+                platform=platform_str,
                 stylised_platform=stylised_platform)
