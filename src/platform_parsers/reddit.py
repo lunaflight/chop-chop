@@ -11,6 +11,8 @@ class T:
         self.soup_from_old = soup_from_old
         self.modern_url = modern_url
 
+    # TODO: The following does not work well on multi-line comments.
+    # [https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/]
     def post(self) -> str:
         return self.soup_from_old\
             .find('div', {'data-type': 'comment'})\

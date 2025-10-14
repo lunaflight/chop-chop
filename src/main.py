@@ -2,23 +2,38 @@
 
 import logging
 from argparse import ArgumentParser
-import platform_parsers.reddit
+from platform_parsers import xenforo, reddit
 
 
 def mock(platform):
     platform = platform.lower()
     if platform == 'reddit':
-        credit = platform_parsers.reddit.mock().credit()
-        print(credit)
+        post = reddit.mock().post()
+        credit = reddit.mock().credit()
+    elif platform == 'hwz':
+        post = xenforo.mock_hardwarezone().post()
+        credit = xenforo.mock_hardwarezone().credit()
+    elif platform == 'sgb':
+        post = xenforo.mock_singaporebrides().post()
+        credit = xenforo.mock_singaporebrides().credit()
     else:
         raise ValueError("Unknown platform: " + platform)
+
+    print(post)
+    print(credit)
 
 
 def read_url_from_stdin():
     url = input()
-    if 'reddit' in url:
-        credit = platform_parsers.reddit.of_url(url).credit()
-        print(credit)
+    if 'reddit.com' in url:
+        post = reddit.of_url(url).post()
+        credit = reddit.of_url(url).credit()
+    elif 'hardwarezone.com.sg' in url or 'singaporebrides.com' in url:
+        post = xenforo.of_url(url).post()
+        credit = xenforo.of_url(url).credit()
+
+    print(post)
+    print(credit)
 
 
 def main():
