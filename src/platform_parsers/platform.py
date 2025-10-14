@@ -2,40 +2,38 @@ from enum import Enum
 
 
 class T(Enum):
-    REDDIT = "Reddit"
     HARDWAREZONE = "HardwareZone"
+    REDDIT = "Reddit"
     SINGAPOREBRIDES = "SingaporeBrides"
+    SINGAPOREMOTHERHOOD = "SingaporeMotherhood"
 
 
 def to_stylised_string(platform: T):
-    if platform == T.REDDIT:
-        return "Reddit"
-    elif platform == T.HARDWAREZONE:
+    if platform == T.HARDWAREZONE:
         return "HardwareZone"
+    elif platform == T.REDDIT:
+        return "Reddit"
     elif platform == T.SINGAPOREBRIDES:
         return "SingaporeBrides"
+    elif platform == T.SINGAPOREMOTHERHOOD:
+        return "SingaporeMotherhood"
     else:
         raise ValueError("Unknown platform.")
 
 
 def to_plain_string(platform: T):
-    if platform == T.REDDIT:
-        return "reddit"
-    elif platform == T.HARDWAREZONE:
-        return "hardwarezone"
-    elif platform == T.SINGAPOREBRIDES:
-        return "singaporebrides"
-    else:
-        raise ValueError("Unknown platform.")
+    return to_stylised_string(platform).lower()
 
 
 def identifying_url_substring(platform: T):
-    if platform == T.REDDIT:
-        return "reddit.com"
-    elif platform == T.HARDWAREZONE:
+    if platform == T.HARDWAREZONE:
         return "hardwarezone.com.sg"
+    elif platform == T.REDDIT:
+        return "reddit.com"
     elif platform == T.SINGAPOREBRIDES:
         return "singaporebrides.com"
+    elif platform == T.SINGAPOREMOTHERHOOD:
+        return "singaporemotherhood.com"
     else:
         raise ValueError("Unknown platform.")
 
@@ -48,4 +46,6 @@ def of_url(url: str):
 
 
 def is_xenforo(platform: T):
-    return platform == T.HARDWAREZONE or platform == T.SINGAPOREBRIDES
+    return (platform == T.HARDWAREZONE or
+            platform == T.SINGAPOREBRIDES or
+            platform == T.SINGAPOREMOTHERHOOD)

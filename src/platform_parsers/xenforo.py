@@ -18,6 +18,8 @@ def post_id(url: str) -> Optional[str]:
     if not post_id:
         post_id = urlparse(url).path.split('/')[-1]
 
+    # TODO: When quoting the first post, it does not work properly since no
+    # [post_id] is present.
     if not post_id.startswith("post-"):
         return None
 
@@ -85,6 +87,7 @@ def of_url(url: str) -> T:
     return T(stylised_platform=stylised_platform, url=url, soup=soup)
 
 
+# TODO: Refactor this to take in a [platform.T] instead.
 def mock(mock_url: str, platform: str, stylised_platform: str) -> T:
     cached_soup = soup_cacher.read(platform)
 
@@ -113,6 +116,18 @@ def mock_singaporebrides() -> T:
                 "any-clubbers-out-there.1305/page-396#post-730029")
     platform_str = platform.to_plain_string(platform.T.SINGAPOREBRIDES)
     stylised_platform = platform.to_stylised_string(platform.T.SINGAPOREBRIDES)
+
+    return mock(mock_url=mock_url,
+                platform=platform_str,
+                stylised_platform=stylised_platform)
+
+
+def mock_singaporemotherhood() -> T:
+    mock_url = ("https://singaporemotherhood.com/forum/threads"
+                "/female-obgyn-recommendations.298237/post-8821891")
+    platform_str = platform.to_plain_string(platform.T.SINGAPOREMOTHERHOOD)
+    stylised_platform = platform.to_stylised_string(
+            platform.T.SINGAPOREMOTHERHOOD)
 
     return mock(mock_url=mock_url,
                 platform=platform_str,

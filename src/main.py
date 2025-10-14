@@ -16,6 +16,10 @@ def mock(platform_str):
     elif platform_str == platform.to_plain_string(platform.T.SINGAPOREBRIDES):
         post = xenforo.mock_singaporebrides().post()
         credit = xenforo.mock_singaporebrides().credit()
+    elif platform_str == platform.to_plain_string(
+            platform.T.SINGAPOREMOTHERHOOD):
+        post = xenforo.mock_singaporemotherhood().post()
+        credit = xenforo.mock_singaporemotherhood().credit()
     else:
         raise ValueError("Unknown platform: " + platform_str)
 
