@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, NavigableString
-from platform_parsers import (format,
+from platform_parsers import (bbcode_format,
+                              citation_format,
                               platform,
                               soup_cacher,
                               url_fetcher)
@@ -45,10 +46,11 @@ class T:
 
         paragraphs = []
         for content in contents:
+            # Emojis, which are embed as images in the HTML, may be present.
             if isinstance(content, NavigableString) and str(content).strip():
                 paragraphs.append(str(content.strip()))
 
-        return "<br>".join(paragraphs)
+        return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
         datetime_str = self.soup\
@@ -69,7 +71,7 @@ class T:
             .text
 
     def credit(self) -> str:
-        return format.online_with_title(
+        return citation_format.online_with_title(
             timestamp=self.timestamp(),
             name=self.username(),
             platform_name=self.stylised_platform,

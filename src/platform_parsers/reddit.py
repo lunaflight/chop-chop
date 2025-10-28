@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-from platform_parsers import (format,
+from platform_parsers import (bbcode_format,
+                              citation_format,
                               platform,
                               soup_cacher,
                               url_fetcher)
@@ -19,8 +20,8 @@ class T:
             .find('div', {'data-type': 'comment'})\
             .find('div', class_='usertext-body')\
             .find_all('p')
-        # TODO: Isolate [<br>] as a helper function to avoid a magic literal.
-        text_with_br = '<br>'.join(p.get_text() for p in paragraphs)
+        text_with_br = bbcode_format.join_with_br(
+                p.get_text() for p in paragraphs)
         return text_with_br
 
     def subreddit(self) -> str:
@@ -47,7 +48,7 @@ class T:
             .text
 
     def credit(self) -> str:
-        return format.online_with_title(
+        return citation_format.online_with_title(
             timestamp=self.timestamp(),
             name=f'u/{self.username()}',
             platform_name=f'r/{self.subreddit()}',
