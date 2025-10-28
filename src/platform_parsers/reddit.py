@@ -14,14 +14,14 @@ class T:
         self.soup_from_old = soup_from_old
         self.modern_url = modern_url
 
-    # TODO: The following does not work well on multi-line comments.
-    # [https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/]
     def post(self) -> str:
-        return self.soup_from_old\
+        paragraphs = self.soup_from_old\
             .find('div', {'data-type': 'comment'})\
             .find('div', class_='usertext-body')\
-            .find_all('p')[0]\
-            .get_text()
+            .find_all('p')
+        # TODO: Isolate [<br>] as a helper function to avoid a magic literal.
+        text_with_br = '<br>'.join(p.get_text() for p in paragraphs)
+        return text_with_br
 
     def subreddit(self) -> str:
         path = urlparse(self.modern_url).path.split('/')
@@ -91,8 +91,8 @@ def of_url(url: str) -> T:
 
 
 def mock() -> T:
-    url = ("https://www.reddit.com/r/singapore/comments/1o58jy5/"
-           "growing_old_alone_in_singapore_why_these_single/nj81rwn/")
+    url = ("https://www.reddit.com/r/singapore/comments/1o5i3fl/"
+           "contract_for_marine_parade_free_shuttle_bus/nj9fl4g/")
     platform_str = platform.to_plain_string(platform.T.REDDIT)
 
     cached_soup = soup_cacher.read(platform_str)
