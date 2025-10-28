@@ -5,6 +5,10 @@ from argparse import ArgumentParser
 from platform_parsers import platform, xenforo, reddit
 
 
+def escape_double_apostrophe(str):
+    return str.replace('"', '\\"')
+
+
 def mock(platform_str):
     platform_str = platform_str.lower()
     if platform_str == platform.to_plain_string(platform.T.REDDIT):
@@ -23,8 +27,7 @@ def mock(platform_str):
     else:
         raise ValueError("Unknown platform: " + platform_str)
 
-    print(post)
-    print(credit)
+    return (post, credit)
 
 
 def read_url_from_stdin():
@@ -40,8 +43,7 @@ def read_url_from_stdin():
     else:
         raise ValueError("Unknown platform")
 
-    print(post)
-    print(credit)
+    return (post, credit)
 
 
 def main():
@@ -64,9 +66,12 @@ def main():
         logging.basicConfig(level=logging.WARNING)
 
     if args.test_with_mock:
-        mock(platform_str=args.test_with_mock)
+        post, credit = mock(platform_str=args.test_with_mock)
     else:
-        read_url_from_stdin()
+        post, credit = read_url_from_stdin()
+
+    print(f'{{ "eg": "{escape_double_apostrophe(post)}", '
+          f'"src": "{escape_double_apostrophe(credit)}" }}')
 
 
 if __name__ == "__main__":
