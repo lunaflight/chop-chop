@@ -16,11 +16,11 @@ from platform_parsers import (
 LOGGER = logging.getLogger(__name__)
 
 
-def narrow_soup_if_reply(soup: BeautifulSoup, *, is_reply: bool) -> Tag | None:
+def narrow_soup(soup: BeautifulSoup, *, is_reply: bool) -> Tag | None:
     if is_reply:
         return soup.find("div", {"data-type": "comment"})
 
-    return soup.find("div", class_="content")
+    return soup.find("div", class_="sitetable")
 
 
 class T:
@@ -38,11 +38,15 @@ class T:
     def post(self) -> str:
         paragraphs = [self.title()]
 
-        body_paragraphs = (
-            narrow_soup_if_reply(  # type: ignore[union-attr]
-                self.soup_from_old, is_reply=self.is_reply)
-            .find("div", class_="usertext-body")
-            .find_all("p"))
+        try:
+            body_paragraphs = (
+                narrow_soup(  # type: ignore[union-attr]
+                    self.soup_from_old, is_reply=self.is_reply)
+                .find("div", class_="usertext-body")
+                .find_all("p"))
+        except AttributeError:
+            body_paragraphs = []
+
         body_paragraphs = cast("list[str]", [p.text for p in body_paragraphs])
 
         paragraphs.extend(body_paragraphs)
@@ -55,7 +59,7 @@ class T:
 
     def timestamp(self) -> datetime:
         datetime_str = (
-            narrow_soup_if_reply(  # type: ignore[union-attr]
+            narrow_soup(  # type: ignore[union-attr]
                 self.soup_from_old, is_reply=self.is_reply)
             .find("p", class_="tagline")
             .find("time")
@@ -71,7 +75,7 @@ class T:
 
     def username(self) -> str:
         return (
-            narrow_soup_if_reply(  # type: ignore[union-attr]
+            narrow_soup(  # type: ignore[union-attr]
                 self.soup_from_old, is_reply=self.is_reply)
             .find("p", class_="tagline")
             .find("a", class_="author")
