@@ -3,7 +3,7 @@ import time
 
 import requests
 from bs4 import BeautifulSoup
-from real_headers import real_headers
+from real_headers import real_headers  # type: ignore[import-untyped]
 
 LOGGER = logging.getLogger(__name__)
 
@@ -17,11 +17,14 @@ def get_soup(url: str) -> BeautifulSoup:
     response = requests.get(url, headers=real_headers(), timeout=10)
 
     if response.status_code != OK_RESPONSE:
-        retry_after_delay = int(response.headers.get("Retry-After"))\
-            if response.status_code == TOO_MANY_REQUESTS\
+        retry_after_header = response.headers.get("Retry-After")
+        retry_after_delay = int(retry_after_header)\
+            if (response.status_code == TOO_MANY_REQUESTS
+                and retry_after_header is not None)\
             else DEFAULT_RETRY_AFTER_DELAY_SEC
         LOGGER.debug("Received bad status code. Trying after delay.",
-                      extra={response.status_code, retry_after_delay})
+                     extra={"response": response.status_code,
+                            "retry_after_delay": retry_after_delay})
         time.sleep(retry_after_delay)
         return get_soup(url)
 

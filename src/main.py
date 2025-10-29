@@ -10,7 +10,7 @@ def escape_double_apostrophe(string: str) -> str:
     return string.replace('"', '\\"')
 
 
-def mock(platform_str: str) -> (str, str):
+def mock(platform_str: str) -> tuple[str, str]:
     platform_str = platform_str.lower()
     if platform_str == platform.to_plain_string(platform.T.REDDIT):
         post = reddit.mock().post()
@@ -31,7 +31,7 @@ def mock(platform_str: str) -> (str, str):
     return (post, credit)
 
 
-def read_url_from_stdin() -> (str, str):
+def read_url_from_stdin() -> tuple[str, str]:
     url = input()
     platform_type = platform.of_url(url)
 

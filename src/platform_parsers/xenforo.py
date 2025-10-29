@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from urllib.parse import urlparse
 
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 from platform_parsers import (
     bbcode_format,
@@ -30,7 +30,7 @@ def post_id(url: str) -> str | None:
 
 
 def narrow_soup_to_post_id(soup: BeautifulSoup, post_id: str | None)\
-        -> BeautifulSoup:
+        -> Tag | None:
     if post_id is None:
         return soup
 
@@ -49,18 +49,20 @@ class T:
         self.url = url
 
     def post(self) -> str:
-        contents =\
-            narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find("article", class_="message-body")\
-            .find("div", class_="bbWrapper")\
-            .contents
+        contents = (
+            narrow_soup_to_post_id(
+                # type: ignore[union-attr]
+                soup=self.soup, post_id=self.post_id)
+            .find("article", class_="message-body")
+            .find("div", class_="bbWrapper")
+            .contents)
 
         paragraphs = []
 
         if self.post_id is None:
-            title = self.soup\
-                .find("h1", class_="p-title-value")\
-                .text
+            title = (self.soup  # type: ignore[union-attr]
+                     .find("h1", class_="p-title-value")
+                     .text)
             paragraphs.append(title)
 
         # Emojis, which are embed as images in the HTML, may be present.
@@ -72,21 +74,28 @@ class T:
         return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
-        datetime_str =\
-            narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find("time")["datetime"]
+        datetime_str = (
+            narrow_soup_to_post_id(
+                # type: ignore[union-attr]
+                soup=self.soup, post_id=self.post_id)
+            .find("time")
+            .get("datetime"))
+        assert isinstance(datetime_str, str)
+
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
-        return self.soup\
-            .find("h1", class_="p-title-value")\
-            .text
+        return (self.soup  # type: ignore[union-attr]
+                .find("h1", class_="p-title-value")
+                .text)
 
     def username(self) -> str:
-        return narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find("section", class_="message-user")\
-            .find("a", class_="username")\
-            .text
+        return (narrow_soup_to_post_id(
+                # type: ignore[union-attr]
+                soup=self.soup, post_id=self.post_id)
+                .find("section", class_="message-user")
+                .find("a", class_="username")
+                .text)
 
     def credit(self) -> str:
         return citation_format.online_with_title(

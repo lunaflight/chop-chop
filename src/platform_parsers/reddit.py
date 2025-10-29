@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from typing import cast
 from urllib.parse import urlparse, urlunparse
 
 from bs4 import BeautifulSoup
@@ -22,34 +23,38 @@ class T:
         self.modern_url = modern_url
 
     def post(self) -> str:
-        paragraphs = self.soup_from_old\
-            .find("div", {"data-type": "comment"})\
-            .find("div", class_="usertext-body")\
-            .find_all("p")
-        return bbcode_format.join_with_br(p.get_text() for p in paragraphs)
+        paragraphs = (self.soup_from_old  # type: ignore[union-attr]
+                      .find("div", {"data-type": "comment"})
+                      .find("div", class_="usertext-body")
+                      .find_all("p"))
+        paragraphs = cast("list[str]", [p.text for p in paragraphs])
+        return bbcode_format.join_with_br(paragraphs)
 
     def subreddit(self) -> str:
         path = urlparse(self.modern_url).path.split("/")
         return path[path.index("r") + 1]
 
     def timestamp(self) -> datetime:
-        datetime_str = self.soup_from_old\
-            .find("div", {"data-type": "comment"})\
-            .find("p", class_="tagline")\
-            .find("time")["datetime"]
+        datetime_str = (self.soup_from_old  # type: ignore[union-attr]
+                        .find("div", {"data-type": "comment"})
+                        .find("p", class_="tagline")
+                        .find("time")
+                        .get("datetime"))
+        assert isinstance(datetime_str, str)
+
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
-        title_tag = self.soup_from_old\
-            .find("a", {"data-event-action": "title"})
-        return title_tag.text
+        return (self.soup_from_old  # type: ignore[union-attr]
+                .find("a", {"data-event-action": "title"})
+                .text)
 
     def username(self) -> str:
-        return self.soup_from_old\
-            .find("div", {"data-type": "comment"})\
-            .find("p", class_="tagline")\
-            .find("a", class_="author")\
-            .text
+        return (self.soup_from_old  # type: ignore[union-attr]
+                .find("div", {"data-type": "comment"})
+                .find("p", class_="tagline")
+                .find("a", class_="author")
+                .text)
 
     def credit(self) -> str:
         return citation_format.online_with_title(
