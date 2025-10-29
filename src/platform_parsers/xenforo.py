@@ -1,22 +1,27 @@
-from bs4 import BeautifulSoup, NavigableString
-from platform_parsers import (bbcode_format,
-                              citation_format,
-                              platform,
-                              soup_cacher,
-                              url_fetcher)
+from __future__ import annotations
+
 from datetime import datetime
 from urllib.parse import urlparse
-from typing import Optional
+
+from bs4 import BeautifulSoup, NavigableString
+
+from platform_parsers import (
+    bbcode_format,
+    citation_format,
+    platform,
+    soup_cacher,
+    url_fetcher,
+)
 
 
 # Returns the post_id in the format [post-NNNNN]
-def post_id(url: str) -> Optional[str]:
+def post_id(url: str) -> str | None:
     # Sometimes, it is located as a fragment at the end of the URL,
     post_id = urlparse(url).fragment
 
     # Other times, it is just the final segment in the path.
     if not post_id:
-        post_id = urlparse(url).path.split('/')[-1]
+        post_id = urlparse(url).path.split("/")[-1]
 
     if not post_id.startswith("post-"):
         return None
@@ -24,12 +29,13 @@ def post_id(url: str) -> Optional[str]:
     return post_id
 
 
-def narrow_soup_to_post_id(soup: BeautifulSoup, post_id: Optional[str]):
+def narrow_soup_to_post_id(soup: BeautifulSoup, post_id: str | None)\
+        -> BeautifulSoup:
     if post_id is None:
         return soup
-    else:
-        return soup.find('article',
-                         {'data-content': f"{post_id}"})
+
+    return soup.find("article",
+                     {"data-content": f"{post_id}"})
 
 
 class T:
@@ -45,40 +51,41 @@ class T:
     def post(self) -> str:
         contents =\
             narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find('article', class_="message-body")\
-            .find('div', class_="bbWrapper")\
+            .find("article", class_="message-body")\
+            .find("div", class_="bbWrapper")\
             .contents
 
         paragraphs = []
 
         if self.post_id is None:
             title = self.soup\
-                .find('h1', class_="p-title-value")\
+                .find("h1", class_="p-title-value")\
                 .text
             paragraphs.append(title)
 
-        for content in contents:
-            # Emojis, which are embed as images in the HTML, may be present.
-            if isinstance(content, NavigableString) and str(content).strip():
-                paragraphs.append(str(content.strip()))
+        # Emojis, which are embed as images in the HTML, may be present.
+        paragraphs += [str(content.strip())
+                       for content in contents
+                       if isinstance(content, NavigableString)
+                       and str(content).strip()]
 
         return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
         datetime_str =\
             narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find('time')['datetime']
+            .find("time")["datetime"]
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
         return self.soup\
-            .find('h1', class_="p-title-value")\
+            .find("h1", class_="p-title-value")\
             .text
 
     def username(self) -> str:
         return narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
-            .find('section', class_="message-user")\
-            .find('a', class_="username")\
+            .find("section", class_="message-user")\
+            .find("a", class_="username")\
             .text
 
     def credit(self) -> str:

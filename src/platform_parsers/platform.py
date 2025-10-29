@@ -8,44 +8,44 @@ class T(Enum):
     SINGAPOREMOTHERHOOD = "SingaporeMotherhood"
 
 
-def to_stylised_string(platform: T):
+def to_stylised_string(platform: T) -> str:
     if platform == T.HARDWAREZONE:
         return "HardwareZone"
-    elif platform == T.REDDIT:
+    if platform == T.REDDIT:
         return "Reddit"
-    elif platform == T.SINGAPOREBRIDES:
+    if platform == T.SINGAPOREBRIDES:
         return "SingaporeBrides"
-    elif platform == T.SINGAPOREMOTHERHOOD:
+    if platform == T.SINGAPOREMOTHERHOOD:
         return "SingaporeMotherhood"
-    else:
-        raise ValueError("Unknown platform.")
+
+    raise ValueError("Unknown platform.")
 
 
-def to_plain_string(platform: T):
+def to_plain_string(platform: T) -> str:
     return to_stylised_string(platform).lower()
 
 
-def identifying_url_substring(platform: T):
+def identifying_url_substring(platform: T) -> str:
     if platform == T.HARDWAREZONE:
         return "hardwarezone.com.sg"
-    elif platform == T.REDDIT:
+    if platform == T.REDDIT:
         return "reddit.com"
-    elif platform == T.SINGAPOREBRIDES:
+    if platform == T.SINGAPOREBRIDES:
         return "singaporebrides.com"
-    elif platform == T.SINGAPOREMOTHERHOOD:
+    if platform == T.SINGAPOREMOTHERHOOD:
         return "singaporemotherhood.com"
-    else:
-        raise ValueError("Unknown platform.")
+
+    raise ValueError("Unknown platform.")
 
 
-def of_url(url: str):
+def of_url(url: str) -> T:
     for platform in T:
         if identifying_url_substring(platform) in url:
             return platform
     raise ValueError("The URL does not match any known platform.")
 
 
-def is_xenforo(platform: T):
-    return (platform == T.HARDWAREZONE or
-            platform == T.SINGAPOREBRIDES or
-            platform == T.SINGAPOREMOTHERHOOD)
+def is_xenforo(platform: T) -> bool:
+    return platform in {T.HARDWAREZONE,
+                        T.SINGAPOREBRIDES,
+                        T.SINGAPOREMOTHERHOOD}

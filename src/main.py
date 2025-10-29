@@ -2,14 +2,15 @@
 
 import logging
 from argparse import ArgumentParser
-from platform_parsers import platform, xenforo, reddit
+
+from platform_parsers import platform, reddit, xenforo
 
 
-def escape_double_apostrophe(str):
-    return str.replace('"', '\\"')
+def escape_double_apostrophe(string: str) -> str:
+    return string.replace('"', '\\"')
 
 
-def mock(platform_str):
+def mock(platform_str: str) -> (str, str):
     platform_str = platform_str.lower()
     if platform_str == platform.to_plain_string(platform.T.REDDIT):
         post = reddit.mock().post()
@@ -30,7 +31,7 @@ def mock(platform_str):
     return (post, credit)
 
 
-def read_url_from_stdin():
+def read_url_from_stdin() -> (str, str):
     url = input()
     platform_type = platform.of_url(url)
 
@@ -46,22 +47,22 @@ def read_url_from_stdin():
     return (post, credit)
 
 
-def main():
+def main() -> None:
     parser = ArgumentParser()
     parser.add_argument(
-        '--test-with-mock',
+        "--test-with-mock",
         type=str,
-        metavar='PLATFORM',
-        help='Use saved HTMLs instead of stdin, for testing purposes')
+        metavar="PLATFORM",
+        help="Use saved HTMLs instead of stdin, for testing purposes")
     parser.add_argument(
-        '--enable-logging',
-        action='store_true',
-        help='Enable logging for debugging')
+        "--enable-logging",
+        action="store_true",
+        help="Enable logging for debugging")
     args = parser.parse_args()
 
     if args.enable_logging:
         logging.basicConfig(level=logging.DEBUG,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+                            format="%(asctime)s - %(levelname)s - %(message)s")
     else:
         logging.basicConfig(level=logging.WARNING)
 
@@ -70,7 +71,7 @@ def main():
     else:
         post, credit = read_url_from_stdin()
 
-    print(f'{{ "eg": "{escape_double_apostrophe(post)}", '
+    print(f'{{ "eg": "{escape_double_apostrophe(post)}", '  # noqa: T201
           f'"src": "{escape_double_apostrophe(credit)}" }}')
 
 

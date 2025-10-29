@@ -9,4 +9,4 @@ def online_with_title(timestamp: datetime,
                       title: str,
                       url: str) -> str:
     return (f"{timestamp.strftime(YYYY_MMM_D_FMT)}, {name}. "
-            f"{platform_name}, \"{title}\". {url}")
+            f'{platform_name}, "{title}". {url}')

@@ -3,8 +3,7 @@ The aim of this repository is to provide an easy way to credit people online
 for their linguistic attestations.
 
 It employs Python and web scraping. Since we expect to query the website only
-once for the information, web scraping is kept to a minimum, in a responsible
-fashion.
+once for the information, web scraping is kept to a minimum, responsibly.
 
 # Installation
 Ensure that you are using `Python 3.13`, but I suspect any sufficiently

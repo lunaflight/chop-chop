@@ -1,12 +1,18 @@
-from bs4 import BeautifulSoup
-from platform_parsers import (bbcode_format,
-                              citation_format,
-                              platform,
-                              soup_cacher,
-                              url_fetcher)
+import logging
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
-import logging
+
+from bs4 import BeautifulSoup
+
+from platform_parsers import (
+    bbcode_format,
+    citation_format,
+    platform,
+    soup_cacher,
+    url_fetcher,
+)
+
+LOGGER = logging.getLogger(__name__)
 
 
 class T:
@@ -17,41 +23,39 @@ class T:
 
     def post(self) -> str:
         paragraphs = self.soup_from_old\
-            .find('div', {'data-type': 'comment'})\
-            .find('div', class_='usertext-body')\
-            .find_all('p')
-        text_with_br = bbcode_format.join_with_br(
-                p.get_text() for p in paragraphs)
-        return text_with_br
+            .find("div", {"data-type": "comment"})\
+            .find("div", class_="usertext-body")\
+            .find_all("p")
+        return bbcode_format.join_with_br(p.get_text() for p in paragraphs)
 
     def subreddit(self) -> str:
-        path = urlparse(self.modern_url).path.split('/')
-        return path[path.index('r') + 1]
+        path = urlparse(self.modern_url).path.split("/")
+        return path[path.index("r") + 1]
 
     def timestamp(self) -> datetime:
         datetime_str = self.soup_from_old\
-            .find('div', {'data-type': 'comment'})\
-            .find('p', class_='tagline')\
-            .find('time')['datetime']
+            .find("div", {"data-type": "comment"})\
+            .find("p", class_="tagline")\
+            .find("time")["datetime"]
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
         title_tag = self.soup_from_old\
-            .find('a', {'data-event-action': 'title'})
+            .find("a", {"data-event-action": "title"})
         return title_tag.text
 
     def username(self) -> str:
         return self.soup_from_old\
-            .find('div', {'data-type': 'comment'})\
-            .find('p', class_='tagline')\
-            .find('a', class_='author')\
+            .find("div", {"data-type": "comment"})\
+            .find("p", class_="tagline")\
+            .find("a", class_="author")\
             .text
 
     def credit(self) -> str:
         return citation_format.online_with_title(
             timestamp=self.timestamp(),
-            name=f'u/{self.username()}',
-            platform_name=f'r/{self.subreddit()}',
+            name=f"u/{self.username()}",
+            platform_name=f"r/{self.subreddit()}",
             title=self.title(),
             url=self.modern_url)
 
@@ -76,13 +80,13 @@ def is_permalink(url: str) -> bool:
     path_with_empty_strs = urlparse(url).path.split("/")
     path = [segment for segment in path_with_empty_strs if segment]
     # Permalink paths are of the form:
-    # [r, subreddit, comments, id, title, comment_id]
+    # [r, subreddit, comments, id, title, comment_id] noqa: ERA001
     return path.index("comments") + 4 == len(path)
 
 
 def of_url(url: str) -> T:
     if not is_permalink(url):
-        logging.error("Expected a permalink to the comment.")
+        LOGGER.error("Expected a permalink to the comment.")
         raise ValueError("Invalid URL: Expected a permalink to the comment.")
 
     old_url = old_url_of_url(url)
