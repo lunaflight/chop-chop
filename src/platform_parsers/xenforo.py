@@ -60,10 +60,7 @@ class T:
         paragraphs = []
 
         if self.post_id is None:
-            title = (self.soup  # type: ignore[union-attr]
-                     .find("h1", class_="p-title-value")
-                     .text)
-            paragraphs.append(title)
+            paragraphs.append(self.title())
 
         # Emojis, which are embed as images in the HTML, may be present.
         paragraphs += [str(content.strip())

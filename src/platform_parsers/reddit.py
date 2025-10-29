@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import cast
 from urllib.parse import urlparse, urlunparse
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from platform_parsers import (
     bbcode_format,
@@ -16,18 +16,37 @@ from platform_parsers import (
 LOGGER = logging.getLogger(__name__)
 
 
+def narrow_soup_if_reply(soup: BeautifulSoup, *, is_reply: bool) -> Tag | None:
+    if is_reply:
+        return soup.find("div", {"data-type": "comment"})
+
+    return soup.find("div", class_="content")
+
+
 class T:
     # The old URL is used for more stable parsing.
-    def __init__(self, modern_url: str, soup_from_old: BeautifulSoup) -> None:
+    def __init__(self,
+                 modern_url: str,
+                 soup_from_old: BeautifulSoup,
+                 *,
+                 is_reply: bool,
+                 ) -> None:
         self.soup_from_old = soup_from_old
         self.modern_url = modern_url
+        self.is_reply = is_reply
 
     def post(self) -> str:
-        paragraphs = (self.soup_from_old  # type: ignore[union-attr]
-                      .find("div", {"data-type": "comment"})
-                      .find("div", class_="usertext-body")
-                      .find_all("p"))
-        paragraphs = cast("list[str]", [p.text for p in paragraphs])
+        paragraphs = [self.title()]
+
+        body_paragraphs = (
+            narrow_soup_if_reply(  # type: ignore[union-attr]
+                self.soup_from_old, is_reply=self.is_reply)
+            .find("div", class_="usertext-body")
+            .find_all("p"))
+        body_paragraphs = cast("list[str]", [p.text for p in body_paragraphs])
+
+        paragraphs.extend(body_paragraphs)
+
         return bbcode_format.join_with_br(paragraphs)
 
     def subreddit(self) -> str:
@@ -35,11 +54,12 @@ class T:
         return path[path.index("r") + 1]
 
     def timestamp(self) -> datetime:
-        datetime_str = (self.soup_from_old  # type: ignore[union-attr]
-                        .find("div", {"data-type": "comment"})
-                        .find("p", class_="tagline")
-                        .find("time")
-                        .get("datetime"))
+        datetime_str = (
+            narrow_soup_if_reply(  # type: ignore[union-attr]
+                self.soup_from_old, is_reply=self.is_reply)
+            .find("p", class_="tagline")
+            .find("time")
+            .get("datetime"))
         assert isinstance(datetime_str, str)
 
         return datetime.fromisoformat(datetime_str)
@@ -50,11 +70,12 @@ class T:
                 .text)
 
     def username(self) -> str:
-        return (self.soup_from_old  # type: ignore[union-attr]
-                .find("div", {"data-type": "comment"})
-                .find("p", class_="tagline")
-                .find("a", class_="author")
-                .text)
+        return (
+            narrow_soup_if_reply(  # type: ignore[union-attr]
+                self.soup_from_old, is_reply=self.is_reply)
+            .find("p", class_="tagline")
+            .find("a", class_="author")
+            .text)
 
     def credit(self) -> str:
         return citation_format.online_with_title(
@@ -81,7 +102,7 @@ def modern_url_of_url(url: str) -> str:
     return replace_netloc_of_url(url, netloc="www.reddit.com")
 
 
-def is_permalink(url: str) -> bool:
+def is_reply_if_permalink(url: str) -> bool:
     path_with_empty_strs = urlparse(url).path.split("/")
     path = [segment for segment in path_with_empty_strs if segment]
     # Permalink paths are of the form:
@@ -90,14 +111,13 @@ def is_permalink(url: str) -> bool:
 
 
 def of_url(url: str) -> T:
-    if not is_permalink(url):
-        LOGGER.error("Expected a permalink to the comment.")
-        raise ValueError("Invalid URL: Expected a permalink to the comment.")
-
     old_url = old_url_of_url(url)
     modern_url = modern_url_of_url(url)
     soup_from_old = url_fetcher.get_soup(old_url)
-    return T(modern_url=modern_url, soup_from_old=soup_from_old)
+    is_reply = is_reply_if_permalink(url)
+    return T(modern_url=modern_url,
+             soup_from_old=soup_from_old,
+             is_reply=is_reply)
 
 
 def mock() -> T:
@@ -110,4 +130,6 @@ def mock() -> T:
         cached_soup = of_url(url).soup_from_old
         soup_cacher.cache(platform_str, cached_soup)
 
-    return T(modern_url=url, soup_from_old=cached_soup)
+    return T(modern_url=url,
+             soup_from_old=cached_soup,
+             is_reply=is_reply_if_permalink(url))
