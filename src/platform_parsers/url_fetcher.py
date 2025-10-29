@@ -14,7 +14,9 @@ DEFAULT_RETRY_AFTER_DELAY_SEC = 5
 
 
 def get_soup(url: str) -> BeautifulSoup:
-    response = requests.get(url, headers=real_headers(), timeout=10)
+    response = requests.get(url,
+                            headers=real_headers(),
+                            timeout=DEFAULT_RETRY_AFTER_DELAY_SEC)
 
     if response.status_code != OK_RESPONSE:
         retry_after_header = response.headers.get("Retry-After")
