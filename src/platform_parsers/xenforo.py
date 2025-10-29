@@ -87,12 +87,13 @@ class T:
                 .text)
 
     def username(self) -> str:
-        return (narrow_soup_to_post_id(
+        return (
+            narrow_soup_to_post_id(
                 # type: ignore[union-attr]
                 soup=self.soup, post_id=self.post_id)
-                .find("section", class_="message-user")
-                .find("a", class_="username")
-                .text)
+            .find("section", class_="message-user")
+            .find("a", class_="username")
+            .text)
 
     def credit(self) -> str:
         return citation_format.online_with_title(
