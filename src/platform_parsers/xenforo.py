@@ -6,7 +6,6 @@ from platform_parsers import (bbcode_format,
                               url_fetcher)
 from datetime import datetime
 from urllib.parse import urlparse
-import logging
 from typing import Optional
 
 
@@ -19,12 +18,18 @@ def post_id(url: str) -> Optional[str]:
     if not post_id:
         post_id = urlparse(url).path.split('/')[-1]
 
-    # TODO: When quoting the first post, it does not work properly since no
-    # [post_id] is present.
     if not post_id.startswith("post-"):
         return None
 
     return post_id
+
+
+def narrow_soup_to_post_id(soup: BeautifulSoup, post_id: Optional[str]):
+    if post_id is None:
+        return soup
+    else:
+        return soup.find('article',
+                         {'data-content': f"{post_id}"})
 
 
 class T:
@@ -38,13 +43,20 @@ class T:
         self.url = url
 
     def post(self) -> str:
-        contents = self.soup\
-            .find('article', {'data-content': f"{self.post_id}"})\
+        contents =\
+            narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
             .find('article', class_="message-body")\
             .find('div', class_="bbWrapper")\
             .contents
 
         paragraphs = []
+
+        if self.post_id is None:
+            title = self.soup\
+                .find('h1', class_="p-title-value")\
+                .text
+            paragraphs.append(title)
+
         for content in contents:
             # Emojis, which are embed as images in the HTML, may be present.
             if isinstance(content, NavigableString) and str(content).strip():
@@ -53,8 +65,8 @@ class T:
         return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
-        datetime_str = self.soup\
-            .find('article', {'data-content': f"{self.post_id}"})\
+        datetime_str =\
+            narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
             .find('time')['datetime']
         return datetime.fromisoformat(datetime_str)
 
@@ -64,8 +76,7 @@ class T:
             .text
 
     def username(self) -> str:
-        return self.soup\
-            .find('article', {'data-content': f"{self.post_id}"})\
+        return narrow_soup_to_post_id(soup=self.soup, post_id=self.post_id)\
             .find('section', class_="message-user")\
             .find('a', class_="username")\
             .text
@@ -80,15 +91,12 @@ class T:
 
 
 def of_url(url: str) -> T:
-    if not post_id(url):
-        logging.error("Expected a permalink to the comment.")
-        raise ValueError("Invalid URL: Expected a permalink to the comment.")
-
     soup = url_fetcher.get_soup(url)
     stylised_platform = platform.to_stylised_string(platform.of_url(url))
     return T(stylised_platform=stylised_platform, url=url, soup=soup)
 
 
+# TODO: URLs that are not links to replies must be testable
 # TODO: Refactor this to take in a [platform.T] instead.
 def mock(mock_url: str, platform: str, stylised_platform: str) -> T:
     cached_soup = soup_cacher.read(platform)
@@ -129,7 +137,7 @@ def mock_singaporemotherhood() -> T:
                 "/female-obgyn-recommendations.298237/post-8821891")
     platform_str = platform.to_plain_string(platform.T.SINGAPOREMOTHERHOOD)
     stylised_platform = platform.to_stylised_string(
-            platform.T.SINGAPOREMOTHERHOOD)
+        platform.T.SINGAPOREMOTHERHOOD)
 
     return mock(mock_url=mock_url,
                 platform=platform_str,
