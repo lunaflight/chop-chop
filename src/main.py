@@ -3,21 +3,17 @@
 import logging
 from argparse import ArgumentParser
 
-from src.platform_parsers import platform
+from src.platform_parsers import assertation, platform
 
 
 def escape_double_apostrophe(string: str) -> str:
     return string.replace('"', '\\"')
 
 
-# TODO: This tuple should be labeled, a dictionary should be returned instead.
-def read_url_from_stdin() -> tuple[str, str]:
+def read_url_from_stdin() -> assertation.T:
     url = input()
     platform_ = platform.of_url(url)
-    post = platform.post(platform_)
-    credit = platform.credit(platform_)
-
-    return (post, credit)
+    return platform.get_assertation(platform_)
 
 
 def main() -> None:
@@ -34,7 +30,9 @@ def main() -> None:
     else:
         logging.basicConfig(level=logging.WARNING)
 
-    post, credit = read_url_from_stdin()
+    assertation_ = read_url_from_stdin()
+    post = assertation_.post
+    credit = assertation_.credit
 
     print(f'{{ "eg": "{escape_double_apostrophe(post)}", '  # noqa: T201
           f'"src": "{escape_double_apostrophe(credit)}" }}')

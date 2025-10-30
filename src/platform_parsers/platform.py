@@ -3,7 +3,7 @@ from enum import Enum
 
 from bs4 import BeautifulSoup
 
-from src.platform_parsers import reddit, xenforo
+from src.platform_parsers import assertation, reddit, xenforo
 
 
 class Platform(Enum):
@@ -54,30 +54,20 @@ def identifying_url_substring(platform: Platform) -> str:
 
 
 def of_url(url: str) -> T:
-    for platform in Platform:
-        if identifying_url_substring(platform) in url:
-            return T(platform=platform, url=url)
+    for platform_ in Platform:
+        if identifying_url_substring(platform_) in url:
+            return T(platform=platform_, url=url)
     raise ValueError("The URL does not match any known platform.")
 
 
-def post(t: T) -> str:
+def get_assertation(t: T) -> assertation.T:
     match t.platform:
         case Platform.REDDIT:
-            return reddit.of_url(t.url).post()
+            return reddit.of_url(t.url).assertation()
         case (Platform.HARDWAREZONE
               | Platform.SINGAPOREBRIDES
               | Platform.SINGAPOREMOTHERHOOD):
-            return xenforo.of_url(t.url).post()
-
-
-def credit(t: T) -> str:
-    match t.platform:
-        case Platform.REDDIT:
-            return reddit.of_url(t.url).credit()
-        case (Platform.HARDWAREZONE
-              | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD):
-            return xenforo.of_url(t.url).credit()
+            return xenforo.of_url(t.url).assertation()
 
 
 def get_soup_for_testing(t: T) -> BeautifulSoup:
@@ -90,12 +80,13 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
             return xenforo.of_url(t.url).soup
 
 
-def credit_with_soup_for_testing(t: T, soup: BeautifulSoup) -> str:
+def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
     match t.platform:
         case Platform.REDDIT:
             return (reddit.of_url_with_soup(url=t.url, soup_from_old=soup)
-                    .credit())
+                    .assertation())
         case (Platform.HARDWAREZONE
               | Platform.SINGAPOREBRIDES
               | Platform.SINGAPOREMOTHERHOOD):
-            return xenforo.of_url_with_soup(url=t.url, soup=soup).credit()
+            return (xenforo.of_url_with_soup(url=t.url, soup=soup)
+                    .assertation())

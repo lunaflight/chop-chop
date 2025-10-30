@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 from src.platform_parsers import (
+    assertation,
     bbcode_format,
     citation_format,
     platform,
@@ -101,6 +102,9 @@ class T:
             platform_name=self.stylised_platform,
             title=self.title(),
             url=self.url)
+
+    def assertation(self) -> assertation.T:
+        return assertation.T(post=self.post(), credit=self.credit())
 
 
 def of_url_with_soup(url: str, soup: BeautifulSoup) -> T:

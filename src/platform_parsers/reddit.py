@@ -6,6 +6,7 @@ from urllib.parse import urlparse, urlunparse
 from bs4 import BeautifulSoup, Tag
 
 from src.platform_parsers import (
+    assertation,
     bbcode_format,
     citation_format,
     url_fetcher,
@@ -86,6 +87,9 @@ class T:
             platform_name=f"r/{self.subreddit()}",
             title=self.title(),
             url=self.modern_url)
+
+    def assertation(self) -> assertation.T:
+        return assertation.T(post=self.post(), credit=self.credit())
 
 
 def replace_netloc_of_url(url: str, netloc: str) -> str:
