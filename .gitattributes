@@ -1,0 +1,3 @@
+# This excludes all HTML files from stats on GitHub.
+*.html linguist-generated
+*.html linguist-documentation
