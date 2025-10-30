@@ -1,4 +1,2 @@
 __pycache__/
 .mypy_cache/
-
-tests/cached_htmls/*.html
