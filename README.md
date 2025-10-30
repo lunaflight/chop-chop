@@ -22,7 +22,7 @@ relative path issues:
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
 
-5. `PYTHONPATH=$(pwd) python src/main.py --help`
+5. `make args=--help`
     - Run the script. Note the `PYTHONPATH` environment variable to help it
     locate packages.
 

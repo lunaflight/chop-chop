@@ -22,11 +22,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Run Ruff
-        run: ruff check --output-format=github .
-
-      - name: Run Mypy
-        run: mypy .
-
-      - name: Run Pytest
-        run: pytest
+      - name: Run Checks
+        run: make ci-check
