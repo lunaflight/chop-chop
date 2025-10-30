@@ -3,7 +3,7 @@
 all: main
 
 main:
-	PYTHONPATH=$(shell pwd) python src/main.py $(args)
+	@PYTHONPATH=$(shell pwd) python src/main.py $(args)
 
 check:
 	ruff check
