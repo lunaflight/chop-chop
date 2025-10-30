@@ -35,7 +35,7 @@ class T:
         self.is_reply = is_reply
 
     def post(self) -> str:
-        paragraphs = [self.title()]
+        paragraphs = [] if self.is_reply else [self.title()]
 
         try:
             body_paragraphs = (

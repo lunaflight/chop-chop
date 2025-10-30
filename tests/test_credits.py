@@ -35,7 +35,7 @@ def _test_assertation(url: str,
 def test_reddit_reply() -> None:
     test_name = "reply"
     url = "https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/"
-    expected_post = 'Contract for Marine Parade free shuttle bus service set to end<br>Better to end the operation then to let the public find out how much it cost. <br>Some friends of PAP sure benefit from this "free" shuttle bus service.<br>They could be charging 10k per trip.<br>Even better, like LBW. Oweself award ownself the tender.'  # noqa: E501
+    expected_post = 'Better to end the operation then to let the public find out how much it cost. <br>Some friends of PAP sure benefit from this "free" shuttle bus service.<br>They could be charging 10k per trip.<br>Even better, like LBW. Oweself award ownself the tender.'  # noqa: E501
     expected_credit = (
         '2025 Oct 13, '
         'u/ValentinoCappuccino. '
