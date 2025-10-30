@@ -32,8 +32,6 @@ def _test_assertation(url: str,
     assert credit == expected_credit
 
 
-# TODO: This needs to test the post as well. This means that an attestation.py
-# and functions that return attestation.Ts might be sane.
 def test_reddit_reply() -> None:
     test_name = "reply"
     url = "https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/"
