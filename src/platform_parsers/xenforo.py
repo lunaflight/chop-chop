@@ -5,11 +5,10 @@ from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup, NavigableString, Tag
 
-from platform_parsers import (
+from src.platform_parsers import (
     bbcode_format,
     citation_format,
     platform,
-    soup_cacher,
     url_fetcher,
 )
 
@@ -104,55 +103,11 @@ class T:
             url=self.url)
 
 
-def of_url(url: str) -> T:
-    soup = url_fetcher.get_soup(url)
+def of_url_with_soup(url: str, soup: BeautifulSoup) -> T:
     stylised_platform = platform.to_stylised_string(platform.of_url(url))
     return T(stylised_platform=stylised_platform, url=url, soup=soup)
 
 
-# TODO: URLs that are not links to replies must be testable
-# TODO: Refactor this to take in a [platform.T] instead.
-def mock(mock_url: str, platform: str, stylised_platform: str) -> T:
-    cached_soup = soup_cacher.read(platform)
-
-    if not cached_soup:
-        cached_soup = of_url(mock_url).soup
-        soup_cacher.cache(platform, cached_soup)
-
-    return T(stylised_platform=stylised_platform,
-             url=mock_url,
-             soup=cached_soup)
-
-
-def mock_hardwarezone() -> T:
-    mock_url = ("https://forums.hardwarezone.com.sg/threads/"
-                "any-good-use-for-myactivesg-credits.7163585/#post-157582701")
-    platform_str = platform.to_plain_string(platform.T.HARDWAREZONE)
-    stylised_platform = platform.to_stylised_string(platform.T.HARDWAREZONE)
-
-    return mock(mock_url=mock_url,
-                platform=platform_str,
-                stylised_platform=stylised_platform)
-
-
-def mock_singaporebrides() -> T:
-    mock_url = ("https://singaporebrides.com/weddingforum/threads/"
-                "any-clubbers-out-there.1305/page-396#post-730029")
-    platform_str = platform.to_plain_string(platform.T.SINGAPOREBRIDES)
-    stylised_platform = platform.to_stylised_string(platform.T.SINGAPOREBRIDES)
-
-    return mock(mock_url=mock_url,
-                platform=platform_str,
-                stylised_platform=stylised_platform)
-
-
-def mock_singaporemotherhood() -> T:
-    mock_url = ("https://singaporemotherhood.com/forum/threads"
-                "/female-obgyn-recommendations.298237/post-8821891")
-    platform_str = platform.to_plain_string(platform.T.SINGAPOREMOTHERHOOD)
-    stylised_platform = platform.to_stylised_string(
-        platform.T.SINGAPOREMOTHERHOOD)
-
-    return mock(mock_url=mock_url,
-                platform=platform_str,
-                stylised_platform=stylised_platform)
+def of_url(url: str) -> T:
+    soup = url_fetcher.get_soup(url)
+    return of_url_with_soup(url=url, soup=soup)

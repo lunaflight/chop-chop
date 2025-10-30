@@ -22,11 +22,9 @@ relative path issues:
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
 
-4. `chmod +x src/main.py`
-    - This step is optional, and only makes for easier execution.
-
-5. `./src/main.py --help`
-    - Run the script!
+5. `PYTHONPATH=$(pwd) python src/main.py --help`
+    - Run the script. Note the `PYTHONPATH` environment variable to help it
+    locate packages.
 
 # Quick Start
 Run `./src/main.py`.

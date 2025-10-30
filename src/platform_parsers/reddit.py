@@ -5,11 +5,9 @@ from urllib.parse import urlparse, urlunparse
 
 from bs4 import BeautifulSoup, Tag
 
-from platform_parsers import (
+from src.platform_parsers import (
     bbcode_format,
     citation_format,
-    platform,
-    soup_cacher,
     url_fetcher,
 )
 
@@ -114,26 +112,15 @@ def is_reply_if_permalink(url: str) -> bool:
     return path.index("comments") + 4 == len(path)
 
 
-def of_url(url: str) -> T:
-    old_url = old_url_of_url(url)
+def of_url_with_soup(url: str, soup_from_old: BeautifulSoup) -> T:
     modern_url = modern_url_of_url(url)
-    soup_from_old = url_fetcher.get_soup(old_url)
     is_reply = is_reply_if_permalink(url)
     return T(modern_url=modern_url,
              soup_from_old=soup_from_old,
              is_reply=is_reply)
 
 
-def mock() -> T:
-    url = ("https://www.reddit.com/r/singapore/comments/1o5i3fl/"
-           "contract_for_marine_parade_free_shuttle_bus/nj9fl4g/")
-    platform_str = platform.to_plain_string(platform.T.REDDIT)
-
-    cached_soup = soup_cacher.read(platform_str)
-    if not cached_soup:
-        cached_soup = of_url(url).soup_from_old
-        soup_cacher.cache(platform_str, cached_soup)
-
-    return T(modern_url=url,
-             soup_from_old=cached_soup,
-             is_reply=is_reply_if_permalink(url))
+def of_url(url: str) -> T:
+    old_url = old_url_of_url(url)
+    soup_from_old = url_fetcher.get_soup(old_url)
+    return of_url_with_soup(url=url, soup_from_old=soup_from_old)
