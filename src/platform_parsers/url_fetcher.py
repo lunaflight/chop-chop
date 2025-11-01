@@ -14,19 +14,27 @@ DEFAULT_RETRY_AFTER_DELAY_SEC = 5
 
 
 def get_soup(url: str) -> BeautifulSoup:
-    response = requests.get(url,
-                            headers=real_headers(),
-                            timeout=DEFAULT_RETRY_AFTER_DELAY_SEC)
+    response = requests.get(
+        url, headers=real_headers(), timeout=DEFAULT_RETRY_AFTER_DELAY_SEC
+    )
 
     if response.status_code != OK_RESPONSE:
         retry_after_header = response.headers.get("Retry-After")
-        retry_after_delay = (int(retry_after_header)
-                             if (response.status_code == TOO_MANY_REQUESTS
-                                 and retry_after_header is not None)
-                             else DEFAULT_RETRY_AFTER_DELAY_SEC)
-        LOGGER.debug("Received bad status code. Trying after delay.",
-                     extra={"response": response.status_code,
-                            "retry_after_delay": retry_after_delay})
+        retry_after_delay = (
+            int(retry_after_header)
+            if (
+                response.status_code == TOO_MANY_REQUESTS
+                and retry_after_header is not None
+            )
+            else DEFAULT_RETRY_AFTER_DELAY_SEC
+        )
+        LOGGER.debug(
+            "Received bad status code. Trying after delay.",
+            extra={
+                "response": response.status_code,
+                "retry_after_delay": retry_after_delay,
+            },
+        )
         time.sleep(retry_after_delay)
         return get_soup(url)
 

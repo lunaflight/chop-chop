@@ -69,10 +69,12 @@ def get_assertation(t: T) -> assertation.T:
     match t.platform:
         case Platform.REDDIT:
             return reddit.of_url(t.url).assertation()
-        case (Platform.HARDWAREZONE
-              | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD
-              | Platform.SOFT):
+        case (
+            Platform.HARDWAREZONE
+            | Platform.SINGAPOREBRIDES
+            | Platform.SINGAPOREMOTHERHOOD
+            | Platform.SOFT
+        ):
             return xenforo.of_url(t.url).assertation()
 
 
@@ -80,21 +82,25 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
     match t.platform:
         case Platform.REDDIT:
             return reddit.of_url(t.url).soup_from_old
-        case (Platform.HARDWAREZONE
-              | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD
-              | Platform.SOFT):
+        case (
+            Platform.HARDWAREZONE
+            | Platform.SINGAPOREBRIDES
+            | Platform.SINGAPOREMOTHERHOOD
+            | Platform.SOFT
+        ):
             return xenforo.of_url(t.url).soup
 
 
 def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
     match t.platform:
         case Platform.REDDIT:
-            return (reddit.of_url_with_soup(url=t.url, soup_from_old=soup)
-                    .assertation())
-        case (Platform.HARDWAREZONE
-              | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD
-              | Platform.SOFT):
-            return (xenforo.of_url_with_soup(url=t.url, soup=soup)
-                    .assertation())
+            return reddit.of_url_with_soup(
+                url=t.url, soup_from_old=soup
+            ).assertation()
+        case (
+            Platform.HARDWAREZONE
+            | Platform.SINGAPOREBRIDES
+            | Platform.SINGAPOREMOTHERHOOD
+            | Platform.SOFT
+        ):
+            return xenforo.of_url_with_soup(url=t.url, soup=soup).assertation()

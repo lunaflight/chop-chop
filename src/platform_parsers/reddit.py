@@ -24,12 +24,13 @@ def narrow_soup(soup: BeautifulSoup, *, is_reply: bool) -> Tag | None:
 
 class T:
     # The old URL is used for more stable parsing.
-    def __init__(self,
-                 modern_url: str,
-                 soup_from_old: BeautifulSoup,
-                 *,
-                 is_reply: bool,
-                 ) -> None:
+    def __init__(
+        self,
+        modern_url: str,
+        soup_from_old: BeautifulSoup,
+        *,
+        is_reply: bool,
+    ) -> None:
         self.soup_from_old = soup_from_old
         self.modern_url = modern_url
         self.is_reply = is_reply
@@ -40,9 +41,11 @@ class T:
         try:
             body_paragraphs = (
                 narrow_soup(  # type: ignore[union-attr]
-                    self.soup_from_old, is_reply=self.is_reply)
+                    self.soup_from_old, is_reply=self.is_reply
+                )
                 .find("div", class_="usertext-body")
-                .find_all("p"))
+                .find_all("p")
+            )
         except AttributeError:
             body_paragraphs = []
 
@@ -59,26 +62,28 @@ class T:
     def timestamp(self) -> datetime:
         datetime_str = (
             narrow_soup(  # type: ignore[union-attr]
-                self.soup_from_old, is_reply=self.is_reply)
+                self.soup_from_old, is_reply=self.is_reply
+            )
             .find("p", class_="tagline")
             .find("time")
-            .get("datetime"))
+            .get("datetime")
+        )
         assert isinstance(datetime_str, str)
 
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
-        return (self.soup_from_old  # type: ignore[union-attr]
-                .find("a", {"data-event-action": "title"})
-                .text)
+        return self.soup_from_old.find("a", {"data-event-action": "title"}).text  # type: ignore[union-attr]
 
     def username(self) -> str:
         return (
             narrow_soup(  # type: ignore[union-attr]
-                self.soup_from_old, is_reply=self.is_reply)
+                self.soup_from_old, is_reply=self.is_reply
+            )
             .find("p", class_="tagline")
             .find("a", class_="author")
-            .text)
+            .text
+        )
 
     def credit(self) -> str:
         return citation_format.online_with_title(
@@ -86,7 +91,8 @@ class T:
             name=f"u/{self.username()}",
             platform_name=f"r/{self.subreddit()}",
             title=self.title(),
-            url=self.modern_url)
+            url=self.modern_url,
+        )
 
     def assertation(self) -> assertation.T:
         return assertation.T(post=self.post(), credit=self.credit())
@@ -119,9 +125,9 @@ def is_reply_if_permalink(url: str) -> bool:
 def of_url_with_soup(url: str, soup_from_old: BeautifulSoup) -> T:
     modern_url = modern_url_of_url(url)
     is_reply = is_reply_if_permalink(url)
-    return T(modern_url=modern_url,
-             soup_from_old=soup_from_old,
-             is_reply=is_reply)
+    return T(
+        modern_url=modern_url, soup_from_old=soup_from_old, is_reply=is_reply
+    )
 
 
 def of_url(url: str) -> T:

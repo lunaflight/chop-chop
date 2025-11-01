@@ -29,20 +29,19 @@ def post_id(url: str) -> str | None:
     return post_id
 
 
-def narrow_soup_to_post_id(soup: BeautifulSoup, post_id: str | None)\
-        -> Tag | None:
+def narrow_soup_to_post_id(
+    soup: BeautifulSoup, post_id: str | None
+) -> Tag | None:
     if post_id is None:
         return soup
 
-    return soup.find("article",
-                     {"data-content": f"{post_id}"})
+    return soup.find("article", {"data-content": f"{post_id}"})
 
 
 class T:
-    def __init__(self,
-                 stylised_platform: str,
-                 url: str,
-                 soup: BeautifulSoup) -> None:
+    def __init__(
+        self, stylised_platform: str, url: str, soup: BeautifulSoup
+    ) -> None:
         self.stylised_platform = stylised_platform
         self.post_id = post_id(url)
         self.soup = soup
@@ -52,10 +51,13 @@ class T:
         contents = (
             narrow_soup_to_post_id(
                 # type: ignore[union-attr]
-                soup=self.soup, post_id=self.post_id)
+                soup=self.soup,
+                post_id=self.post_id,
+            )
             .find("article", class_="message-body")
             .find("div", class_="bbWrapper")
-            .contents)
+            .contents
+        )
 
         paragraphs = []
 
@@ -63,10 +65,11 @@ class T:
             paragraphs.append(self.title())
 
         # Emojis, which are embed as images in the HTML, may be present.
-        paragraphs += [str(content.strip())
-                       for content in contents
-                       if isinstance(content, NavigableString)
-                       and str(content).strip()]
+        paragraphs += [
+            str(content.strip())
+            for content in contents
+            if isinstance(content, NavigableString) and str(content).strip()
+        ]
 
         return bbcode_format.join_with_br(paragraphs)
 
@@ -74,26 +77,30 @@ class T:
         datetime_str = (
             narrow_soup_to_post_id(
                 # type: ignore[union-attr]
-                soup=self.soup, post_id=self.post_id)
+                soup=self.soup,
+                post_id=self.post_id,
+            )
             .find("time")
-            .get("datetime"))
+            .get("datetime")
+        )
         assert isinstance(datetime_str, str)
 
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
-        return (self.soup  # type: ignore[union-attr]
-                .find("h1", class_="p-title-value")
-                .text)
+        return self.soup.find("h1", class_="p-title-value").text  # type: ignore[union-attr]
 
     def username(self) -> str:
         return (
             narrow_soup_to_post_id(
                 # type: ignore[union-attr]
-                soup=self.soup, post_id=self.post_id)
+                soup=self.soup,
+                post_id=self.post_id,
+            )
             .find("section", class_="message-user")
             .find("a", class_="username")
-            .text)
+            .text
+        )
 
     def credit(self) -> str:
         return citation_format.online_with_title(
@@ -101,7 +108,8 @@ class T:
             name=self.username(),
             platform_name=self.stylised_platform,
             title=self.title(),
-            url=self.url)
+            url=self.url,
+        )
 
     def assertation(self) -> assertation.T:
         return assertation.T(post=self.post(), credit=self.credit())

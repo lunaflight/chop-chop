@@ -21,12 +21,15 @@ def main() -> None:
     parser.add_argument(
         "--enable-logging",
         action="store_true",
-        help="Enable logging for debugging")
+        help="Enable logging for debugging",
+    )
     args = parser.parse_args()
 
     if args.enable_logging:
-        logging.basicConfig(level=logging.DEBUG,
-                            format="%(asctime)s - %(levelname)s - %(message)s")
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format="%(asctime)s - %(levelname)s - %(message)s",
+        )
     else:
         logging.basicConfig(level=logging.WARNING)
 
@@ -34,8 +37,10 @@ def main() -> None:
     post = assertation_.post
     credit = assertation_.credit
 
-    print(f'{{ "eg": "{escape_double_apostrophe(post)}", '  # noqa: T201
-          f'"src": "{escape_double_apostrophe(credit)}" }}')
+    print(  # noqa: T201
+        f'{{ "eg": "{escape_double_apostrophe(post)}", '
+        f'"src": "{escape_double_apostrophe(credit)}" }}'
+    )
 
 
 if __name__ == "__main__":
