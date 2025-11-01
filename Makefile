@@ -1,4 +1,4 @@
-.PHONY: all check ci-check main
+.PHONY: all check ci-check fmt main
 
 all: main
 
@@ -7,10 +7,15 @@ main:
 
 check:
 	ruff check
+	ruff format --check
 	mypy .
 	pytest
 
+fmt:
+	ruff format
+
 ci-check:
 	ruff check --output-format=github .
+	ruff format --check
 	mypy .
 	pytest

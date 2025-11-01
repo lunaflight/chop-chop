@@ -1,7 +1,11 @@
+fix = true
+line-length = 80
+
 [lint]
 select = ["ALL"]
 preview = true
 ignore = [
+"COM812",  # already handled by formatter
 "CPY001",
 "D100",
 "D101",
