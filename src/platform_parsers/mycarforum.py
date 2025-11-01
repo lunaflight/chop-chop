@@ -18,8 +18,18 @@ if TYPE_CHECKING:
 
 def comment_id(url: str) -> int | None:
     try:
-        query = urlparse(url).query
-        post_id = parse_qs(query).get("comment", [])[0]
+        parsed_url = urlparse(url)
+        query = parsed_url.query
+
+        # The ID can be in the URL in 2 possible ways
+        if "comment" in query:
+            post_id = parse_qs(query).get("comment", [])[0]
+        else:
+            fragment = parsed_url.fragment
+            if fragment and "-" in fragment:
+                post_id = fragment.split("-")[-1]
+            else:
+                return None
     except (AttributeError, IndexError):
         return None
 
