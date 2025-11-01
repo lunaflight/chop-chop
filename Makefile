@@ -11,11 +11,12 @@ check:
 	mypy .
 	pytest
 
-fmt:
-	ruff format
-
 ci-check:
 	ruff check --output-format=github .
 	ruff format --check
 	mypy .
 	pytest
+
+fmt:
+	ruff format
+
