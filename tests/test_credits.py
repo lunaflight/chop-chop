@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# TODO: split tests up into individual files
+
 from bs4 import BeautifulSoup
 
 from src.platform_parsers import platform
@@ -34,7 +36,7 @@ def _test_assertation(
 def test_reddit_reply() -> None:
     test_name = "reply"
     url = "https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/"
-    expected_post = 'Better to end the operation then to let the public find out how much it cost. <br>Some friends of PAP sure benefit from this "free" shuttle bus service.<br>They could be charging 10k per trip.<br>Even better, like LBW. Oweself award ownself the tender.'  # noqa: E501
+    expected_post = 'Better to end the operation then to let the public find out how much it cost.<br>Some friends of PAP sure benefit from this "free" shuttle bus service.<br>They could be charging 10k per trip.<br>Even better, like LBW. Oweself award ownself the tender.'  # noqa: E501
     expected_credit = (
         "2025 Oct 13, "
         "u/ValentinoCappuccino. "
@@ -54,7 +56,7 @@ def test_reddit_reply() -> None:
 def test_reddit_main_post() -> None:
     test_name = "main_post"
     url = "https://www.reddit.com/r/singapore/comments/1oixj70/hsa_blood_stocklevels_for_a_is_critical_low_29_oct/"
-    expected_post = "HSA Blood StockLevels for A- is Critical Low (29 Oct)<br>According to Red Cross Singapore website. The blood stock levels for A- is at critical low. Screenshot from Red Cross SG website. <br>As a regular blood donor, I hope people who are young and healthy and able to give. Please do so, and especially you are A negative.<br>Blood is needed to save lives in times of emergencies and to sustain the lives of those with medical conditions, like leukemia, thalassaemia and bleeding disorders, as well as patients who are undergoing major surgeries.<br>For many patients, blood donors are their lifeline. One unit of blood can save three lives!<br>Blood Stock level: https://redcross.sg/#bloodstock"  # noqa: E501
+    expected_post = "HSA Blood StockLevels for A- is Critical Low (29 Oct)<br>According to Red Cross Singapore website. The blood stock levels for A- is at critical low. Screenshot from Red Cross SG website.<br>As a regular blood donor, I hope people who are young and healthy and able to give. Please do so, and especially you are A negative.<br>Blood is needed to save lives in times of emergencies and to sustain the lives of those with medical conditions, like leukemia, thalassaemia and bleeding disorders, as well as patients who are undergoing major surgeries.<br>For many patients, blood donors are their lifeline. One unit of blood can save three lives!<br>Blood Stock level: https://redcross.sg/#bloodstock"  # noqa: E501
     expected_credit = (
         "2025 Oct 29, "
         "u/Bitter-Rattata. "
@@ -74,7 +76,7 @@ def test_reddit_main_post() -> None:
 def test_backslash_n_replaced_with_br() -> None:
     test_name = "blackslash_n_replaced_with_br"
     url = "https://www.reddit.com/r/singapore/comments/1o8rpju/grandpas_struggle_to_secure_a_better_hdb_flat/"
-    expected_post = "Grandpa's struggle to secure a better HDB flat, 1970s<br>These are all the letters and forms kept by my maternal grandparents to get a HDB flat in the 70s.<br>My maternal grandfather or gua gong, was a coconut hawker with his wife in the old Tekka Market. Everyday, they opened early in the morning to serve the early morning customers, like cooked food hawkers who served breakfast and housewives. They would cut coconuts, grind coconuts and deliver coconuts to the old shophouses along the Rochor Canal. <br>They closed late at night around 10pm, after disposing of the coconut shells and other trash. It was very tiring work that made them desire to live near the market. <br>Originally, my gua gong, gua ma, my mother and her 4 siblings all lived at 12 Race Course Rd, which is now Exit E of the MRT here. My gua gong, who was born in poverty in China, was adopted by his Chia relatives here, who were abusive to him and his family. My own mother recounts being sent to become essentially their maid as a little girl. He wanted to get away from them, and got a 1 rm flat in Kim Keat. It was quickly realised to be too small for a family of 7  so he kept writing to the gov for a larger flat, or one closer to Tekka.<br>He secured Blk 422 AMK in 78 or 79, after years of trying, before selling that flat to finance his final home in Tekka, where I found his documents in our old furniture. "  # noqa: E501
+    expected_post = "Grandpa's struggle to secure a better HDB flat, 1970s<br>These are all the letters and forms kept by my maternal grandparents to get a HDB flat in the 70s.<br>My maternal grandfather or gua gong, was a coconut hawker with his wife in the old Tekka Market. Everyday, they opened early in the morning to serve the early morning customers, like cooked food hawkers who served breakfast and housewives. They would cut coconuts, grind coconuts and deliver coconuts to the old shophouses along the Rochor Canal.<br>They closed late at night around 10pm, after disposing of the coconut shells and other trash. It was very tiring work that made them desire to live near the market.<br>Originally, my gua gong, gua ma, my mother and her 4 siblings all lived at 12 Race Course Rd, which is now Exit E of the MRT here. My gua gong, who was born in poverty in China, was adopted by his Chia relatives here, who were abusive to him and his family. My own mother recounts being sent to become essentially their maid as a little girl. He wanted to get away from them, and got a 1 rm flat in Kim Keat. It was quickly realised to be too small for a family of 7  so he kept writing to the gov for a larger flat, or one closer to Tekka.<br>He secured Blk 422 AMK in 78 or 79, after years of trying, before selling that flat to finance his final home in Tekka, where I found his documents in our old furniture."  # noqa: E501
     expected_credit = (
         "2025 Oct 17, "
         "u/mt-tekka. "
@@ -139,6 +141,48 @@ def test_soft_reply() -> None:
         f'2005 Oct 30, MichaelAngelo. S.O.F.T., "Childhood jeers". {url}'
     )
 
+    _test_assertation(
+        url=url,
+        test_name=test_name,
+        expected_post=expected_post,
+        expected_credit=expected_credit,
+    )
+
+
+def test_mycarforum_reply() -> None:
+    test_name = "reply"
+    url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&comment=2115341"
+    expected_post = "yeah lor.. really hope so...<br>but mebbe not doing sea sports..<br>more likely spa etc..<br>hahaa<br>Wah, good way to relax!<br>C u there!!<br>Aiya!! I guess MCF should start selling member's T-shirt to support the forum, then all those going Bintan can hi to each other."  # noqa: E501
+    expected_credit = (
+        "2007 Nov 5, Davidcks. Mycarforum, "
+        f'"Bring/Buy beer from SG to Bintan resorts?". {url}'
+    )
+    _test_assertation(
+        url=url,
+        test_name=test_name,
+        expected_post=expected_post,
+        expected_credit=expected_credit,
+    )
+
+
+def test_mycarforum_main_post() -> None:
+    test_name = "topic"
+    url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/"
+    expected_post = (
+        "Bring/Buy beer from SG to Bintan resorts?<br>Hi, I need advise "
+        "from the experts who visit bintan resorts often. Me with some "
+        "family and  friends are going over to bintan lagoon next long "
+        "weekend.<br>And was told that beer are expensive there, so was "
+        "wondering if it is a good idea to buy in SG and bring it across, "
+        "or is there any duly free shops at TM ferry terminal to purchase "
+        "from?? Someone told me that it is ok to bring a six pack each "
+        "person into bintan, is this true?<br>Does anyone has any "
+        "suggestion or advise?? 10q 10q."
+    )
+    expected_credit = (
+        '2007 Nov 1, Davidcks. Mycarforum, "Bring/Buy beer from SG to '
+        f'Bintan resorts?". {url}'
+    )
     _test_assertation(
         url=url,
         test_name=test_name,
