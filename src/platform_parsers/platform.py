@@ -11,6 +11,7 @@ class Platform(Enum):
     REDDIT = "Reddit"
     SINGAPOREBRIDES = "SingaporeBrides"
     SINGAPOREMOTHERHOOD = "SingaporeMotherhood"
+    SOFT = "S.O.F.T."
 
 
 # TODO: This file could use a better name, since platform is already one
@@ -31,6 +32,8 @@ def to_stylised_string(t: T) -> str:
             return "SingaporeBrides"
         case Platform.SINGAPOREMOTHERHOOD:
             return "SingaporeMotherhood"
+        case Platform.SOFT:
+            return "S.O.F.T."
 
     raise ValueError("Unknown platform.")
 
@@ -49,6 +52,8 @@ def identifying_url_substring(platform: Platform) -> str:
             return "singaporebrides.com"
         case Platform.SINGAPOREMOTHERHOOD:
             return "singaporemotherhood.com"
+        case Platform.SOFT:
+            return "soft.com.sg"
 
     raise ValueError("Unknown platform.")
 
@@ -66,7 +71,8 @@ def get_assertation(t: T) -> assertation.T:
             return reddit.of_url(t.url).assertation()
         case (Platform.HARDWAREZONE
               | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD):
+              | Platform.SINGAPOREMOTHERHOOD
+              | Platform.SOFT):
             return xenforo.of_url(t.url).assertation()
 
 
@@ -76,7 +82,8 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
             return reddit.of_url(t.url).soup_from_old
         case (Platform.HARDWAREZONE
               | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD):
+              | Platform.SINGAPOREMOTHERHOOD
+              | Platform.SOFT):
             return xenforo.of_url(t.url).soup
 
 
@@ -87,6 +94,7 @@ def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
                     .assertation())
         case (Platform.HARDWAREZONE
               | Platform.SINGAPOREBRIDES
-              | Platform.SINGAPOREMOTHERHOOD):
+              | Platform.SINGAPOREMOTHERHOOD
+              | Platform.SOFT):
             return (xenforo.of_url_with_soup(url=t.url, soup=soup)
                     .assertation())
