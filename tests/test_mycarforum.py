@@ -1,7 +1,7 @@
 from tests import url_checker
 
 
-def test_mycarforum_reply() -> None:
+def test_reply() -> None:
     test_suffix = "reply"
     url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&comment=2115341"
     expected_post = "yeah lor.. really hope so...<br>but mebbe not doing sea sports..<br>more likely spa etc..<br>hahaa<br>Wah, good way to relax!<br>C u there!!<br>Aiya!! I guess MCF should start selling member's T-shirt to support the forum, then all those going Bintan can hi to each other."  # noqa: E501
@@ -17,7 +17,7 @@ def test_mycarforum_reply() -> None:
     )
 
 
-def test_mycarforum_main_post() -> None:
+def test_main_post() -> None:
     test_suffix = "topic"
     url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/"
     expected_post = (

@@ -1,7 +1,7 @@
 from tests import url_checker
 
 
-def test_reddit_reply() -> None:
+def test_reply() -> None:
     test_suffix = "reply"
     url = "https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/"
     expected_post = 'Better to end the operation then to let the public find out how much it cost.<br>Some friends of PAP sure benefit from this "free" shuttle bus service.<br>They could be charging 10k per trip.<br>Even better, like LBW. Oweself award ownself the tender.'  # noqa: E501
@@ -21,7 +21,7 @@ def test_reddit_reply() -> None:
     )
 
 
-def test_reddit_main_post() -> None:
+def test_main_post() -> None:
     test_suffix = "main_post"
     url = "https://www.reddit.com/r/singapore/comments/1oixj70/hsa_blood_stocklevels_for_a_is_critical_low_29_oct/"
     expected_post = "HSA Blood StockLevels for A- is Critical Low (29 Oct)<br>According to Red Cross Singapore website. The blood stock levels for A- is at critical low. Screenshot from Red Cross SG website.<br>As a regular blood donor, I hope people who are young and healthy and able to give. Please do so, and especially you are A negative.<br>Blood is needed to save lives in times of emergencies and to sustain the lives of those with medical conditions, like leukemia, thalassaemia and bleeding disorders, as well as patients who are undergoing major surgeries.<br>For many patients, blood donors are their lifeline. One unit of blood can save three lives!<br>Blood Stock level: https://redcross.sg/#bloodstock"  # noqa: E501

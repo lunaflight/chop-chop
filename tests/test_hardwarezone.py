@@ -1,7 +1,7 @@
 from tests import url_checker
 
 
-def test_hardwarezone_reply() -> None:
+def test_reply() -> None:
     test_suffix = "reply"
     url = "https://forums.hardwarezone.com.sg/threads/the-tech-show-2025-any-good-lobang.7166719/post-157701902"
     expected_post = "Also, we'll have our highlight stories from the show floor. Easier to see and get ideas"  # noqa: E501
@@ -21,7 +21,7 @@ def test_hardwarezone_reply() -> None:
     )
 
 
-def test_hardwarezone_main_post() -> None:
+def test_main_post() -> None:
     test_suffix = "main_post"
     url = "https://forums.hardwarezone.com.sg/threads/the-tech-show-2025-any-good-lobang.7166719/"
     expected_post = "The Tech Show 2025: any good lobang<br>Any interesting products to shop?<br>Have gotten desk from ulti and chair from ergotune<br>got any smart sofa that can recline and dyson promos for their hair curler"  # noqa: E501
