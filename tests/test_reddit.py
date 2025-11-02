@@ -59,3 +59,21 @@ def test_backslash_n_replaced_with_br() -> None:
         expected_post=expected_post,
         expected_credit=expected_credit,
     )
+
+
+def test_deleted_user() -> None:
+    test_suffix_for_caching = "deleted_user"
+    url = "https://www.reddit.com/r/singapore/comments/8cs8b0/marsiling_at_sunrise/dxk89g2/"
+    expected_post = (
+        "Marsiling-er here too. North side best side! go JB shop till u drop"
+    )
+    expected_credit = (
+        f'2018 Apr 18, Deleted User. r/singapore, "Marsiling at Sunrise". {url}'
+    )
+
+    url_checker.assert_produces_post_and_credit(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+        expected_post=expected_post,
+        expected_credit=expected_credit,
+    )

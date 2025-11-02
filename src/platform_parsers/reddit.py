@@ -76,19 +76,25 @@ class T:
         return self.soup_from_old.find("a", {"data-event-action": "title"}).text  # type: ignore[union-attr]
 
     def username(self) -> str:
-        return (
-            narrow_soup(  # type: ignore[union-attr]
-                self.soup_from_old, is_reply=self.is_reply
+        try:
+            username = (
+                narrow_soup(  # type: ignore[union-attr]
+                    self.soup_from_old, is_reply=self.is_reply
+                )
+                .find("p", class_="tagline")
+                .find("a", class_="author")
+                .text
             )
-            .find("p", class_="tagline")
-            .find("a", class_="author")
-            .text
-        )
+            username = f"u/{username}"
+        except AttributeError:
+            username = "Deleted User"
+
+        return username
 
     def credit(self) -> str:
         return citation_format.online_with_title(
             timestamp=self.timestamp(),
-            name=f"u/{self.username()}",
+            name=self.username(),
             platform_name=f"r/{self.subreddit()}",
             title=self.title(),
             url=self.modern_url,
