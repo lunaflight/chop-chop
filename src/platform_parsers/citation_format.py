@@ -1,6 +1,8 @@
 from datetime import datetime
 
-YYYY_MMM_D_FMT = "%Y %b %-d"
+# Windows uses Microsoft strftime format, others use GNU strftime format
+# only Windows uses \ in file path. thus this checks for windows or not
+YYYY_MMM_D_FMT = "%Y %b %#d" if "\\" in __file__ else "%Y %b %-d"
 
 
 def online_with_title(

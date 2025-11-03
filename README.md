@@ -8,10 +8,12 @@ once for the information, web scraping is kept to a minimum, responsibly.
 # Installation
 Ensure that you are using `Python 3.13`, but I suspect any sufficiently
 modern version should work fine.
+`Python 3.10` and below will not work as it does not support some ISO date formats. 
 
 Clone this repository and do the following from the **project root** to avoid
 relative path issues:
 
+## Linux / Unix
 1. `python -m venv venv`
     - This sets up a virtual environment to manage project dependencies.
 
@@ -25,6 +27,25 @@ relative path issues:
 5. `make args=--help`
     - Run the script. Note the `PYTHONPATH` environment variable to help it
     locate packages.
+	
+## Windows
+### Automatic:
+1. run `run.ps1` (right click and run with PowerShell).
+
+### Manual (if script fails):
+1. `python -m venv venv`
+    - This sets up a virtual environment to manage project dependencies.
+
+2. `venv\Scripts\Activate.ps1` (PowerShell) / `venv\Scripts\activate.bat` (Command Prompt)
+    - This activates the virtual environment.
+	- The prompt should change to something like: `(venv) C:\[path]`
+    - To escape the environment, you can run `deactivate`.
+
+3. `pip install -r requirements.txt`
+    - This installs the required dependencies for the project.
+
+5. `python -m src.main`
+    - Run the script.
 
 # Quick Start
 Run `./src/main.py`.
