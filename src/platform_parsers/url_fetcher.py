@@ -3,7 +3,7 @@ import time
 
 import requests
 from bs4 import BeautifulSoup
-from real_headers import real_headers  # type: ignore[import-untyped]
+from fake_useragent import UserAgent
 
 LOGGER = logging.getLogger(__name__)
 
@@ -12,10 +12,14 @@ TOO_MANY_REQUESTS = 429
 
 DEFAULT_RETRY_AFTER_DELAY_SEC = 5
 
+USER_AGENT = UserAgent()
+
+HEADERS = {"User-Agent": USER_AGENT.random}
+
 
 def get_soup(url: str) -> BeautifulSoup:
     response = requests.get(
-        url, headers=real_headers(), timeout=DEFAULT_RETRY_AFTER_DELAY_SEC
+        url, headers=HEADERS, timeout=DEFAULT_RETRY_AFTER_DELAY_SEC
     )
 
     if response.status_code != OK_RESPONSE:
