@@ -77,3 +77,20 @@ def test_deleted_user() -> None:
         expected_post=expected_post,
         expected_credit=expected_credit,
     )
+
+
+def test_list_in_reply() -> None:
+    test_suffix_for_caching = "list"
+    url = "https://www.reddit.com/r/askSingapore/comments/sd00v4/what_is_an_unsolved_mystery_in_singapore/hua69nt/"
+    expected_post = "- Why do we need a mayor?<br>- Was Bukit Ho Swee Fire an inside job so that we can have HDB?<br>- Is tekong cough a placebo effect or is there something in the water?<br>- Why MRT actually comes faster than what's displayed on the next arriving timing?<br>- Did Sang nila utama see a lion?<br>/s"  # noqa: E501
+    expected_credit = (
+        "2022 Jan 26, u/BakeMate. r/askSingapore, "
+        f'"What is an unsolved mystery in Singapore?". {url}'
+    )
+
+    url_checker.assert_produces_post_and_credit(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+        expected_post=expected_post,
+        expected_credit=expected_credit,
+    )

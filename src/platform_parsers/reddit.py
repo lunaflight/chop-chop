@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-from typing import cast
 from urllib.parse import urlparse, urlunparse
 
 from bs4 import BeautifulSoup, Tag
@@ -39,19 +38,21 @@ class T:
         paragraphs = [] if self.is_reply else [self.title()]
 
         try:
-            body_paragraphs = (
+            elements = (
                 narrow_soup(  # type: ignore[union-attr]
                     self.soup_from_old, is_reply=self.is_reply
                 )
                 .find("div", class_="usertext-body")
-                .find_all("p")
+                .find_all(["p", "li"])
             )
         except AttributeError:
-            body_paragraphs = []
+            elements = []
 
-        body_paragraphs = cast("list[str]", [p.text for p in body_paragraphs])
-
-        paragraphs.extend(body_paragraphs)
+        for element in elements:
+            if element.name == "p":
+                paragraphs.append(element.get_text())
+            elif element.name == "li":
+                paragraphs.append(f" - {element.get_text()}")
 
         return bbcode_format.join_with_br(paragraphs)
 
