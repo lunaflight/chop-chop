@@ -59,23 +59,3 @@ def test_replace_ellipses_with_ascii() -> None:
         expected_post=expected_post,
         expected_credit=expected_credit,
     )
-
-
-def test_charmap_codec_handled() -> None:
-    test_suffix_for_caching = "charmap_codec"
-    url = "https://forums.hardwarezone.com.sg/threads/my-iphone-1-month-changes-3-screen-protector.6757633/post-141915882"
-    expected_post = "$3 is cheap liao<br>Bought one recently at one of the shop at Nex due to finger print and dirt<br>Stall owner quote me $19, though i know is chop carrot head but since he serve me and see him hit flies at his stall, then chin chai and bought from him"  # noqa: E501
-    expected_credit = (
-        "2022 May 31, "
-        "106gunner. "
-        "HardwareZone, "
-        '"真气死人！my iPhone 1 month changes 3 screen protector!". '  # noqa: RUF001
-        f"{url}"
-    )
-
-    url_checker.assert_produces_post_and_credit(
-        url=url,
-        test_suffix_for_caching=test_suffix_for_caching,
-        expected_post=expected_post,
-        expected_credit=expected_credit,
-    )

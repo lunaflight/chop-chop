@@ -1,37 +1,16 @@
 #!/usr/bin/env python3
 
-import io
 import logging
-import os
-import sys
 from argparse import ArgumentParser
 
+from src import sanitizer, windows_hacks
 from src.platform_parsers import assertation, platform
 
-# Windows only UTF-8 fix
-if os.name == "nt":
-    sys.stdin = io.TextIOWrapper(
-        sys.stdin.buffer, encoding="utf-8", errors="replace"
-    )
-    sys.stdout = io.TextIOWrapper(
-        sys.stdout.buffer, encoding="utf-8", errors="replace"
-    )
-
-
-def escape_double_apostrophe(string: str) -> str:
-    return string.replace('"', '\\"')
+windows_hacks.set_stdin_stdout_encoding_if_windows()
 
 
 def read_url_from_stdin() -> assertation.T:
-    # clean up nonsense \ufeff chars (else throws error on windows)
-    url = input().strip()
-    while url.startswith("\ufeff"):
-        url = url[len("\ufeff") :]
-    url = (
-        url.encode("utf-8", "ignore")
-        .decode("utf-8", errors="ignore")
-        .lstrip("\ufeff")
-    )
+    url = sanitizer.clean_for_utf8_compatibility(input())
 
     platform_ = platform.of_url(url)
     return platform.get_assertation(platform_)
@@ -61,10 +40,10 @@ def main() -> None:
     # Rudimentary formatting is done by printing twice, to separate the
     # [eg] string onto a single line for easier string manipulation in VIM.
     print(  # noqa: T201
-        f'{{ "eg": "{escape_double_apostrophe(post)}",'
+        f'{{ "eg": "{sanitizer.escape_double_apostrophe(post)}",'
     )
     print(  # noqa: T201
-        f'"src": "{escape_double_apostrophe(credit)}" }}'
+        f'"src": "{sanitizer.escape_double_apostrophe(credit)}" }}'
     )
 
 
