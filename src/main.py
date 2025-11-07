@@ -10,7 +10,7 @@ windows_hacks.set_stdin_stdout_encoding_if_windows()
 
 
 def read_url_from_stdin() -> assertation.T:
-    url = sanitizer.clean_for_utf8_compatibility(input())
+    url = sanitizer.clean_input_for_utf8_compatibility(input())
 
     platform_ = platform.of_url(url)
     return platform.get_assertation(platform_)
