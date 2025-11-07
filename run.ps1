@@ -1,6 +1,11 @@
 # Stop on first error
 $ErrorActionPreference = "Stop"
 
+# set utf-8
+chcp 65001 > $null
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+
 # Go to directory
 Set-Location -Path $PSScriptRoot
 
@@ -39,7 +44,8 @@ while ($true) {
 		if ($url -eq "") { continue }
 		
 		try {
-			$output = echo $url | python -m src.main
+			$output = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+			$output = python -m src.main <<< $url
 			
 			# Copy to clipboard
 			Write-Host "Output:" -ForegroundColor Yellow
