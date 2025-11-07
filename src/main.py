@@ -47,8 +47,12 @@ def main() -> None:
     post = assertation_.post
     credit = assertation_.credit
 
+    # Rudimentary formatting is done by printing twice, to separate the
+    # [eg] string onto a single line for easier string manipulation in VIM.
     print(  # noqa: T201
-        f'{{ "eg": "{escape_double_apostrophe(post)}", '
+        f'{{ "eg": "{escape_double_apostrophe(post)}",'
+    )
+    print(  # noqa: T201
         f'"src": "{escape_double_apostrophe(credit)}" }}'
     )
 
