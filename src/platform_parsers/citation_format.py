@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from src.windows_hacks import AM_WINDOWS
+
 # Windows uses Microsoft strftime format, others use GNU strftime format
-# only Windows uses \ in file path. thus this checks for windows or not
-YYYY_MMM_D_FMT = "%Y %b %#d" if "\\" in __file__ else "%Y %b %-d"
+YYYY_MMM_D_FMT = "%Y %b %#d" if AM_WINDOWS else "%Y %b %-d"
 
 
 def online_with_title(
