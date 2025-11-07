@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
 
+import io
 import logging
-import sys, io, os
+import os
+import sys
 from argparse import ArgumentParser
 
 from src.platform_parsers import assertation, platform
 
 # Windows only UTF-8 fix
-if os.name == "nt":  
-    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8", errors="replace")
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+if os.name == "nt":
+    sys.stdin = io.TextIOWrapper(
+        sys.stdin.buffer, encoding="utf-8", errors="replace"
+    )
+    sys.stdout = io.TextIOWrapper(
+        sys.stdout.buffer, encoding="utf-8", errors="replace"
+    )
+
 
 def escape_double_apostrophe(string: str) -> str:
     return string.replace('"', '\\"')
@@ -19,8 +26,12 @@ def read_url_from_stdin() -> assertation.T:
     # clean up nonsense \ufeff chars (else throws error on windows)
     url = input().strip()
     while url.startswith("\ufeff"):
-        url = url[len("\ufeff"):]
-    url = url.encode("utf-8", "ignore").decode('utf-8', errors='ignore').lstrip('\ufeff')
+        url = url[len("\ufeff") :]
+    url = (
+        url.encode("utf-8", "ignore")
+        .decode("utf-8", errors="ignore")
+        .lstrip("\ufeff")
+    )
 
     platform_ = platform.of_url(url)
     return platform.get_assertation(platform_)
