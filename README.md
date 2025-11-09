@@ -2,12 +2,13 @@
 The aim of this repository is to provide an easy way to credit people online
 for their linguistic attestations.
 
-It employs Python and web scraping. Since we expect to query the website only
-once for the information, web scraping is kept to a minimum, responsibly.
+It employs Python and web scraping. See below for the disclaimer on ethicality
+of web scraping.
 
 # Installation
 Ensure that you are using `Python 3.13`, but I suspect any sufficiently
 modern version should work fine.
+
 `Python 3.10` and below will not work as it does not support some ISO date formats. 
 
 Clone this repository and do the following from the **project root** to avoid
@@ -48,7 +49,7 @@ relative path issues:
     - Run the script.
 
 # Quick Start
-Run `./src/main.py`.
+Run `make` to run the script.
 
 The following table describes the list of supported platforms and notes on
 how to obtain a URL for the platform.
@@ -58,3 +59,12 @@ how to obtain a URL for the platform.
 | Mycarforum | Mycarforum | https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&comment=2114128 | Click on the 3 dots, then Share, then copy the link shown. |
 | Reddit | Reddit | https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9euqx/ | Click `permalink` on the comment to obtain a direct link. |
 | Xenforo Websites | HardwareZone, SingaporeBrides, SingaporeMotherhood, S.O.F.T. | https://singaporemotherhood.com/forum/threads/female-obgyn-recommendations.298237/post-8821891 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
+
+# Disclaimer on Web Scraping
+For ethical reasons, the use of scraping in this repository is limited.
+
+- The script must take a specific URL, and is not automatically crawled.
+- The program only queries as much as or less than the number of queries made by
+manually accessing the website through the browser.
+- The tests which fetch HTMLs are cached locally, to ensure that the website are
+not pummeled with requests every time a test in conducted.
