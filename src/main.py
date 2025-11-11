@@ -34,17 +34,8 @@ def main() -> None:
         logging.basicConfig(level=logging.WARNING)
 
     assertation_ = read_url_from_stdin()
-    post = assertation_.post
-    credit = assertation_.credit
 
-    # Rudimentary formatting is done by printing twice, to separate the
-    # [eg] string onto a single line for easier string manipulation in VIM.
-    print(  # noqa: T201
-        f'{{ "eg": "{sanitizer.escape_double_apostrophe(post)}",'
-    )
-    print(  # noqa: T201
-        f'"src": "{sanitizer.escape_double_apostrophe(credit)}" }}'
-    )
+    print(assertation.to_json(assertation_))  # noqa: T201
 
 
 if __name__ == "__main__":
