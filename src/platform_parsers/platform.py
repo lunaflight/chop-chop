@@ -7,6 +7,7 @@ from src.platform_parsers import assertation, invision, reddit, xenforo
 
 
 class Platform(Enum):
+    BLOWINGWIND = "Blowing Wind"
     HARDWAREZONE = "HardwareZone"
     MYCARFORUM = "Mycarforum"
     REDDIT = "Reddit"
@@ -23,8 +24,10 @@ class T:
     url: str
 
 
-def to_stylised_string(t: T) -> str:
+def to_stylised_string(t: T) -> str:  # noqa: PLR0911
     match t.platform:
+        case Platform.BLOWINGWIND:
+            return "Blowing Wind"
         case Platform.HARDWAREZONE:
             return "HardwareZone"
         case Platform.MYCARFORUM:
@@ -45,8 +48,10 @@ def to_plain_string(t: T) -> str:
     return to_stylised_string(t).lower()
 
 
-def identifying_url_substring(platform: Platform) -> str:
+def identifying_url_substring(platform: Platform) -> str:  # noqa: PLR0911
     match platform:
+        case Platform.BLOWINGWIND:
+            return "blowingwind.io"
         case Platform.HARDWAREZONE:
             return "hardwarezone.com.sg"
         case Platform.MYCARFORUM:
@@ -72,7 +77,7 @@ def of_url(url: str) -> T:
 
 def get_assertation(t: T) -> assertation.T:
     match t.platform:
-        case Platform.MYCARFORUM:
+        case Platform.BLOWINGWIND | Platform.MYCARFORUM:
             return invision.of_url(t.url).assertation()
         case Platform.REDDIT:
             return reddit.of_url(t.url).assertation()
@@ -87,7 +92,7 @@ def get_assertation(t: T) -> assertation.T:
 
 def get_soup_for_testing(t: T) -> BeautifulSoup:
     match t.platform:
-        case Platform.MYCARFORUM:
+        case Platform.BLOWINGWIND | Platform.MYCARFORUM:
             return invision.of_url(t.url).soup
         case Platform.REDDIT:
             return reddit.of_url(t.url).soup_from_old
@@ -102,7 +107,7 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
 
 def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
     match t.platform:
-        case Platform.MYCARFORUM:
+        case Platform.BLOWINGWIND | Platform.MYCARFORUM:
             return invision.of_url_with_soup(url=t.url, soup=soup).assertation()
         case Platform.REDDIT:
             return reddit.of_url_with_soup(
