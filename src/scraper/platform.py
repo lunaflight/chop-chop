@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, auto
 
 from bs4 import BeautifulSoup
 
@@ -7,13 +7,13 @@ from src.scraper import assertation, invision, reddit, xenforo
 
 
 class SiteName(Enum):
-    BLOWINGWIND = "Blowing_wind"
-    HARDWAREZONE = "HardwareZone"
-    MYCARFORUM = "Mycarforum"
-    REDDIT = "Reddit"
-    SINGAPOREBRIDES = "SingaporeBrides"
-    SINGAPOREMOTHERHOOD = "SingaporeMotherhood"
-    SOFT = "S.O.F.T."
+    BLOWINGWIND = auto()
+    HARDWAREZONE = auto()
+    MYCARFORUM = auto()
+    REDDIT = auto()
+    SINGAPOREBRIDES = auto()
+    SINGAPOREMOTHERHOOD = auto()
+    SOFT = auto()
 
 
 @dataclass
