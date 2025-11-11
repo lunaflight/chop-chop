@@ -13,6 +13,11 @@ from src.platform_parsers import (
 
 LOGGER = logging.getLogger(__name__)
 
+COOKIES = {
+    # Required to bypass an over 18 confirmation screen
+    "over18": "1"
+}
+
 
 def narrow_soup(soup: BeautifulSoup, *, is_reply: bool) -> Tag | None:
     if is_reply:
@@ -139,5 +144,5 @@ def of_url_with_soup(url: str, soup_from_old: BeautifulSoup) -> T:
 
 def of_url(url: str) -> T:
     old_url = old_url_of_url(url)
-    soup_from_old = url_fetcher.get_soup(old_url)
+    soup_from_old = url_fetcher.get_soup(old_url, cookies=COOKIES)
     return of_url_with_soup(url=url, soup_from_old=soup_from_old)

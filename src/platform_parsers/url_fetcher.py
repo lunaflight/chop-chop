@@ -17,9 +17,12 @@ USER_AGENT = UserAgent()
 HEADERS = {"User-Agent": USER_AGENT.random}
 
 
-def get_soup(url: str) -> BeautifulSoup:
+def get_soup(url: str, cookies: dict | None = None) -> BeautifulSoup:
     response = requests.get(
-        url, headers=HEADERS, timeout=DEFAULT_RETRY_AFTER_DELAY_SEC
+        url,
+        headers=HEADERS,
+        cookies=cookies,
+        timeout=DEFAULT_RETRY_AFTER_DELAY_SEC,
     )
 
     if response.status_code != OK_RESPONSE:

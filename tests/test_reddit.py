@@ -94,3 +94,21 @@ def test_list_in_reply() -> None:
         expected_post=expected_post,
         expected_credit=expected_credit,
     )
+
+
+def test_able_to_get_past_18_plus_check() -> None:
+    test_suffix_for_caching = "18_plus_check"
+    url = "https://www.reddit.com/r/askSingapore/comments/1icl0q9/is_it_normal_for_ur_dad_to_strip_naked_in_front/m9uo106/"
+    expected_post = "I guess this is called gong xi fuck cai"
+    expected_credit = (
+        "2025 Jan 29, u/DurianNational6775. r/askSingapore, "
+        '"Is it normal for ur dad to strip naked in front of u? Even in SG families". '  # noqa: E501
+        f"{url}"
+    )
+
+    url_checker.assert_produces_post_and_credit(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+        expected_post=expected_post,
+        expected_credit=expected_credit,
+    )
