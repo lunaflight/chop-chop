@@ -3,7 +3,7 @@ from enum import Enum
 
 from bs4 import BeautifulSoup
 
-from src.platform_parsers import assertation, invision, reddit, xenforo
+from src.scraper import assertation, invision, reddit, xenforo
 
 
 class Platform(Enum):

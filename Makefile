@@ -18,7 +18,7 @@ ci-check:
 	pytest
 
 clear-cache-and-check:
-	rm -f tests/cached_htmls/*.html
+	rm -f tests/scraper/cached_htmls/*.html
 	$(MAKE) check
 
 fmt:

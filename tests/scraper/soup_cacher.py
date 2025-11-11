@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 LOGGER = logging.getLogger(__name__)
 
-PATH_TO_HTML_CACHE = Path("tests/cached_htmls")
+PATH_TO_HTML_CACHE = Path("tests/scraper/cached_htmls")
 
 
 def path(filename: str) -> Path:

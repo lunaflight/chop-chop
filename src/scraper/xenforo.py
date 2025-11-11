@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, cast
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import urlparse
 
-from src.platform_parsers import (
+from bs4 import BeautifulSoup, NavigableString, Tag
+
+from src.scraper import (
     assertation,
     bbcode_format,
     citation_format,
@@ -12,37 +13,29 @@ from src.platform_parsers import (
     url_fetcher,
 )
 
-if TYPE_CHECKING:
-    from bs4 import BeautifulSoup, Tag
 
+# Returns the post_id in the format [post-NNNNN]
+def post_id(url: str) -> str | None:
+    # Sometimes, it is located as a fragment at the end of the URL,
+    post_id = urlparse(url).fragment
 
-def comment_id(url: str) -> int | None:
-    try:
-        parsed_url = urlparse(url)
-        query = parsed_url.query
+    # Other times, it is just the final segment in the path.
+    if not post_id:
+        post_id = urlparse(url).path.split("/")[-1]
 
-        # The ID can be in the URL in 2 possible ways
-        if "comment" in query:
-            post_id = parse_qs(query).get("comment", [])[0]
-        else:
-            fragment = parsed_url.fragment
-            if fragment and "-" in fragment:
-                post_id = fragment.split("-")[-1]
-            else:
-                return None
-    except (AttributeError, IndexError):
+    if not post_id.startswith("post-"):
         return None
 
-    return int(post_id)
+    return post_id
 
 
-def narrow_soup_to_comment_id(
-    soup: BeautifulSoup, comment_id: int | None
+def narrow_soup_to_post_id(
+    soup: BeautifulSoup, post_id: str | None
 ) -> Tag | None:
-    if comment_id is None:
+    if post_id is None:
         return soup
 
-    return soup.find("article", {"id": f"elComment_{comment_id}"})
+    return soup.find("article", {"data-content": f"{post_id}"})
 
 
 class T:
@@ -50,39 +43,42 @@ class T:
         self, stylised_platform: str, url: str, soup: BeautifulSoup
     ) -> None:
         self.stylised_platform = stylised_platform
-        self.comment_id = comment_id(url)
+        self.post_id = post_id(url)
         self.soup = soup
         self.url = url
 
     def post(self) -> str:
         contents = (
-            narrow_soup_to_comment_id(
+            narrow_soup_to_post_id(
                 # type: ignore[union-attr]
                 soup=self.soup,
-                comment_id=self.comment_id,
+                post_id=self.post_id,
             )
-            .find("div", class_="cPost_contentWrap")
-            .find("div", {"data-role": "commentContent"})
-            .find_all("p", recursive=False)
+            .find("article", class_="message-body")
+            .find("div", class_="bbWrapper")
+            .contents
         )
 
         paragraphs = []
 
-        if self.comment_id is None:
+        if self.post_id is None:
             paragraphs.append(self.title())
 
-        body_paragraphs = cast("list[str]", [p.text for p in contents])
-
-        paragraphs.extend(body_paragraphs)
+        # Emojis, which are embed as images in the HTML, may be present.
+        paragraphs += [
+            str(content.strip())
+            for content in contents
+            if isinstance(content, NavigableString) and str(content).strip()
+        ]
 
         return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
         datetime_str = (
-            narrow_soup_to_comment_id(
+            narrow_soup_to_post_id(
                 # type: ignore[union-attr]
                 soup=self.soup,
-                comment_id=self.comment_id,
+                post_id=self.post_id,
             )
             .find("time")
             .get("datetime")
@@ -92,22 +88,17 @@ class T:
         return datetime.fromisoformat(datetime_str)
 
     def title(self) -> str:
-        return (
-            self.soup.find("h1", class_="ipsType_pageTitle")  # type: ignore[union-attr]
-            .find("span")
-            .find("span")
-            .text
-        )
+        return self.soup.find("h1", class_="p-title-value").text  # type: ignore[union-attr]
 
     def username(self) -> str:
         return (
-            narrow_soup_to_comment_id(
+            narrow_soup_to_post_id(
                 # type: ignore[union-attr]
                 soup=self.soup,
-                comment_id=self.comment_id,
+                post_id=self.post_id,
             )
-            .find("h3", class_="cAuthorPane_author")
-            .find("a")
+            .find("section", class_="message-user")
+            .find("a", class_="username")
             .text
         )
 

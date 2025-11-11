@@ -4,7 +4,7 @@ import logging
 from argparse import ArgumentParser
 
 from src import sanitizer, windows_hacks
-from src.platform_parsers import assertation, platform
+from src.scraper import assertation, platform
 
 windows_hacks.set_stdin_stdout_encoding_if_windows()
 

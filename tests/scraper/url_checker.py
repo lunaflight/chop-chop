@@ -2,8 +2,8 @@ import logging
 
 from bs4 import BeautifulSoup
 
-from src.platform_parsers import platform
-from tests import soup_cacher
+from src.scraper import platform
+from tests.scraper import soup_cacher
 
 LOGGER = logging.getLogger(__name__)
 

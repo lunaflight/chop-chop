@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from tests import url_checker
+from tests.scraper import url_checker
 
 
 class ExpectedData(TypedDict):

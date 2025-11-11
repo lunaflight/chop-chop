@@ -4,7 +4,7 @@ from urllib.parse import urlparse, urlunparse
 
 from bs4 import BeautifulSoup, Tag
 
-from src.platform_parsers import (
+from src.scraper import (
     assertation,
     bbcode_format,
     citation_format,

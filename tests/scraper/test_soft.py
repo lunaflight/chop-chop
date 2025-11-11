@@ -1,4 +1,4 @@
-from tests import url_checker
+from tests.scraper import url_checker
 
 
 def test_reply() -> None:
