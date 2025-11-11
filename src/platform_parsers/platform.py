@@ -3,7 +3,7 @@ from enum import Enum
 
 from bs4 import BeautifulSoup
 
-from src.platform_parsers import assertation, mycarforum, reddit, xenforo
+from src.platform_parsers import assertation, invision, reddit, xenforo
 
 
 class Platform(Enum):
@@ -73,7 +73,7 @@ def of_url(url: str) -> T:
 def get_assertation(t: T) -> assertation.T:
     match t.platform:
         case Platform.MYCARFORUM:
-            return mycarforum.of_url(t.url).assertation()
+            return invision.of_url(t.url).assertation()
         case Platform.REDDIT:
             return reddit.of_url(t.url).assertation()
         case (
@@ -88,7 +88,7 @@ def get_assertation(t: T) -> assertation.T:
 def get_soup_for_testing(t: T) -> BeautifulSoup:
     match t.platform:
         case Platform.MYCARFORUM:
-            return mycarforum.of_url(t.url).soup
+            return invision.of_url(t.url).soup
         case Platform.REDDIT:
             return reddit.of_url(t.url).soup_from_old
         case (
@@ -103,9 +103,7 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
 def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
     match t.platform:
         case Platform.MYCARFORUM:
-            return mycarforum.of_url_with_soup(
-                url=t.url, soup=soup
-            ).assertation()
+            return invision.of_url_with_soup(url=t.url, soup=soup).assertation()
         case Platform.REDDIT:
             return reddit.of_url_with_soup(
                 url=t.url, soup_from_old=soup
