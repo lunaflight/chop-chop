@@ -9,7 +9,7 @@
     const IpsDataLayerConfig = {"_events":{"account_login":{"enabled":true,"formatted_name":"account_login"},"account_logout":{"enabled":true,"formatted_name":"account_logout"},"account_register":{"enabled":true,"formatted_name":"account_register"},"content_comment":{"enabled":false,"formatted_name":"content_comment"},"content_create":{"enabled":false,"formatted_name":"content_create"},"content_react":{"enabled":false,"formatted_name":"content_react"},"content_view":{"enabled":false,"formatted_name":"content_view"},"search":{"enabled":true,"formatted_name":"search"}},"_properties":{"content_container_url":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_container_url","enabled":true,"type":"string","page_level":true},"content_id":{"event_keys":["content_*","file_download"],"pii":false,"formatted_name":"content_id","enabled":true,"type":"number","page_level":true},"author_name":{"event_keys":["content_*","social_reply","file_download"],"pii":true,"formatted_name":"author_name","enabled":true,"type":"string","page_level":true},"content_title":{"event_keys":["content_*","file_download"],"pii":true,"formatted_name":"content_title","enabled":true,"type":"string","page_level":true},"content_url":{"event_keys":["content_*","file_download"],"pii":false,"formatted_name":"content_url","enabled":true,"type":"string","page_level":true},"author_id":{"event_keys":["content_*","social_reply","file_download"],"pii":true,"formatted_name":"author_id","enabled":true,"type":"number | string","replace_with_sso":true,"page_level":true},"comment_type":{"event_keys":["content_comment","content_react","content_quote"],"pii":false,"formatted_name":"comment_type","enabled":true,"type":"string","page_level":false},"comment_url":{"event_keys":["content_comment","content_react","content_quote"],"pii":false,"formatted_name":"comment_url","enabled":true,"type":"string","page_level":false},"community_area":{"event_keys":["filter_*","sort"],"pii":false,"formatted_name":"community_area","enabled":true,"type":"string","page_level":true},"content_age":{"event_keys":["content_*","file_download"],"pii":false,"formatted_name":"content_age","enabled":true,"type":"number","page_level":true},"content_area":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_area","enabled":true,"type":"string","page_level":true},"content_container_id":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_container_id","enabled":true,"type":"number","page_level":true},"content_container_name":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_container_name","enabled":true,"type":"string","page_level":true},"content_container_path":{"event_keys":["content_*"],"pii":false,"formatted_name":"content_container_path","enabled":false,"type":"array","page_level":true,"default":[]},"content_container_type":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_container_type","enabled":true,"type":"string","page_level":true},"content_type":{"event_keys":["content_*","filter_*","sort","file_download"],"pii":false,"formatted_name":"content_type","enabled":true,"type":"string","page_level":true},"file_name":{"event_keys":["file_download"],"pii":false,"formatted_name":"file_name","enabled":true,"type":"string","page_level":false},"ips_time":{"event_keys":["*"],"pii":false,"formatted_name":"ips_time","enabled":true,"type":"number","page_level":true},"page_number":{"event_keys":["content_view","query","filter","sort"],"pii":false,"formatted_name":"page_number","enabled":true,"type":"number","page_level":true},"comment_id":{"event_keys":["content_comment","content_react","content_quote"],"pii":false,"formatted_name":"comment_id","enabled":true,"type":"number","page_level":false},"logged_in":{"event_keys":[],"pii":false,"formatted_name":"logged_in","enabled":true,"type":"number","page_level":true},"logged_in_time":{"event_keys":[],"pii":false,"formatted_name":"logged_in_time","enabled":true,"type":"number","page_level":true},"member_group":{"event_keys":[],"pii":false,"formatted_name":"member_group","enabled":true,"type":"string","page_level":true},"member_group_id":{"event_keys":[],"pii":false,"formatted_name":"member_group_id","enabled":true,"type":"number","page_level":true},"member_id":{"event_keys":[],"pii":true,"formatted_name":"member_id","enabled":true,"type":"number | string","page_level":true,"replace_with_sso":true},"member_name":{"event_keys":[],"pii":true,"formatted_name":"member_name","enabled":true,"type":"string","page_level":true},"profile_group":{"event_keys":["social_*"],"pii":false,"formatted_name":"profile_group","enabled":true,"type":"string","page_level":true},"profile_group_id":{"event_keys":["social_*"],"pii":false,"formatted_name":"profile_group_id","enabled":true,"type":"number","page_level":true},"profile_id":{"event_keys":["social_*"],"pii":true,"formatted_name":"profile_id","enabled":true,"type":"number | string","page_level":true,"replace_with_sso":true},"profile_name":{"event_keys":["social_*"],"pii":true,"formatted_name":"profile_name","enabled":true,"type":"string","page_level":true},"reaction_type":{"event_keys":["content_react"],"pii":false,"formatted_name":"reaction_type","enabled":true,"type":"string","page_level":false},"sort_by":{"event_keys":["*sort"],"pii":false,"formatted_name":"sort_by","enabled":true,"type":"string","page_level":true},"sort_direction":{"event_keys":["*sort"],"pii":false,"formatted_name":"sort_direction","enabled":true,"type":"string","page_level":true},"view_location":{"event_keys":["*_view"],"pii":false,"formatted_name":"view_location","enabled":true,"type":"string","page_level":true,"default":"page"},"query":{"event_keys":["search"],"pii":false,"formatted_name":"query","enabled":true,"type":"string","page_level":false},"filter_title":{"event_keys":["filter_*"],"pii":false,"formatted_name":"filter_title","enabled":true,"type":"string","page_level":false},"ips_key":{"event_keys":["*"],"pii":false,"formatted_name":"ips_key","enabled":false,"type":"string","page_level":true}},"_pii":false,"_pii_groups":[["author_id","author_name"],["member_id","member_name"],["profile_id","profile_name"]]};
 
     /* IPS Context */
-    const IpsDataLayerContext = {"content_container_url":"https:\/\/www.mycarforum.com\/forums\/forum\/15-lite-amp-ez\/","content_id":2111034,"author_name":null,"content_title":null,"content_url":"https:\/\/www.mycarforum.com\/forums\/topic\/2111034-bringbuy-beer-from-sg-to-bintan-resorts\/","author_id":null,"community_area":"Forums","content_age":6574,"content_area":"Forums","content_container_id":15,"content_container_name":"Lite &amp; EZ","content_container_type":"forums","content_type":"topic","ips_time":null,"page_number":null,"logged_in":0,"logged_in_time":null,"member_group":"Guest users","member_group_id":1,"member_id":null,"member_name":null,"profile_group":null,"profile_group_id":null,"profile_id":null,"profile_name":null,"sort_by":null,"sort_direction":null,"view_location":"page"};
+    const IpsDataLayerContext = {"content_container_url":"https:\/\/www.mycarforum.com\/forums\/forum\/15-lite-amp-ez\/","content_id":2111034,"author_name":null,"content_title":null,"content_url":"https:\/\/www.mycarforum.com\/forums\/topic\/2111034-bringbuy-beer-from-sg-to-bintan-resorts\/","author_id":null,"community_area":"Forums","content_age":6584,"content_area":"Forums","content_container_id":15,"content_container_name":"Lite &amp; EZ","content_container_type":"forums","content_type":"topic","ips_time":null,"page_number":null,"logged_in":0,"logged_in_time":null,"member_group":"Guest users","member_group_id":1,"member_id":null,"member_name":null,"profile_group":null,"profile_group_id":null,"profile_id":null,"profile_name":null,"sort_by":null,"sort_direction":null,"view_location":"page"};
 
     /* IPS Events */
     const IpsDataLayerEvents = [];
@@ -238,6 +238,30 @@ const IpsDataLayerPropertiesHandlers = [
 <!-- end GA Tag -->
 </head>
 <body class="ipsApp ipsApp_front ipsJS_none ipsClearfix" data-controller="core.front.core.app,core.front.core.dataLayer,global.scrolltotop,global.stickysearch" data-message="" data-pageapp="forums" data-pagecontroller="topic" data-pagelocation="front" data-pagemodule="forums"><!-- ogury -->
+<script type="text/javascript">
+(function () {
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		/** mycarforum.com */
+		window.top.OG_ad_units = window.top.OG_ad_units || [];
+		window.top.OG_ad_units.push({
+			ad_unit_id:"304166_default",
+			asset_key:"OGY-6FA143A8FCBB",
+			click_url:"%%CLICK_URL_UNESC%%",
+			params: { 
+				max_width:180, 
+				max_height:180, 
+				gravity:"BOTTOM_LEFT"
+			},
+			passback: {
+            	ad_unit_id: "wm-tg-thmb-mycarf-sgcmp-drfudiams0cu"
+        	}
+		});
+		var st = document.createElement("script");st.type = "text/javascript";st.async = true;
+		st.src = ("https:" == document.location.protocol ? "https:": "http:") + "//mwtw.presage.io/v1/tag.js";
+		document.head.appendChild(st);
+	}
+})();
+</script>
 <!-- end ogury -->
 <a accesskey="m" class="ipsHide" href="#elContent" title="Go to main content on this page">Jump to content</a>
 <!-- IPS Data Body Start -->
@@ -275,7 +299,7 @@ const IpsDataLayerPropertiesHandlers = [
 </a>
 <div class="ipsMenu ipsMenu_auto ipsHide" id="elUserSignIn_menu">
 <form accept-charset="utf-8" action="https://www.mycarforum.com/login/" autocomplete="off" data-controller="core.global.core.login" method="post">
-<input name="csrfKey" type="hidden" value="b92eb4cafce9fd4f4981a0a58e5eef7c"/>
+<input name="csrfKey" type="hidden" value="e20330f63bcbb8f114de1632b4749593"/>
 <input name="ref" type="hidden" value="aHR0cHM6Ly93d3cubXljYXJmb3J1bS5jb20vZm9ydW1zL3RvcGljLzIxMTEwMzQtYnJpbmdidXktYmVlci1mcm9tLXNnLXRvLWJpbnRhbi1yZXNvcnRzLw=="/>
 <div data-role="loginForm">
 <div class="ipsColumns ipsColumns_noSpacing">
@@ -530,9 +554,9 @@ const IpsDataLayerPropertiesHandlers = [
 <li style="width:100%;">
 <form accept-charset="utf-8" action="https://www.mycarforum.com/index.php?app=core&amp;module=search&amp;controller=search&amp;do=quicksearch" class="ipsForm ipsForm_horizontal" data-ipsform="" enctype="multipart/form-data" id="mcfquicksearchform" method="post">
 <input name="mobilesearchheader_submitted" type="hidden" value="1"/>
-<input name="csrfKey" type="hidden" value="b92eb4cafce9fd4f4981a0a58e5eef7c"/>
+<input name="csrfKey" type="hidden" value="e20330f63bcbb8f114de1632b4749593"/>
 <input name="MAX_FILE_SIZE" type="hidden" value="133169152"/>
-<input name="plupload" type="hidden" value="fbf4dec1d237352c1ae56b51998eeda4"/>
+<input name="plupload" type="hidden" value="e8302dfc89595b5ae73c242d8a22d540"/>
 <ul class="ipsForm">
 <li class="ipsFieldRow ipsClearfix" id="mobilesearchheader_q">
 <label class="ipsFieldRow_label" for="elInput_q">
@@ -646,7 +670,7 @@ const IpsDataLayerPropertiesHandlers = [
 <main class="ipsLayout_container" id="ipsLayout_body">
 <div class="ipsResponsive_hidePhone ipsHide" id="globalsearch_main">
 <form accept-charset="utf-8" action="//www.mycarforum.com/search/" class="ipsForm ipsForm_vertical" id="global_topsearch" method="post">
-<input name="csrfKey" type="hidden" value="b92eb4cafce9fd4f4981a0a58e5eef7c">
+<input name="csrfKey" type="hidden" value="e20330f63bcbb8f114de1632b4749593">
 <input name="search_in" type="hidden" value="titles">
 <input name="search_and_or" type="hidden" value="or">
 <ul class="ipsList ipsList_inline">
@@ -779,7 +803,7 @@ const IpsDataLayerPropertiesHandlers = [
 
 
 <a class="ipsType_break" data-ipshover="" data-ipshover-target="https://www.mycarforum.com/profile/721-davidcks/?do=hovercard&amp;referrer=https%253A%252F%252Fwww.mycarforum.com%252Fforums%252Ftopic%252F2111034-bringbuy-beer-from-sg-to-bintan-resorts%252F" data-ipshover-width="370" href="https://www.mycarforum.com/profile/721-davidcks/" rel="nofollow" title="Go to Davidcks's profile">Davidcks</a>, </strong><br/>
-<span class="ipsType_light"><time data-short="17 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time> in <a href="https://www.mycarforum.com/forums/forum/15-lite-amp-ez/">Lite &amp; EZ</a></span>
+<span class="ipsType_light"><time data-short="18 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time> in <a href="https://www.mycarforum.com/forums/forum/15-lite-amp-ez/">Lite &amp; EZ</a></span>
 </span>
 </p>
 </div>
@@ -787,10 +811,10 @@ const IpsDataLayerPropertiesHandlers = [
 </div>
 <div class="ipsFlex-flex:01 ipsResponsive_hidePhone">
 <div class="ipsFlex ipsFlex-ai:center ipsFlex-jc:center ipsGap:3 ipsGap_row:0">
-<a class="ipsShareButton ipsButton ipsButton_verySmall ipsButton_link ipsButton_link--light" data-ipsmenu="" href="#elShareItem_1486716789_menu" id="elShareItem_1486716789">
+<a class="ipsShareButton ipsButton ipsButton_verySmall ipsButton_link ipsButton_link--light" data-ipsmenu="" href="#elShareItem_871248872_menu" id="elShareItem_871248872">
 <span><i class="fa fa-share-alt"></i></span>  Share
     </a>
-<div class="ipsPadding ipsMenu ipsMenu_auto ipsHide" data-controller="core.front.core.sharelink" id="elShareItem_1486716789_menu">
+<div class="ipsPadding ipsMenu ipsMenu_auto ipsHide" data-controller="core.front.core.sharelink" id="elShareItem_871248872_menu">
 <ul class="ipsList_inline">
 <li>
 <a class="cShareLink cShareLink_x" data-ipstooltip="" data-role="shareLink" href="https://x.com/share?url=https%3A%2F%2Fwww.mycarforum.com%2Fforums%2Ftopic%2F2111034-bringbuy-beer-from-sg-to-bintan-resorts%2F" rel="nofollow noopener" target="_blank" title="Share on X">
@@ -826,7 +850,7 @@ const IpsDataLayerPropertiesHandlers = [
 <div class="ipsBox ipsResponsive_pull ipsPadding:half ipsClearfix ipsClear ipsMargin_bottom">
 <!-- script: disable ajax pagination -->
 <!-- end of script -->
-<ul class="ipsPagination" data-ipspagination-seopagination="true" data-pages="5" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312">
+<ul class="ipsPagination" data-ipspagination-seopagination="true" data-pages="5" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606">
 <li class="ipsPagination_first ipsPagination_inactive"><a data-ipstooltip="" data-page="1" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" rel="first" title="First page"><i class="fa fa-angle-double-left"></i></a></li>
 <li class="ipsPagination_prev ipsPagination_inactive"><a data-ipstooltip="" data-page="0" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" rel="prev" title="Previous page">Prev</a></li>
 <li class="ipsPagination_page ipsPagination_active"><a data-page="1" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments">1</a></li>
@@ -837,8 +861,8 @@ const IpsDataLayerPropertiesHandlers = [
 <li class="ipsPagination_next"><a data-ipstooltip="" data-page="2" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/page/2/#comments" rel="next" title="Next page">Next</a></li>
 <li class="ipsPagination_last"><a data-ipstooltip="" data-page="5" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/page/5/#comments" rel="last" title="Last page"><i class="fa fa-angle-double-right"></i></a></li>
 <li class="ipsPagination_pageJump">
-<a data-ipsmenu="" data-ipsmenu-appendto="#elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312" data-ipsmenu-closeonclick="false" href="#" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312_jump">Page 1 of 5  <i class="fa fa-caret-down"></i></a>
-<div class="ipsMenu ipsMenu_narrow ipsPadding ipsHide" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312_jump_menu">
+<a data-ipsmenu="" data-ipsmenu-appendto="#elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606" data-ipsmenu-closeonclick="false" href="#" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606_jump">Page 1 of 5  <i class="fa fa-caret-down"></i></a>
+<div class="ipsMenu ipsMenu_narrow ipsPadding ipsHide" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606_jump_menu">
 <form accept-charset="utf-8" action="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" data-role="pageJump" method="post">
 <ul class="ipsForm ipsForm_horizontal">
 <li class="ipsFieldRow">
@@ -859,7 +883,7 @@ const IpsDataLayerPropertiesHandlers = [
 </div>
 </div>
 <div data-controller="core.front.core.moderation" data-role="commentFeed" id="elPostFeed">
-<form action="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?csrfKey=b92eb4cafce9fd4f4981a0a58e5eef7c&amp;do=multimodComment" data-ipspageaction="" data-role="moderationTools" method="post">
+<form action="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?csrfKey=e20330f63bcbb8f114de1632b4749593&amp;do=multimodComment" data-ipspageaction="" data-role="moderationTools" method="post">
 <a id="comment-2111034"></a>
 <article class="cPost ipsBox ipsResponsive_pull ipsComment ipsComment_parent ipsClearfix ipsClear ipsColumns ipsColumns_noSpacing ipsColumns_collapsePhone removemargin" id="elComment_2111034">
 <div class="cAuthorPane_mobile ipsResponsive_showPhone">
@@ -875,7 +899,7 @@ const IpsDataLayerPropertiesHandlers = [
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111034"><time data-short="17 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111034"><time data-short="18 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time></a>
 </div>
 </div>
 </div>
@@ -922,7 +946,7 @@ const IpsDataLayerPropertiesHandlers = [
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111034"><time data-short="17 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111034"><time data-short="18 yr" datetime="2007-11-01T15:24:09Z" title="11/01/2007 03:24  PM">November 1, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -935,7 +959,6 @@ const IpsDataLayerPropertiesHandlers = [
 <p> </p>
 <p>Does anyone has any suggestion or advise?? 10q 10q. <img alt="[;)]" src="https://www.mycarforum.com/uploads/emoticons/default_wink.png"/></p>
 </div>
-<div class="adspace" style="color: #AAAAAA;">↡ Advertisement</div>
 <iframe frameborder="0" height="250" scrolling="No" src="/?app=googleadverts&amp;section=ads&amp;do=carousel&amp;mode=NoncarRelatedDiscussion&amp;pos=TopThread" style="margin-bottom: 10px" width="300"></iframe>
 </div>
 <div class="ipsPadding ipsHide cPostShareMenu" id="elSharePost_2111034_menu">
@@ -982,7 +1005,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111178"><time data-short="17 yr" datetime="2007-11-01T17:20:08Z" title="11/01/2007 05:20  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111178"><time data-short="18 yr" datetime="2007-11-01T17:20:08Z" title="11/01/2007 05:20  PM">November 1, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1028,7 +1051,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111178"><time data-short="17 yr" datetime="2007-11-01T17:20:08Z" title="11/01/2007 05:20  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111178"><time data-short="18 yr" datetime="2007-11-01T17:20:08Z" title="11/01/2007 05:20  PM">November 1, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1077,7 +1100,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111215"><time data-short="17 yr" datetime="2007-11-01T23:44:32Z" title="11/01/2007 11:44  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111215"><time data-short="18 yr" datetime="2007-11-01T23:44:32Z" title="11/01/2007 11:44  PM">November 1, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1123,7 +1146,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111215"><time data-short="17 yr" datetime="2007-11-01T23:44:32Z" title="11/01/2007 11:44  PM">November 1, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111215"><time data-short="18 yr" datetime="2007-11-01T23:44:32Z" title="11/01/2007 11:44  PM">November 1, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1172,7 +1195,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Supersonic</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111225"><time data-short="17 yr" datetime="2007-11-02T00:15:58Z" title="11/02/2007 12:15  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111225"><time data-short="18 yr" datetime="2007-11-02T00:15:58Z" title="11/02/2007 12:15  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1189,11 +1212,11 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </li>
 <li data-role="reputation-badge">
 <span class="ipsRepBadge ipsRepBadge_positive" data-ipstooltip="" title="Member's total reputation">
-<i class="fa fa-plus-circle"></i> 67,444
+<i class="fa fa-plus-circle"></i> 67,447
 	
 		</span>
 </li>
-<li class="ipsType_light" data-role="posts"><!-- 44,205 posts --></li>
+<li class="ipsType_light" data-role="posts"><!-- 44,206 posts --></li>
 <li class="ipsPadding:half ipsHide" data-role="reputation-image">
 <img alt="" src="https://www.mycarforum.com/uploads/monthly_2022_08/12_Supersonic_30001.png.601bfa990bdc77a047bd318ec23f8908.png" title="Supersonic"/>
 </li>
@@ -1218,7 +1241,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111225"><time data-short="17 yr" datetime="2007-11-02T00:15:58Z" title="11/02/2007 12:15  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111225"><time data-short="18 yr" datetime="2007-11-02T00:15:58Z" title="11/02/2007 12:15  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 				
 					(edited)
@@ -1237,7 +1260,7 @@ Does anyone has any suggestion or advise?? 10q 10q.
 <p> </p>
 <p> <img alt="[laugh]" src="https://www.mycarforum.com/uploads/emoticons/default_laugh.png"><img alt="[laugh]" src="https://www.mycarforum.com/uploads/emoticons/default_laugh.png"><img alt="[laugh]" src="https://www.mycarforum.com/uploads/emoticons/default_laugh.png"/></img></img></p>
 <span class="ipsType_reset ipsType_medium ipsType_light" data-excludequote="">
-<strong>Edited <time data-short="17 yr" datetime="2007-11-02T00:16:33Z" title="11/02/2007 12:16  AM">November 2, 2007</time> by Picnic06</strong>
+<strong>Edited <time data-short="18 yr" datetime="2007-11-02T00:16:33Z" title="11/02/2007 12:16  AM">November 2, 2007</time> by Picnic06</strong>
 </span>
 </div>
 </div>
@@ -1287,7 +1310,7 @@ chicken farm   which chicken farm ?
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111388"><time data-short="17 yr" datetime="2007-11-02T02:14:56Z" title="11/02/2007 02:14  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111388"><time data-short="18 yr" datetime="2007-11-02T02:14:56Z" title="11/02/2007 02:14  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1335,7 +1358,7 @@ chicken farm   which chicken farm ?
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111388"><time data-short="17 yr" datetime="2007-11-02T02:14:56Z" title="11/02/2007 02:14  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111388"><time data-short="18 yr" datetime="2007-11-02T02:14:56Z" title="11/02/2007 02:14  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1397,7 +1420,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Neutral Newbie</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111421"><time data-short="17 yr" datetime="2007-11-02T02:43:48Z" title="11/02/2007 02:43  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111421"><time data-short="18 yr" datetime="2007-11-02T02:43:48Z" title="11/02/2007 02:43  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1443,7 +1466,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111421"><time data-short="17 yr" datetime="2007-11-02T02:43:48Z" title="11/02/2007 02:43  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111421"><time data-short="18 yr" datetime="2007-11-02T02:43:48Z" title="11/02/2007 02:43  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1492,7 +1515,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111504"><time data-short="17 yr" datetime="2007-11-02T03:28:52Z" title="11/02/2007 03:28  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111504"><time data-short="18 yr" datetime="2007-11-02T03:28:52Z" title="11/02/2007 03:28  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1540,7 +1563,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111504"><time data-short="17 yr" datetime="2007-11-02T03:28:52Z" title="11/02/2007 03:28  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111504"><time data-short="18 yr" datetime="2007-11-02T03:28:52Z" title="11/02/2007 03:28  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1591,7 +1614,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">2nd Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111532"><time data-short="17 yr" datetime="2007-11-02T03:39:17Z" title="11/02/2007 03:39  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111532"><time data-short="18 yr" datetime="2007-11-02T03:39:17Z" title="11/02/2007 03:39  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1637,7 +1660,7 @@ Btw, hows the clubs at tanjong piang?? another chicken farm?? never been there.
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111532"><time data-short="17 yr" datetime="2007-11-02T03:39:17Z" title="11/02/2007 03:39  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111532"><time data-short="18 yr" datetime="2007-11-02T03:39:17Z" title="11/02/2007 03:39  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 				
 					(edited)
@@ -1663,7 +1686,7 @@ I only happen to found out after my second stay that, there is a 'agent' for thi
 <p>
 <img alt="map.jpg" border="0" src="http://www.bintanagro.com/front/images/stories/map.jpg"/></p>
 <span class="ipsType_reset ipsType_medium ipsType_light" data-excludequote="">
-<strong>Edited <time data-short="17 yr" datetime="2007-11-02T03:41:29Z" title="11/02/2007 03:41  AM">November 2, 2007</time> by Gadgeter</strong>
+<strong>Edited <time data-short="18 yr" datetime="2007-11-02T03:41:29Z" title="11/02/2007 03:41  AM">November 2, 2007</time> by Gadgeter</strong>
 </span>
 </div>
 </div>
@@ -1720,7 +1743,7 @@ I only happen to found out after my second stay that, there is a 'agent' for thi
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Turbocharged</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111544"><time data-short="17 yr" datetime="2007-11-02T03:42:42Z" title="11/02/2007 03:42  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111544"><time data-short="18 yr" datetime="2007-11-02T03:42:42Z" title="11/02/2007 03:42  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1766,7 +1789,7 @@ I only happen to found out after my second stay that, there is a 'agent' for thi
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111544"><time data-short="17 yr" datetime="2007-11-02T03:42:42Z" title="11/02/2007 03:42  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111544"><time data-short="18 yr" datetime="2007-11-02T03:42:42Z" title="11/02/2007 03:42  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1818,7 +1841,7 @@ I only happen to found out after my second stay that, there is a 'agent' for thi
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111637"><time data-short="17 yr" datetime="2007-11-02T04:26:40Z" title="11/02/2007 04:26  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111637"><time data-short="18 yr" datetime="2007-11-02T04:26:40Z" title="11/02/2007 04:26  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1864,7 +1887,7 @@ I only happen to found out after my second stay that, there is a 'agent' for thi
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111637"><time data-short="17 yr" datetime="2007-11-02T04:26:40Z" title="11/02/2007 04:26  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111637"><time data-short="18 yr" datetime="2007-11-02T04:26:40Z" title="11/02/2007 04:26  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -1919,7 +1942,7 @@ chicken farms, i don't know wor.. me no like that color one  ...
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Neutral Newbie</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111655"><time data-short="17 yr" datetime="2007-11-02T04:35:44Z" title="11/02/2007 04:35  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111655"><time data-short="18 yr" datetime="2007-11-02T04:35:44Z" title="11/02/2007 04:35  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -1966,7 +1989,7 @@ chicken farms, i don't know wor.. me no like that color one  ...
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111655"><time data-short="17 yr" datetime="2007-11-02T04:35:44Z" title="11/02/2007 04:35  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111655"><time data-short="18 yr" datetime="2007-11-02T04:35:44Z" title="11/02/2007 04:35  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 				
 					(edited)
@@ -1990,7 +2013,7 @@ chicken farms, i don't know wor.. me no like that color one  ...
 <p> </p>
 <p>TO ADD:<span style="color:#FF0000;">Try not to bring back the booze ... sg. customs will give problems... for me heng i kept the receipt ... brought one bot of JD back ... with receipt showing it's purchased in SG it's fine</span></p>
 <span class="ipsType_reset ipsType_medium ipsType_light" data-excludequote="">
-<strong>Edited <time data-short="17 yr" datetime="2007-11-02T04:41:30Z" title="11/02/2007 04:41  AM">November 2, 2007</time> by Wolverman</strong>
+<strong>Edited <time data-short="18 yr" datetime="2007-11-02T04:41:30Z" title="11/02/2007 04:41  AM">November 2, 2007</time> by Wolverman</strong>
 </span>
 </div>
 </div>
@@ -2039,7 +2062,7 @@ TO ADD:Try not to bring back the booze ... sg. customs will give problems... for
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Neutral Newbie</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111658"><time data-short="17 yr" datetime="2007-11-02T04:37:12Z" title="11/02/2007 04:37  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111658"><time data-short="18 yr" datetime="2007-11-02T04:37:12Z" title="11/02/2007 04:37  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2086,7 +2109,7 @@ TO ADD:Try not to bring back the booze ... sg. customs will give problems... for
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111658"><time data-short="17 yr" datetime="2007-11-02T04:37:12Z" title="11/02/2007 04:37  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111658"><time data-short="18 yr" datetime="2007-11-02T04:37:12Z" title="11/02/2007 04:37  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2135,7 +2158,7 @@ TO ADD:Try not to bring back the booze ... sg. customs will give problems... for
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111667"><time data-short="17 yr" datetime="2007-11-02T04:43:29Z" title="11/02/2007 04:43  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111667"><time data-short="18 yr" datetime="2007-11-02T04:43:29Z" title="11/02/2007 04:43  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2181,7 +2204,7 @@ TO ADD:Try not to bring back the booze ... sg. customs will give problems... for
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111667"><time data-short="17 yr" datetime="2007-11-02T04:43:29Z" title="11/02/2007 04:43  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111667"><time data-short="18 yr" datetime="2007-11-02T04:43:29Z" title="11/02/2007 04:43  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2247,7 +2270,7 @@ clubs in tanjong piang are like the 80s sgp clubs.. lots of ah beng techno which
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111675"><time data-short="17 yr" datetime="2007-11-02T04:45:12Z" title="11/02/2007 04:45  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111675"><time data-short="18 yr" datetime="2007-11-02T04:45:12Z" title="11/02/2007 04:45  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2293,7 +2316,7 @@ clubs in tanjong piang are like the 80s sgp clubs.. lots of ah beng techno which
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111675"><time data-short="17 yr" datetime="2007-11-02T04:45:12Z" title="11/02/2007 04:45  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111675"><time data-short="18 yr" datetime="2007-11-02T04:45:12Z" title="11/02/2007 04:45  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2342,7 +2365,7 @@ clubs in tanjong piang are like the 80s sgp clubs.. lots of ah beng techno which
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">Neutral Newbie</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111677"><time data-short="17 yr" datetime="2007-11-02T04:46:26Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111677"><time data-short="18 yr" datetime="2007-11-02T04:46:26Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2389,7 +2412,7 @@ clubs in tanjong piang are like the 80s sgp clubs.. lots of ah beng techno which
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111677"><time data-short="17 yr" datetime="2007-11-02T04:46:26Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111677"><time data-short="18 yr" datetime="2007-11-02T04:46:26Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2441,7 +2464,7 @@ i just see hordes of singaporean ah pek going .... sad ....
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111680"><time data-short="17 yr" datetime="2007-11-02T04:46:54Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111680"><time data-short="18 yr" datetime="2007-11-02T04:46:54Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2487,7 +2510,7 @@ i just see hordes of singaporean ah pek going .... sad ....
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111680"><time data-short="17 yr" datetime="2007-11-02T04:46:54Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111680"><time data-short="18 yr" datetime="2007-11-02T04:46:54Z" title="11/02/2007 04:46  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2551,7 +2574,7 @@ buy house there to keep mistress??
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111684"><time data-short="17 yr" datetime="2007-11-02T04:49:38Z" title="11/02/2007 04:49  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111684"><time data-short="18 yr" datetime="2007-11-02T04:49:38Z" title="11/02/2007 04:49  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2597,7 +2620,7 @@ buy house there to keep mistress??
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111684"><time data-short="17 yr" datetime="2007-11-02T04:49:38Z" title="11/02/2007 04:49  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111684"><time data-short="18 yr" datetime="2007-11-02T04:49:38Z" title="11/02/2007 04:49  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2651,7 +2674,7 @@ fuak la.. ah pek go all the way there to f... wtf... damn troublesome lor.. siao
 </h3>
 <div class="ipsType_light ipsType_reset">
 <span class="ipsResponsive_hideDesktop ipsResponsive_hideTablet" style="color:#12A926;">1st Gear</span>
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111703"><time data-short="17 yr" datetime="2007-11-02T04:58:24Z" title="11/02/2007 04:58  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111703"><time data-short="18 yr" datetime="2007-11-02T04:58:24Z" title="11/02/2007 04:58  AM">November 2, 2007</time></a>
 </div>
 </div>
 </div>
@@ -2697,7 +2720,7 @@ fuak la.. ah pek go all the way there to f... wtf... damn troublesome lor.. siao
 </ul>
 </div>
 <div class="ipsType_reset ipsResponsive_hidePhone">
-<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111703"><time data-short="17 yr" datetime="2007-11-02T04:58:24Z" title="11/02/2007 04:58  AM">November 2, 2007</time></a>
+<a class="ipsType_blendLinks" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&amp;comment=2111703"><time data-short="18 yr" datetime="2007-11-02T04:58:24Z" title="11/02/2007 04:58  AM">November 2, 2007</time></a>
 <span class="ipsResponsive_hidePhone">
 </span>
 </div>
@@ -2712,7 +2735,6 @@ next time he got good stuff dun post in SBF liaoz. </p>
 <p>
 oh sh1t, i tot this is SBF.</p>
 </div>
-<div class="adspace" style="color: #AAAAAA;">↡ Advertisement</div>
 <iframe frameborder="0" height="250" scrolling="No" src="/?app=googleadverts&amp;section=ads&amp;do=carousel&amp;mode=NoncarRelatedDiscussion&amp;pos=BottomThread" style="margin-bottom: 10px" width="300"></iframe>
 </div>
 <div class="ipsPadding ipsHide cPostShareMenu" id="elSharePost_2111703_menu">
@@ -2746,13 +2768,13 @@ oh sh1t, i tot this is SBF.
 </div>
 </div>
 </article>
-<input name="csrfKey" type="hidden" value="b92eb4cafce9fd4f4981a0a58e5eef7c">
+<input name="csrfKey" type="hidden" value="e20330f63bcbb8f114de1632b4749593">
 </input></form>
 </div>
 <div class="ipsBox ipsPadding:half ipsSpacer_top ipsClearfix ipsClear">
 <!-- script: disable ajax pagination -->
 <!-- end of script -->
-<ul class="ipsPagination" data-ipspagination-seopagination="true" data-pages="5" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312">
+<ul class="ipsPagination" data-ipspagination-seopagination="true" data-pages="5" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606">
 <li class="ipsPagination_first ipsPagination_inactive"><a data-ipstooltip="" data-page="1" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" rel="first" title="First page"><i class="fa fa-angle-double-left"></i></a></li>
 <li class="ipsPagination_prev ipsPagination_inactive"><a data-ipstooltip="" data-page="0" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" rel="prev" title="Previous page">Prev</a></li>
 <li class="ipsPagination_page ipsPagination_active"><a data-page="1" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments">1</a></li>
@@ -2763,8 +2785,8 @@ oh sh1t, i tot this is SBF.
 <li class="ipsPagination_next"><a data-ipstooltip="" data-page="2" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/page/2/#comments" rel="next" title="Next page">Next</a></li>
 <li class="ipsPagination_last"><a data-ipstooltip="" data-page="5" href="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/page/5/#comments" rel="last" title="Last page"><i class="fa fa-angle-double-right"></i></a></li>
 <li class="ipsPagination_pageJump">
-<a data-ipsmenu="" data-ipsmenu-appendto="#elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312" data-ipsmenu-closeonclick="false" href="#" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312_jump">Page 1 of 5  <i class="fa fa-caret-down"></i></a>
-<div class="ipsMenu ipsMenu_narrow ipsPadding ipsHide" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_85019312_jump_menu">
+<a data-ipsmenu="" data-ipsmenu-appendto="#elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606" data-ipsmenu-closeonclick="false" href="#" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606_jump">Page 1 of 5  <i class="fa fa-caret-down"></i></a>
+<div class="ipsMenu ipsMenu_narrow ipsPadding ipsHide" id="elPagination_88a87d04717be2b09ae99dc0297dad6f_1780890606_jump_menu">
 <form accept-charset="utf-8" action="https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/#comments" data-role="pageJump" method="post">
 <ul class="ipsForm ipsForm_horizontal">
 <li class="ipsFieldRow">
@@ -2782,7 +2804,7 @@ oh sh1t, i tot this is SBF.
 <a id="replyForm"></a>
 <div class="cTopicPostArea ipsBox ipsResponsive_pull ipsPadding cTopicPostArea_noSize ipsSpacer_top" data-role="replyArea">
 <div data-controller="core.global.core.login">
-<input name="csrfKey" type="hidden" value="b92eb4cafce9fd4f4981a0a58e5eef7c"/>
+<input name="csrfKey" type="hidden" value="e20330f63bcbb8f114de1632b4749593"/>
 <div class="ipsType_center ipsPad cGuestTeaser">
 <h2 class="ipsType_pageTitle" style="font-size: 16px;">Create an account or sign in to comment</h2>
 <p class="ipsType_light ipsType_normal ipsType_reset ipsHide">You need to be a member in order to leave a comment</p>
@@ -2811,6 +2833,21 @@ oh sh1t, i tot this is SBF.
 <h3 class="ipsType_reset _ipsWidget_title ipsType_sectionTitle ipsTruncate __ipsTruncate_line ipsResponsive_hidePhone ipsResponsive_hideTablet">Related Discussions</h3>
 <h3 class="ipsType_reset ipsType_sectionTitle _ipsWidget_title ipsResponsive_hideDesktop">Related Discussions</h3>
 <ul class="ipsDataList ipsDataList_zebra ipsContained_container ipsContained" style="width:100%;">
+<li class="cForumRow ipsDataItem ipsContained_container">
+<div class="ipsDataItem_main ipsContained" data-controller="mcfhome.discussion.newcomment">
+<h4 class="ipsDataItem_title ipsTruncate ipsTruncate_line ipsResponsive_hidePhone ipsResponsive_hideTablet">
+<strong><a href="https://www.mycarforum.com/forums/topic/2665634-favourite-japanese-songs-from-1980-90s/?src=fastreply" seotemplate="forums_topic" seotitle="" title="Favourite Japanese Songs from 1980-90s" }"="">Favourite Japanese Songs from 1980-90s</a></strong> 
+                            <!-- <a href="https://www.mycarforum.com/forums/topic/2665634-favourite-japanese-songs-from-1980-90s/?do=getNewComment&amp;src=fastreply" class="mcfhome_unreadlink" title="Go to first unread post"><i class="relateddiscussionstopics_getNewComment fa fa-forward ipsType_light"></i></a> -->
+</h4>
+<h4 class="ipsDataItem_title ipsResponsive_hideDesktop">
+<strong><a href="https://www.mycarforum.com/forums/topic/2665634-favourite-japanese-songs-from-1980-90s/?src=fastreply" seotemplate="forums_topic" seotitle="" title="Favourite Japanese Songs from 1980-90s" }"="">Favourite Japanese Songs from 1980-90s</a></strong> 
+                            <!-- <a href="https://www.mycarforum.com/forums/topic/2665634-favourite-japanese-songs-from-1980-90s/?do=getNewComment&amp;src=fastreply" class="mcfhome_unreadlink" title="Go to first unread post"><i class="relateddiscussionstopics_getNewComment fa fa-forward ipsType_light"></i></a> -->
+</h4>
+</div>
+<dl class="ipsDataItem_stats" style="vertical-align:initial;margin:0;">
+<dd class="ipsType_small ipsDataItem_stats_type ipsType_light">104 replies</dd>
+</dl>
+</li>
 <li class="cForumRow ipsDataItem ipsContained_container">
 <div class="ipsDataItem_main ipsContained" data-controller="mcfhome.discussion.newcomment">
 <h4 class="ipsDataItem_title ipsTruncate ipsTruncate_line ipsResponsive_hidePhone ipsResponsive_hideTablet">
@@ -2916,21 +2953,6 @@ oh sh1t, i tot this is SBF.
 <dd class="ipsType_small ipsDataItem_stats_type ipsType_light">122 replies</dd>
 </dl>
 </li>
-<li class="cForumRow ipsDataItem ipsContained_container">
-<div class="ipsDataItem_main ipsContained" data-controller="mcfhome.discussion.newcomment">
-<h4 class="ipsDataItem_title ipsTruncate ipsTruncate_line ipsResponsive_hidePhone ipsResponsive_hideTablet">
-<strong><a href="https://www.mycarforum.com/forums/topic/2723234-is-coffee-without-coffee-beans-still-coffee/?src=fastreply" seotemplate="forums_topic" seotitle="" title="Is coffee without coffee beans still coffee?" }"="">Is coffee without coffee beans still coffee?</a></strong> 
-                            <!-- <a href="https://www.mycarforum.com/forums/topic/2723234-is-coffee-without-coffee-beans-still-coffee/?do=getNewComment&amp;src=fastreply" class="mcfhome_unreadlink" title="Go to first unread post"><i class="relateddiscussionstopics_getNewComment fa fa-forward ipsType_light"></i></a> -->
-</h4>
-<h4 class="ipsDataItem_title ipsResponsive_hideDesktop">
-<strong><a href="https://www.mycarforum.com/forums/topic/2723234-is-coffee-without-coffee-beans-still-coffee/?src=fastreply" seotemplate="forums_topic" seotitle="" title="Is coffee without coffee beans still coffee?" }"="">Is coffee without coffee beans still coffee?</a></strong> 
-                            <!-- <a href="https://www.mycarforum.com/forums/topic/2723234-is-coffee-without-coffee-beans-still-coffee/?do=getNewComment&amp;src=fastreply" class="mcfhome_unreadlink" title="Go to first unread post"><i class="relateddiscussionstopics_getNewComment fa fa-forward ipsType_light"></i></a> -->
-</h4>
-</div>
-<dl class="ipsDataItem_stats" style="vertical-align:initial;margin:0;">
-<dd class="ipsType_small ipsDataItem_stats_type ipsType_light">44 replies</dd>
-</dl>
-</li>
 </ul>
 </li>
 </ul>
@@ -3002,10 +3024,10 @@ oh sh1t, i tot this is SBF.
 </style>
 <div class="ipsBox ipsPadding ipsResponsive_pull ipsResponsive_showPhone ipsMargin_top">
 <div class="ipsResponsive_noFloat ipsResponsive_block ipsMargin_bottom:half">
-<a class="ipsShareButton ipsButton ipsButton_verySmall ipsButton_light" data-ipsmenu="" href="#elShareItem_1734506013_menu" id="elShareItem_1734506013">
+<a class="ipsShareButton ipsButton ipsButton_verySmall ipsButton_light" data-ipsmenu="" href="#elShareItem_695724121_menu" id="elShareItem_695724121">
 <span><i class="fa fa-share-alt"></i></span>  Share
     </a>
-<div class="ipsPadding ipsMenu ipsMenu_auto ipsHide" data-controller="core.front.core.sharelink" id="elShareItem_1734506013_menu">
+<div class="ipsPadding ipsMenu ipsMenu_auto ipsHide" data-controller="core.front.core.sharelink" id="elShareItem_695724121_menu">
 <ul class="ipsList_inline">
 <li>
 <a class="cShareLink cShareLink_x" data-ipstooltip="" data-role="shareLink" href="https://x.com/share?url=https%3A%2F%2Fwww.mycarforum.com%2Fforums%2Ftopic%2F2111034-bringbuy-beer-from-sg-to-bintan-resorts%2F" rel="nofollow noopener" target="_blank" title="Share on X">
@@ -3330,9 +3352,9 @@ oh sh1t, i tot this is SBF.
 			notification_imgURL: "",
 			baseURL: "//www.mycarforum.com/",
 			jsURL: "//www.mycarforum.com/applications/core/interface/js/js.php",
-			csrfKey: "b92eb4cafce9fd4f4981a0a58e5eef7c",
+			csrfKey: "e20330f63bcbb8f114de1632b4749593",
 			antiCache: "528632eecf1759977961",
-			jsAntiCache: "528632eecf1761901449",
+			jsAntiCache: "528632eecf1762853557",
 			disableNotificationSounds: false,
 			useCompiledFiles: true,
 			links_external: true,
@@ -3371,20 +3393,20 @@ setTimeout( function() {
 }, 0 );
 </script>
 <!-- End Facebook Pixel Code -->
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_library.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_js_lang_1.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_framework.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/global_global_core.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/plugins_plugins.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_front.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/front_front_core.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="//www.mycarforum.com/applications/mcfcommon/interface/colorbox/jquery.colorbox-min.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_forums/front_front_topic.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_mcfhome/front_front_mcfhomelisting.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_map.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_mcfhome/front_front_mcfhome.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="//www.mycarforum.com/applications/mcfhome/interface/fotorama/fotorama.js?v=528632eecf1761901449" type="text/javascript"></script>
-<script data-ips="" src="//www.mycarforum.com/applications/mcfhome/interface/colorbox/jquery.colorbox-min.js?v=528632eecf1761901449" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_library.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_js_lang_1.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_framework.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/global_global_core.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/plugins_plugins.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_front.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_core/front_front_core.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="//www.mycarforum.com/applications/mcfcommon/interface/colorbox/jquery.colorbox-min.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_forums/front_front_topic.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_mcfhome/front_front_mcfhomelisting.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_global/root_map.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="https://www.mycarforum.com/uploads/javascript_mcfhome/front_front_mcfhome.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="//www.mycarforum.com/applications/mcfhome/interface/fotorama/fotorama.js?v=528632eecf1762853557" type="text/javascript"></script>
+<script data-ips="" src="//www.mycarforum.com/applications/mcfhome/interface/colorbox/jquery.colorbox-min.js?v=528632eecf1762853557" type="text/javascript"></script>
 <script type="text/javascript">
 		
 			ips.setSetting( 'date_format', jQuery.parseJSON('"mm\/dd\/yy"') );
@@ -3432,7 +3454,7 @@ setTimeout( function() {
         {
             "@type": "InteractionCounter",
             "interactionType": "http://schema.org/ViewAction",
-            "userInteractionCount": 15961
+            "userInteractionCount": 15996
         },
         {
             "@type": "InteractionCounter",
@@ -3803,100 +3825,15 @@ setTimeout( function() {
 <noscript>
 <img alt="" height="1" src="https://www.facebook.com/tr?id=349219855723236&amp;ev=PageView&amp;cd%5Bitem_id%5D=2111034&amp;cd%5Bitem_name%5D=Bring%2FBuy+beer+from+SG+to+Bintan+resorts%3F&amp;cd%5Bitem_type%5D=topic&amp;cd%5Bcategory_name%5D=Lite &amp; EZ" style="display:none" width="1">
 </img></noscript>
-<script src="https://www.sgcarmart.com/js/jquery.colorbox-min.js" type="text/javascript"></script>
-<!--<script src='https://www.mycarforum.com/uploads/set_resources_1/3e2a021b7d1baaf9945415abecd3531c_desktopSidePTO.js'></script>-->
-<script type="text/javascript">
-        var dpto_duration = 12000;
-        var dpto_countdown = dpto_duration/1000+1;
-        var dpto_interval;
-        var dpto_revealed = false;
-        var dpto_side_image = '';
-		
-         	var dpto_preview = '/gam_pto_desktop_adserve.php';
-        
-        
-        function dPTOShow(manual){
-            jQuery.colorbox({
-                iframe:true,
-                href:dpto_preview,
-                html:false,
-                innerWidth:800,
-                innerHeight:505,
-                open:true,
-                onLoad:function(){jQuery("#cboxContent").css("background-color","#FFF");},
-                onComplete:function(){if (manual==undefined || manual==false)resizeColorBox(); else jQuery("#cboxClose").css("display","block");},
-                onClosed:function(){jQuery("#colorbox").removeClass("dptostyle");}
-            });
-            if(manual == undefined || manual == false){jQuery("#colorbox").addClass("dptostyle");}
-            dpto_revealed = true;
-        }
-
-        function resizeColorBox(){
-            jQuery(".dptostyle").append("<div class='adtimer' style='display:inline; z-index:900000; color:#000; position:absolute; bottom:35px; right:20px;'><table cellpadding='0' cellspacing='0'><tr><td valign='middle'><span id='ptocontdown' style='color:#999999;font-size:11px;font-weight:bold;'>  <td valign='middle'><a href='javascript:' onclick='dPTOClose()'><img src='https://i.i-sgcm.com/pagetakeover/close-button-black.png' valign='center' />");
-            jQuery(".dptostyle").prev("#cboxOverlay").click(function(){dPTOClose();});
-            dPTOCounter();
-            dpto_interval = setInterval(function(){dPTOCounter();}, 1000);
-        }
-        function dPTOCounter(){
-            if(dpto_countdown <= 1) {dPTOClose();}
-            dpto_countdown = dpto_countdown - 1;
-            jQuery(".dptostyle #ptocontdown").html("Closing Ad in... " + dpto_countdown);
-        }
-        function dPTOClose(){
-            clearInterval(dpto_interval);
-            jQuery(".dptostyle").find("div.adtimer").remove();
-            jQuery("#cboxClose").css("display","none");
-            jQuery.colorbox.close();
-        }
-
-        function dPTOExec(){
-            if(dpto_side_image!=''){
-                if(jQuery("#dpto_placeholder").length){
-                    jQuery("#dpto_placeholder").show();
-                    dptoReposSideImage();
-                    jQuery(window).resize(function(){dptoReposSideImage();});
-                    jQuery("#dpto_wrapper").html('<img src="'+dpto_side_image+'" width="155" height="90" border="0">');
-                    jQuery("#dpto_wrapper").click(function(){dPTOClose();dPTOShow(true);});
-                }
-            }
-        }
-
-        function dptoReposSideImage(){
-            var winWidth = jQuery(window).width();
-            if(jQuery(window).width() < 1260)
-                jQuery("#dpto_wrapper").hide();
-            else
-                jQuery("#dpto_wrapper").show();
-        }
+<script src="https://www.mycarforum.com/uploads/set_resources_1/3e2a021b7d1baaf9945415abecd3531c_mobileCatfish.js"></script>
+<link href="https://www.mycarforum.com/uploads/set_resources_1/3e2a021b7d1baaf9945415abecd3531c_desktop_catfish.css" rel="stylesheet" type="text/css"/>
+<!-- /1707400/MCF_Home_Catfish_mobile -->
+<div id="div-gpt-ad-1597636986100-0">
+<script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1597636986100-0'); });
         </script>
-<style>
-            .dptostyle #cboxWrapper {height:555px !important;}
-            .dptostyle #cboxMiddleLeft,
-            .dptostyle #cboxContent,
-            .dptostyle #cboxLoadingOverlay,
-            .dptostyle #cboxLoadingGraphic,
-            .dptostyle #cboxMiddleRight {height: 512px !important;}
-            .dptostyle #cboxClose {display:none;}
-            .adtimer table {width:auto !important;}
-            #ptocb_countdown {bottom:37px !important;}
-        </style>
-<script type="text/javascript">
-        var ua = window.navigator.userAgent;
-        var msie = ua.indexOf("MSIE ");
-
-        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // Internet Explorer trigger
-        {
-          	
-          	
-          	
-          	dpto_url ='gam_pto_desktop_adserve.php'
-          	dpto_side_image = 'https://tpc.googlesyndication.com/simgad/5661649146188960081?';
-            dpto_is_adserve='Yes'
-            dPTOExec();
-        }
-      </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'997a2193cdae5542',t:'MTc2MTk4Njg4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script crossorigin="anonymous" data-cf-beacon='{"rayId":"997a2193cdae5542","version":"2025.9.1","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"a992df3cdfcd4cf98d0f9c2856140267","b":1}' defer="" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"></script>
-</body>
+</div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99cd5fd93c9b5f72',t:'MTc2Mjg1OTc1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 <script>
       $(document).ready(function(){
       	var autolink = '#ipsLayout_header > header > div > ul.ipsList.ipsList_inline.ipsResponsive_block.ipsResponsive_showPhone > li:nth-child(2) > a';

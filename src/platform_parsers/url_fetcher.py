@@ -8,6 +8,7 @@ from fake_useragent import UserAgent
 LOGGER = logging.getLogger(__name__)
 
 OK_RESPONSE = 200
+NOT_FOUND = 404
 TOO_MANY_REQUESTS = 429
 
 DEFAULT_RETRY_AFTER_DELAY_SEC = 5
@@ -25,6 +26,8 @@ def get_soup(url: str, cookies: dict | None = None) -> BeautifulSoup:
         timeout=DEFAULT_RETRY_AFTER_DELAY_SEC,
     )
 
+    if response.status_code == NOT_FOUND:
+        raise ValueError("Webpage can no longer be found:" + str({"url": url}))
     if response.status_code != OK_RESPONSE:
         retry_after_header = response.headers.get("Retry-After")
         retry_after_delay = (
@@ -36,8 +39,8 @@ def get_soup(url: str, cookies: dict | None = None) -> BeautifulSoup:
             else DEFAULT_RETRY_AFTER_DELAY_SEC
         )
         LOGGER.debug(
-            "Received bad status code. Trying after delay.",
-            extra={
+            "Received bad status code. Trying after delay. %s",
+            {
                 "response": response.status_code,
                 "retry_after_delay": retry_after_delay,
             },

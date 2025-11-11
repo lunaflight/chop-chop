@@ -3,13 +3,13 @@ from tests import url_checker
 
 def test_reply() -> None:
     test_suffix_for_caching = "reply"
-    url = "https://forums.hardwarezone.com.sg/threads/the-tech-show-2025-any-good-lobang.7166719/post-157701902"
-    expected_post = "Also, we'll have our highlight stories from the show floor. Easier to see and get ideas"  # noqa: E501
+    url = "https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/post-138981367"
+    expected_post = "Normal lah, jin happy collect money then throw tile liao ... then forget pu one tile xiao xiang gong"  # noqa: E501
     expected_credit = (
-        "2025 Oct 30, "
-        "Dr.Vijay. "
+        "2022 Jan 4, "
+        "Bunknifer. "
         "HardwareZone, "
-        '"The Tech Show 2025: any good lobang". '
+        '"Noob mahjong question - experts please help". '
         f"{url}"
     )
 
@@ -23,13 +23,13 @@ def test_reply() -> None:
 
 def test_main_post() -> None:
     test_suffix_for_caching = "main_post"
-    url = "https://forums.hardwarezone.com.sg/threads/the-tech-show-2025-any-good-lobang.7166719/"
-    expected_post = "The Tech Show 2025: any good lobang<br>Any interesting products to shop?<br>Have gotten desk from ulti and chair from ergotune<br>got any smart sofa that can recline and dyson promos for their hair curler"  # noqa: E501
+    url = "https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/"
+    expected_post = "Noob mahjong question - experts please help<br>Let’s say I 听 六万 九万。Someone throws 九万 I didn’t see or missed. Then in the same round the next player throws 六万，can I game?"  # noqa: E501, RUF001
     expected_credit = (
-        "2025 Oct 30, "
-        "katty91. "
+        "2022 Jan 3, "
+        "gytaci. "
         "HardwareZone, "
-        '"The Tech Show 2025: any good lobang". '
+        '"Noob mahjong question - experts please help". '
         f"{url}"
     )
 

@@ -19,8 +19,8 @@ def cache(filename: str, soup: BeautifulSoup) -> None:
     file_path.parent.mkdir(parents=True, exist_ok=True)
     file_path.write_text(str(soup), encoding="utf-8")
     LOGGER.debug(
-        "Cached file successfully",
-        extra={"filename_": filename, "file_path": file_path},
+        "Cached file successfully %s",
+        {"filename_": filename, "file_path": file_path},
     )
 
 
@@ -28,12 +28,12 @@ def read(filename: str) -> BeautifulSoup | None:
     file_path = path(filename)
     if not file_path.is_file():
         LOGGER.debug(
-            "Cache file not found",
-            extra={"filename_": filename, "file_path": file_path},
+            "Cache file not found %s",
+            {"filename_": filename, "file_path": file_path},
         )
         return None
 
     content = file_path.read_text(encoding="utf-8")
     soup = BeautifulSoup(content, "html.parser")
-    LOGGER.debug("Cache retrieved successfully", extra={"filename_": filename})
+    LOGGER.debug("Cache retrieved successfully: %s", {"filename_": filename})
     return soup

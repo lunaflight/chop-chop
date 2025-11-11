@@ -1,4 +1,4 @@
-.PHONY: all check ci-check fmt main
+.PHONY: all check ci-check clear-cache-and-check fmt main
 
 all: main
 
@@ -16,6 +16,10 @@ ci-check:
 	ruff format --check
 	mypy .
 	pytest
+
+clear-cache-and-check:
+	rm -f tests/cached_htmls/*.html
+	$(MAKE) check
 
 fmt:
 	ruff format

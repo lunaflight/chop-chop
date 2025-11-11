@@ -1,7 +1,11 @@
+import logging
+
 from bs4 import BeautifulSoup
 
 from src.platform_parsers import platform
 from tests import soup_cacher
+
+LOGGER = logging.getLogger(__name__)
 
 
 def get_soup(
@@ -32,5 +36,14 @@ def assert_produces_post_and_credit(
     post = assertation_.post
     credit = assertation_.credit
 
+    LOGGER.debug(
+        "%s",
+        {
+            "post": post,
+            "expected_post": expected_post,
+            "credit": credit,
+            "expected_credit": expected_credit,
+        },
+    )
     assert post == expected_post
     assert credit == expected_credit
