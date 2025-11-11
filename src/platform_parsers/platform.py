@@ -7,7 +7,7 @@ from src.platform_parsers import assertation, invision, reddit, xenforo
 
 
 class Platform(Enum):
-    BLOWINGWIND = "Blowing Wind"
+    BLOWINGWIND = "Blowing_wind"
     HARDWAREZONE = "HardwareZone"
     MYCARFORUM = "Mycarforum"
     REDDIT = "Reddit"
@@ -45,7 +45,7 @@ def to_stylised_string(t: T) -> str:  # noqa: PLR0911
 
 
 def to_plain_string(t: T) -> str:
-    return to_stylised_string(t).lower()
+    return to_stylised_string(t).lower().replace(" ", "_")
 
 
 def identifying_url_substring(platform: Platform) -> str:  # noqa: PLR0911
