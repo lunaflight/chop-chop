@@ -5,6 +5,10 @@ def clean_input_for_utf8_compatibility(string: str) -> str:
     return string.strip().replace("\ufeff", "")
 
 
+def get_input() -> str:
+    return clean_input_for_utf8_compatibility(input())
+
+
 def clean_unicode_for_output(string: str) -> str:
     replacements = {
         "\xa0": "",  # non-breaking space
