@@ -13,6 +13,7 @@ def clean_unicode_for_output(string: str) -> str:
     replacements = {
         "\xa0": "",  # non-breaking space
         "…": "...",
+        "\u2019": "'",  # right single quotation mark
     }
 
     for key, val in replacements.items():

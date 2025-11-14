@@ -109,3 +109,21 @@ def test_able_to_get_past_18_plus_check() -> None:
     "credit": "2025 Jan 29, u/DurianNational6775. r/askSingapore, \\"Is it normal for ur dad to strip naked in front of u? Even in SG families\\". https://www.reddit.com/r/askSingapore/comments/1icl0q9/is_it_normal_for_ur_dad_to_strip_naked_in_front/m9uo106/"
 }""",
     )
+
+
+def test_single_right_quotation_mark() -> None:
+    test_suffix_for_caching = "single_right_quotation_mark"
+    url = "https://www.reddit.com/r/SGExams/comments/1gwbtxe/what_are_my_school_choices_by_rank_please_for_al6/ly85rmn/"
+    json = src_interfacer.get_assertation_as_json(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+    )
+
+    assert_expected_inline(
+        json,
+        """\
+{
+    "post": "Just admitting u were horny eh<br>Well anyth is better than an all boy's school, judging from stories i hear haha.<br>Just sayin, most boys have self control. And not all girls have self control, especially in an all girls sch if u catch my drift.<br>It could be fine to get her used to boys and to saying no. But ik a few friends from all girls that are quite fine too, not much diff. Krispy kreme and i forgot the other chij?",
+    "credit": "2024 Nov 21, u/ebbbby. r/SGExams, \\"What are my school choices (by rank please) for AL6? Preference for west and central location, all girls' school.\\". https://www.reddit.com/r/SGExams/comments/1gwbtxe/what_are_my_school_choices_by_rank_please_for_al6/ly85rmn/"
+}""",
+    )

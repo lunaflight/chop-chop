@@ -32,7 +32,7 @@ def test_main_post() -> None:
         json,
         """\
 {
-    "post": "Noob mahjong question - experts please help<br>Let\\u2019s say I \\u542c \\u516d\\u4e07 \\u4e5d\\u4e07\\u3002Someone throws \\u4e5d\\u4e07 I didn\\u2019t see or missed. Then in the same round the next player throws \\u516d\\u4e07\\uff0ccan I game?",
+    "post": "Noob mahjong question - experts please help<br>Let's say I \\u542c \\u516d\\u4e07 \\u4e5d\\u4e07\\u3002Someone throws \\u4e5d\\u4e07 I didn't see or missed. Then in the same round the next player throws \\u516d\\u4e07\\uff0ccan I game?",
     "credit": "2022 Jan 3, gytaci. HardwareZone, \\"Noob mahjong question - experts please help\\". https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/"
 }""",
     )
