@@ -16,5 +16,5 @@ Run `make fmt`.
 This repository uses [expecttest](https://github.com/pytorch/expecttest), which
 inlines the expected output in the file.
 
-If there is a failing test, run `make accept-tests` to change the inlined
+If there is a failing test, run `make fix-all` to change the inlined
 output to make it pass.

@@ -24,9 +24,6 @@ clear-cache-and-check:
 fmt:
 	ruff format
 
-accept-tests:
-	EXPECTTEST_ACCEPT=1 pytest
-
 fix-all:
-	$(MAKE) accept-tests
+	EXPECTTEST_ACCEPT=1 pytest
 	$(MAKE) fmt
