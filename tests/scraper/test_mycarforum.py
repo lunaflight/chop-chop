@@ -1,15 +1,6 @@
-from typing import TypedDict
-
 from expecttest import assert_expected_inline
 
 from tests.scraper import src_interfacer
-
-
-class ExpectedData(TypedDict):
-    expected_post: str
-    expected_credit: str
-    test_suffix_for_caching: str
-
 
 SAME_TEST_SUFFIX_FOR_2111034 = "reply"
 
