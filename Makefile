@@ -1,4 +1,4 @@
-.PHONY: all check ci-check clear-cache-and-check fmt main
+.PHONY: all check ci-check clear-cache-and-check fmt main accept-tests fix-all
 
 all: main
 
@@ -24,3 +24,9 @@ clear-cache-and-check:
 fmt:
 	ruff format
 
+accept-tests:
+	EXPECTTEST_ACCEPT=1 pytest
+
+fix-all:
+	$(MAKE) accept-tests
+	$(MAKE) fmt

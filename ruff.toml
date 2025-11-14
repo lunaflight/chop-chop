@@ -22,3 +22,6 @@ ignore = [
 "TD003",
 "TRY003",
 ]
+
+[lint.per-file-ignores]
+"tests/**/test_*.py" = ["E501"]  # expecttest is used, so this line too long is ok

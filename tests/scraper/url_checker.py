@@ -2,7 +2,7 @@ import logging
 
 from bs4 import BeautifulSoup
 
-from src.scraper import platform
+from src.scraper import assertation, platform
 from tests.scraper import soup_cacher
 
 LOGGER = logging.getLogger(__name__)
@@ -22,28 +22,13 @@ def get_soup(
     return cached_soup
 
 
-def assert_produces_post_and_credit(
+def get_assertation_as_json(
     url: str,
     test_suffix_for_caching: str,
-    expected_post: str,
-    expected_credit: str,
-) -> None:
+) -> str:
     platform_ = platform.of_url(url)
     soup = get_soup(
         platform_=platform_, test_suffix_for_caching=test_suffix_for_caching
     )
     assertation_ = platform.get_assertation_for_testing(platform_, soup)
-    post = assertation_.post
-    credit = assertation_.credit
-
-    LOGGER.debug(
-        "%s",
-        {
-            "post": post,
-            "expected_post": expected_post,
-            "credit": credit,
-            "expected_credit": expected_credit,
-        },
-    )
-    assert post == expected_post
-    assert credit == expected_credit
+    return assertation.to_json(assertation_)
