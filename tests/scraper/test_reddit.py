@@ -1,12 +1,12 @@
 from expecttest import assert_expected_inline
 
-from tests.scraper import url_checker
+from tests.scraper import src_interfacer
 
 
 def test_reply() -> None:
     test_suffix_for_caching = "reply"
     url = "https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9fl4g/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -24,7 +24,7 @@ def test_reply() -> None:
 def test_main_post() -> None:
     test_suffix_for_caching = "main_post"
     url = "https://www.reddit.com/r/singapore/comments/1oixj70/hsa_blood_stocklevels_for_a_is_critical_low_29_oct/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -42,7 +42,7 @@ def test_main_post() -> None:
 def test_backslash_n_replaced_with_br() -> None:
     test_suffix_for_caching = "blackslash_n_replaced_with_br"
     url = "https://www.reddit.com/r/singapore/comments/1o8rpju/grandpas_struggle_to_secure_a_better_hdb_flat/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -60,7 +60,7 @@ def test_backslash_n_replaced_with_br() -> None:
 def test_deleted_user() -> None:
     test_suffix_for_caching = "deleted_user"
     url = "https://www.reddit.com/r/singapore/comments/8cs8b0/marsiling_at_sunrise/dxk89g2/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -78,7 +78,7 @@ def test_deleted_user() -> None:
 def test_list_in_reply() -> None:
     test_suffix_for_caching = "list"
     url = "https://www.reddit.com/r/askSingapore/comments/sd00v4/what_is_an_unsolved_mystery_in_singapore/hua69nt/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -96,7 +96,7 @@ def test_list_in_reply() -> None:
 def test_able_to_get_past_18_plus_check() -> None:
     test_suffix_for_caching = "18_plus_check"
     url = "https://www.reddit.com/r/askSingapore/comments/1icl0q9/is_it_normal_for_ur_dad_to_strip_naked_in_front/m9uo106/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )

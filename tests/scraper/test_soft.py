@@ -1,12 +1,12 @@
 from expecttest import assert_expected_inline
 
-from tests.scraper import url_checker
+from tests.scraper import src_interfacer
 
 
 def test_reply() -> None:
     test_suffix_for_caching = "reply"
     url = "https://soft.com.sg/threads/childhood-jeers.6640/#post-108928"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )

@@ -1,12 +1,12 @@
 from expecttest import assert_expected_inline
 
-from tests.scraper import url_checker
+from tests.scraper import src_interfacer
 
 
 def test_reply() -> None:
     test_suffix_for_caching = "reply"
     url = "https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/post-138981367"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url, test_suffix_for_caching=test_suffix_for_caching
     )
 
@@ -23,7 +23,7 @@ def test_reply() -> None:
 def test_main_post() -> None:
     test_suffix_for_caching = "main_post"
     url = "https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
@@ -41,7 +41,7 @@ def test_main_post() -> None:
 def test_replace_ellipses_with_ascii() -> None:
     test_suffix_for_caching = "ellipses"
     url = "https://forums.hardwarezone.com.sg/threads/sg-soon-no-need-water-from-malaysia-liao.7105036/post-155324874"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )

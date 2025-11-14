@@ -2,7 +2,7 @@ from typing import TypedDict
 
 from expecttest import assert_expected_inline
 
-from tests.scraper import url_checker
+from tests.scraper import src_interfacer
 
 
 class ExpectedData(TypedDict):
@@ -16,7 +16,7 @@ SAME_TEST_SUFFIX_FOR_2111034 = "reply"
 
 def test_reply_directly_from_share() -> None:
     url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&comment=2115341"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=SAME_TEST_SUFFIX_FOR_2111034,
     )
@@ -33,7 +33,7 @@ def test_reply_directly_from_share() -> None:
 
 def test_reply_directly_from_url_bar() -> None:
     url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/page/4/#comment-2115341"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=SAME_TEST_SUFFIX_FOR_2111034,
     )
@@ -51,7 +51,7 @@ def test_reply_directly_from_url_bar() -> None:
 def test_main_post() -> None:
     test_suffix_for_caching = "topic"
     url = "https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/"
-    json = url_checker.get_assertation_as_json(
+    json = src_interfacer.get_assertation_as_json(
         url=url,
         test_suffix_for_caching=test_suffix_for_caching,
     )
