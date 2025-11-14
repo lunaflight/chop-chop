@@ -1,6 +1,8 @@
 import json
 from dataclasses import dataclass
 
+from src import sanitizer
+
 
 @dataclass
 class T:
@@ -9,7 +11,10 @@ class T:
 
 
 def create(post: str, credit: str) -> T:
-    return T(post=post, credit=credit)
+    return T(
+        post=sanitizer.clean_unicode_for_output(post),
+        credit=sanitizer.clean_unicode_for_output(credit),
+    )
 
 
 def to_json(t: T) -> str:

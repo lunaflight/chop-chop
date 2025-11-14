@@ -107,7 +107,7 @@ class T:
         )
 
     def assertation(self) -> assertation.T:
-        return assertation.T(post=self.post(), credit=self.credit())
+        return assertation.create(post=self.post(), credit=self.credit())
 
 
 def replace_netloc_of_url(url: str, netloc: str) -> str:

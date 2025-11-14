@@ -127,3 +127,21 @@ def test_single_right_quotation_mark() -> None:
     "credit": "2024 Nov 21, u/ebbbby. r/SGExams, \\"What are my school choices (by rank please) for AL6? Preference for west and central location, all girls' school.\\". https://www.reddit.com/r/SGExams/comments/1gwbtxe/what_are_my_school_choices_by_rank_please_for_al6/ly85rmn/"
 }""",
     )
+
+
+def test_double_quotation_marks() -> None:
+    test_suffix_for_caching = "double_quotation_marks"
+    url = "https://www.reddit.com/r/singapore/comments/1du36c8/pink_dot_had_an_unmanned_booth_for_educators/"
+    json = src_interfacer.get_assertation_as_json(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+    )
+
+    assert_expected_inline(
+        json,
+        """\
+{
+    "post": "Pink Dot had an unmanned booth for educators called \\"Queer Friendly Chers\\"",
+    "credit": "2024 Jul 3, u/Varantain. r/singapore, \\"Pink Dot had an unmanned booth for educators called \\"Queer Friendly Chers\\"\\". https://www.reddit.com/r/singapore/comments/1du36c8/pink_dot_had_an_unmanned_booth_for_educators/"
+}""",
+    )

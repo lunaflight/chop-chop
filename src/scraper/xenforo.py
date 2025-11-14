@@ -112,7 +112,7 @@ class T:
         )
 
     def assertation(self) -> assertation.T:
-        return assertation.T(post=self.post(), credit=self.credit())
+        return assertation.create(post=self.post(), credit=self.credit())
 
 
 def of_url_with_soup(url: str, soup: BeautifulSoup) -> T:
