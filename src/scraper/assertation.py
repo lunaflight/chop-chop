@@ -18,4 +18,5 @@ def create(post: str, credit: str) -> T:
 
 
 def to_json(t: T) -> str:
-    return json.dumps(t.__dict__, indent=4)
+    json_dict = {"eg": t.post, "src": t.credit}
+    return json.dumps(json_dict, indent=4)

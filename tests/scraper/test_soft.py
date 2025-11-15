@@ -15,7 +15,7 @@ def test_reply() -> None:
         json,
         """\
 {
-    "post": "haha...suddenly remembered more...<br>Copy cat, kiss the rat, go home let your mother slap, father say, \\"nevermind\\". Mother say, \\"Go and die!\\"<br>i learnt that in kindergarten, then when i recited it at home, my mum was appalled, and told me not to chant it anymore...lol!",
-    "credit": "2005 Oct 30, MichaelAngelo. S.O.F.T., \\"Childhood jeers\\". https://soft.com.sg/threads/childhood-jeers.6640/#post-108928"
+    "eg": "haha...suddenly remembered more...<br>Copy cat, kiss the rat, go home let your mother slap, father say, \\"nevermind\\". Mother say, \\"Go and die!\\"<br>i learnt that in kindergarten, then when i recited it at home, my mum was appalled, and told me not to chant it anymore...lol!",
+    "src": "2005 Oct 30, MichaelAngelo. S.O.F.T., \\"Childhood jeers\\". https://soft.com.sg/threads/childhood-jeers.6640/#post-108928"
 }""",
     )

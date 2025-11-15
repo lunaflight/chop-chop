@@ -14,8 +14,8 @@ def test_reply() -> None:
         json,
         """\
 {
-    "post": "Normal lah, jin happy collect money then throw tile liao ... then forget pu one tile xiao xiang gong",
-    "credit": "2022 Jan 4, Bunknifer. HardwareZone, \\"Noob mahjong question - experts please help\\". https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/post-138981367"
+    "eg": "Normal lah, jin happy collect money then throw tile liao ... then forget pu one tile xiao xiang gong",
+    "src": "2022 Jan 4, Bunknifer. HardwareZone, \\"Noob mahjong question - experts please help\\". https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/post-138981367"
 }""",
     )
 
@@ -32,8 +32,8 @@ def test_main_post() -> None:
         json,
         """\
 {
-    "post": "Noob mahjong question - experts please help<br>Let's say I \\u542c \\u516d\\u4e07 \\u4e5d\\u4e07\\u3002Someone throws \\u4e5d\\u4e07 I didn't see or missed. Then in the same round the next player throws \\u516d\\u4e07\\uff0ccan I game?",
-    "credit": "2022 Jan 3, gytaci. HardwareZone, \\"Noob mahjong question - experts please help\\". https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/"
+    "eg": "Noob mahjong question - experts please help<br>Let's say I \\u542c \\u516d\\u4e07 \\u4e5d\\u4e07\\u3002Someone throws \\u4e5d\\u4e07 I didn't see or missed. Then in the same round the next player throws \\u516d\\u4e07\\uff0ccan I game?",
+    "src": "2022 Jan 3, gytaci. HardwareZone, \\"Noob mahjong question - experts please help\\". https://forums.hardwarezone.com.sg/threads/noob-mahjong-question-experts-please-help.6672504/"
 }""",
     )
 
@@ -50,7 +50,7 @@ def test_replace_ellipses_with_ascii() -> None:
         json,
         """\
 {
-    "post": "If we have sufficient solar electricity or nuclear power generator... we can have endless supply of water...<br>We are limited by energy...",
-    "credit": "2025 Feb 15, Can Or Not. HardwareZone, \\"SG soon no need water from malaysia liao\\". https://forums.hardwarezone.com.sg/threads/sg-soon-no-need-water-from-malaysia-liao.7105036/post-155324874"
+    "eg": "If we have sufficient solar electricity or nuclear power generator... we can have endless supply of water...<br>We are limited by energy...",
+    "src": "2025 Feb 15, Can Or Not. HardwareZone, \\"SG soon no need water from malaysia liao\\". https://forums.hardwarezone.com.sg/threads/sg-soon-no-need-water-from-malaysia-liao.7105036/post-155324874"
 }""",
     )
