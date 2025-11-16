@@ -1,4 +1,11 @@
-.PHONY: all check ci-check clear-cache-and-check fmt main accept-tests fix-all
+.PHONY: \
+	all \
+	main \
+	check \
+	ci-check \
+	clear-cache-and-check \
+	fix-all \
+	fmt
 
 all: main
 
@@ -21,10 +28,10 @@ clear-cache-and-check:
 	rm -f tests/scraper/cached_htmls/*.html
 	$(MAKE) check
 
-fmt:
-	ruff format
-
 fix-all:
 	EXPECTTEST_ACCEPT=1 pytest
 	ruff check --fix
 	$(MAKE) fmt
+
+fmt:
+	ruff format
