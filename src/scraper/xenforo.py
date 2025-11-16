@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import TYPE_CHECKING
 from urllib.parse import urlparse
-
-from bs4 import BeautifulSoup, NavigableString, Tag
 
 from src.scraper import (
     assertation,
@@ -12,6 +11,9 @@ from src.scraper import (
     platform,
     url_fetcher,
 )
+
+if TYPE_CHECKING:
+    from bs4 import BeautifulSoup, Tag
 
 
 # Returns the post_id in the format [post-NNNNN]
@@ -56,20 +58,28 @@ class T:
             )
             .find("article", class_="message-body")
             .find("div", class_="bbWrapper")
-            .contents
+            .children
         )
 
         paragraphs = []
-
         if self.post_id is None:
             paragraphs.append(self.title())
 
-        # Emojis, which are embed as images in the HTML, may be present.
-        paragraphs += [
-            str(content.strip())
-            for content in contents
-            if isinstance(content, NavigableString) and str(content).strip()
-        ]
+        accumulated_paragraph = ""
+        for element in contents:
+            # "user said:" blockquotes are bloat information that are not
+            # attributed to this author
+            if hasattr(element, "name") and element.name == "blockquote":
+                continue
+            # every logical paragraph is separated by <br> in HardwareZone
+            elif hasattr(element, "name") and element.name == "br":
+                paragraphs.append(accumulated_paragraph)
+                accumulated_paragraph = ""
+            elif hasattr(element, "get_text"):
+                accumulated_paragraph += element.get_text()
+            else:
+                accumulated_paragraph += str(element)
+        paragraphs.append(accumulated_paragraph)
 
         return bbcode_format.join_with_br(paragraphs)
 
