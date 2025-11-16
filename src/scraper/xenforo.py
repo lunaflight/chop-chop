@@ -72,7 +72,7 @@ class T:
             if hasattr(element, "name") and element.name == "blockquote":
                 continue
             # every logical paragraph is separated by <br> in HardwareZone
-            elif hasattr(element, "name") and element.name == "br":
+            if hasattr(element, "name") and element.name == "br":
                 paragraphs.append(accumulated_paragraph)
                 accumulated_paragraph = ""
             elif hasattr(element, "get_text"):

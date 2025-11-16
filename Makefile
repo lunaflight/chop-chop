@@ -6,13 +6,13 @@ main:
 	@PYTHONPATH=$(shell pwd) python src/main.py $(args)
 
 check:
-	ruff check
+	ruff check --no-fix
 	ruff format --check
 	mypy .
 	pytest
 
 ci-check:
-	ruff check --output-format=github .
+	ruff check --no-fix --output-format=github .
 	ruff format --check
 	mypy .
 	pytest
@@ -26,4 +26,5 @@ fmt:
 
 fix-all:
 	EXPECTTEST_ACCEPT=1 pytest
+	ruff check --fix
 	$(MAKE) fmt
