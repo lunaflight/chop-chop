@@ -1,8 +1,11 @@
 from invoke import Context, task
 
+from src.windows_hacks import AM_WINDOWS
+
 
 def _run(c: Context, cmd: str) -> None:
-    c.run(cmd, pty=True)  # pty=True is required for colour
+    pty = not AM_WINDOWS
+    c.run(cmd, pty=pty)  # pty=True is required for colour on Linux
 
 
 def _pytest(c: Context, *, fix: bool) -> None:
