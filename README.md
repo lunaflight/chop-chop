@@ -44,7 +44,7 @@ relative path issues:
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
 
-4. `python -m src.main`
+4. `python -m src.scraper.main`
     - Run the script.
 
 # Tools

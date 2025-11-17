@@ -1,3 +1,3 @@
 #!/bin/bash
 
-PYTHONPATH=$(pwd) python src/main.py "$@"
+PYTHONPATH=$(pwd) python -m src.scraper.main "$@"

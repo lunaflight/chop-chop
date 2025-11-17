@@ -45,7 +45,7 @@ while ($true) {
 		
 		try {
 			$output = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-			$output = python -m src.main <<< $url
+			$output = python -m src.scraper.main <<< $url
 			
 			# Copy to clipboard
 			Write-Host "Output:" -ForegroundColor Yellow
