@@ -9,6 +9,10 @@ class T:
     info: str | None
 
 
+def get_level(t: T) -> rule_level.T:
+    return t.level
+
+
 def ok() -> T:
     return T(level=rule_level.T.OK, info=None)
 

@@ -5,6 +5,7 @@ It runs a set of rules on the JSON files and catches mistakes to the best of
 its ability. It does not guarantee that the JSON file is perfect.
 
 ## Flags
-<!-- TODO: Support showing errors above a certain level only -->
 <!-- TODO: Think about how to suppress errors -->
-None at the moment.
+| Flag | Description |
+|------|-------------|
+| `--rule-level` | Set the minimum severity level for rules to be displayed. Choices: `all`, `suggestion`, `warning`, `error`. Default: `suggestion`. Shows rules greater than or equal to the specified level. |
