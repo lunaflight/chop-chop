@@ -24,6 +24,9 @@ relative path issues:
 
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
+
+4. `chmod +x scripts/*.sh`
+    - This ensures that the scripts are executable.
 	
 ## Windows
 ### Automatic:

@@ -1,5 +1,5 @@
 # Quick Start
-Run `make` to run the script.
+Run `./scripts/scrape.sh` to run the script.
 
 The following table describes the list of supported platforms and notes on
 how to obtain a URL for the platform.

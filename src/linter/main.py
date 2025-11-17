@@ -13,7 +13,7 @@ def main() -> None:
 
     entries_and_file_names: list[tuple[entry.T, Path]] = []
 
-    for file_path in args.file_paths:
+    for file_path in args.json_file_paths:
         with Path(file_path).open(encoding="utf-8") as json_file:
             entry_ = entry.create_from_json_exn(json_file.read())
             entries_and_file_names.append((entry_, Path(file_path)))
