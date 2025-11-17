@@ -9,6 +9,7 @@ class T(TypedDict):
     trieId: str
     sense: str
     etyNotes: str
+    usage: str
     category: list[str]
 
 
@@ -23,6 +24,7 @@ def create_exn(dict_: dict[str, Any]) -> T:
         trieId=dict_["trieId"],
         sense=dict_["sense"],
         etyNotes=dict_["etyNotes"],
+        usage=dict_["usage"],
         category=dict_["category"],
     )
 
@@ -33,6 +35,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "trieId": "test word",
         "sense": "0",
         "etyNotes": "Etymology notes.",
+        "usage": "Usage notes.",
         "category": [],
     }
     default_data.update(kwargs)
@@ -44,7 +47,5 @@ def create_from_json_exn(json_data: str) -> T:
     return create_exn(json_dict)
 
 
-# The below function only shallowly checks string types, i.e. arr[str] does
-# not count, even though it should.
-def all_strings(t: T) -> list[str]:
-    return [value for key, value in t.items() if isinstance(value, str)]
+def self_written_sentences(t: T) -> list[str]:
+    return [t["etyNotes"], t["usage"]]

@@ -7,7 +7,7 @@ HASH_BRACE_CAPTURE = r"#\{(.*?)\}"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    sentences = entry.all_strings(entry_)
+    sentences = entry.self_written_sentences(entry_)
 
     for sentence in sentences:
         contents = re.findall(HASH_BRACE_CAPTURE, sentence)

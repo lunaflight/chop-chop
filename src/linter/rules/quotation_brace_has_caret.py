@@ -8,7 +8,7 @@ MALFORMED_QUOTATION_BRACE_REGEX = rf"(?<![{escaped_chars}])\{{(\d+)\}}"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    sentences = entry.all_strings(entry_)
+    sentences = entry.self_written_sentences(entry_)
 
     for sentence in sentences:
         match = re.search(MALFORMED_QUOTATION_BRACE_REGEX, sentence)

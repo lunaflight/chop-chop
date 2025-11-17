@@ -69,3 +69,11 @@ def test_bad_content_in_multiple() -> None:
         lint_and_get_result(entry_),
         """ERROR: Found "unknown word", hash braces only accept [likely, poss, dubious, warn]""",
     )
+
+
+def test_detected_in_usage_notes() -> None:
+    entry_ = entry.create_for_testing(usage="#{unknown word}")
+    assert_expected_inline(
+        lint_and_get_result(entry_),
+        """ERROR: Found "unknown word", hash braces only accept [likely, poss, dubious, warn]""",
+    )
