@@ -1,5 +1,6 @@
 .PHONY: \
 	all \
+	lint \
 	main \
 	check \
 	ci-check \
@@ -8,6 +9,9 @@
 	fmt
 
 all: main
+
+lint:
+	@PYTHONPATH=$(shell pwd) python -m src.linter.main $(args)
 
 main:
 	@PYTHONPATH=$(shell pwd) python src/main.py $(args)
