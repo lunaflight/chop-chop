@@ -40,3 +40,9 @@ def create_for_testing(**kwargs: str) -> T:
 def create_from_json_exn(json_data: str) -> T:
     json_dict = json.loads(json_data)
     return create_exn(json_dict)
+
+
+# The below function only shallowly checks string types, i.e. arr[str] does
+# not count, even though it should.
+def all_strings(t: T) -> list[str]:
+    return [value for key, value in t.items() if isinstance(value, str)]

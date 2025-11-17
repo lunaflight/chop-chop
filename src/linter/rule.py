@@ -1,10 +1,11 @@
 from enum import Enum, auto
 
 from src.linter import entry, rule_result
-from src.linter.rules import sense_is_int
+from src.linter.rules import hash_brace_contents, sense_is_int
 
 
 class T(Enum):
+    HASH_BRACE_CONTENTS = auto()
     SENSE_IS_INT = auto()
 
 
@@ -17,5 +18,7 @@ ALL: list[T] = list(T)
 
 def lint(t: T, entry: entry.T) -> rule_result.T:
     match t:
+        case T.HASH_BRACE_CONTENTS:
+            return hash_brace_contents.lint(entry)
         case T.SENSE_IS_INT:
             return sense_is_int.lint(entry)
