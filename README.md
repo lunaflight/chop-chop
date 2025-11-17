@@ -56,4 +56,5 @@ See its [README](docs/scraper/README.md) for more details.
 
 ## Linter
 This tool runs some rules against JSON files to check for mistakes automatically.
+
 See its [README](docs/linter/README.md) for more details.
