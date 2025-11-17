@@ -3,7 +3,8 @@ from enum import Enum, auto
 
 from bs4 import BeautifulSoup
 
-from src.scraper import assertation, invision, reddit, xenforo
+from src.scraper import assertation
+from src.scraper.platforms import invision, reddit, xenforo
 
 
 class SiteName(Enum):
