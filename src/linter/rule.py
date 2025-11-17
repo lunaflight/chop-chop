@@ -5,6 +5,7 @@ from src.linter.rules import (
     hash_brace_contents,
     head_word_hash_number,
     sense_is_int,
+    sense_should_agree_with_trieId,
 )
 
 
@@ -12,6 +13,7 @@ class T(Enum):
     HASH_BRACE_CONTENTS = auto()
     HEAD_WORD_HASH_NUMBER = auto()
     SENSE_IS_INT = auto()
+    SENSE_SHOULD_AGREE_WITH_TRIEID = auto()
 
 
 def to_string(t: T) -> str:
@@ -29,3 +31,5 @@ def lint(t: T, entry: entry.T) -> rule_result.T:
             return head_word_hash_number.lint(entry)
         case T.SENSE_IS_INT:
             return sense_is_int.lint(entry)
+        case T.SENSE_SHOULD_AGREE_WITH_TRIEID:
+            return sense_should_agree_with_trieId.lint(entry)
