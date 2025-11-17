@@ -1,17 +1,16 @@
 import re
 
 from src.linter import entry, rule_result
+from src.linter.json_specs import CERTAINTY_LEVELS
 
 HASH_BRACE_CAPTURE = r"#\{(.*?)\}"
-
-POSSIBLE_CONTENTS = ["likely", "poss", "dubious", "warn"]
 
 
 def lint(entry_: entry.T) -> rule_result.T:
     def error_finding(finding: str) -> rule_result.T:
         return rule_result.error(
             f'Found "{finding}", hash braces only accept '
-            f"[{', '.join(POSSIBLE_CONTENTS)}]"
+            f"[{', '.join(CERTAINTY_LEVELS)}]"
         )
 
     sentences = entry.all_strings(entry_)
@@ -19,7 +18,7 @@ def lint(entry_: entry.T) -> rule_result.T:
     for sentence in sentences:
         contents = re.findall(HASH_BRACE_CAPTURE, sentence)
         for content in contents:
-            if content not in POSSIBLE_CONTENTS:
+            if content not in CERTAINTY_LEVELS:
                 return error_finding(content)
 
     return rule_result.ok()
