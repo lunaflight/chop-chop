@@ -1,36 +1,31 @@
 from dataclasses import dataclass
-from enum import Enum, auto
 
-
-class Level(Enum):
-    OK = auto()
-    SUGGESTION = auto()
-    WARNING = auto()
-    ERROR = auto()
+from src.linter import rule_level
 
 
 @dataclass
 class T:
-    level: Level
+    level: rule_level.T
     info: str | None
 
 
 def ok() -> T:
-    return T(level=Level.OK, info=None)
+    return T(level=rule_level.T.OK, info=None)
 
 
 def suggestion(info: str) -> T:
-    return T(level=Level.SUGGESTION, info=info)
+    return T(level=rule_level.T.SUGGESTION, info=info)
 
 
 def warning(info: str) -> T:
-    return T(level=Level.WARNING, info=info)
+    return T(level=rule_level.T.WARNING, info=info)
 
 
 def error(info: str) -> T:
-    return T(level=Level.ERROR, info=info)
+    return T(level=rule_level.T.ERROR, info=info)
 
 
 def to_string(t: T) -> str:
     colon_info = "" if t.info is None else f": {t.info}"
-    return f"{t.level.name}{colon_info}"
+    rule_level_str = rule_level.to_string(t.level)
+    return f"{rule_level_str}{colon_info}"
