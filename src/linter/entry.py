@@ -1,12 +1,15 @@
 import json
-from typing import Any, TypedDict
+from dataclasses import dataclass
+from typing import Any, TypeAlias, TypedDict
 
 
+@dataclass
 class Attestation(TypedDict):
     eg: str
     src: str | None
 
 
+@dataclass
 class DefinitionEntry(TypedDict):
     definition: str
     example: list[Attestation] | None
@@ -14,9 +17,10 @@ class DefinitionEntry(TypedDict):
     antonyms: list[str] | None
 
 
-PartOfSpeech = list[DefinitionEntry]
+PartOfSpeech: TypeAlias = list[DefinitionEntry]
 
 
+@dataclass
 class T(TypedDict):
     word: str
     trieId: str
