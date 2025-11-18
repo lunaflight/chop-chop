@@ -4,29 +4,27 @@ from typing import Any, TypedDict
 
 class Attestation(TypedDict):
     eg: str
-    src: str
+    src: str | None
 
 
 class DefinitionEntry(TypedDict):
     definition: str
-    example: list[Attestation]
-    synonyms: list[str]
-    antonyms: list[str]
+    example: list[Attestation] | None
+    synonyms: list[str] | None
+    antonyms: list[str] | None
 
 
 PartOfSpeech = list[DefinitionEntry]
 
 
-# TODO: These fields may be empty -- this is well-defined behaviour and
-# should be supported
 class T(TypedDict):
     word: str
     trieId: str
     sense: str
-    etyNotes: str
+    etyNotes: str | None
     meanings: dict[str, PartOfSpeech]
-    usage: str
-    category: list[str]
+    usage: str | None
+    category: list[str] | None
 
 
 def create_exn(dict_: dict[str, Any]) -> T:
@@ -66,4 +64,16 @@ def create_from_json_exn(json_data: str) -> T:
 
 
 def self_written_sentences(t: T) -> list[str]:
-    return [t["etyNotes"], t["usage"]]
+    self_written_sentences = []
+
+    if t["etyNotes"] is not None:
+        self_written_sentences.append(t["etyNotes"])
+    if t["usage"] is not None:
+        self_written_sentences.append(t["usage"])
+    for part_of_speech in t["meanings"].values():
+        self_written_sentences.extend(
+            definition_entry["definition"]
+            for definition_entry in part_of_speech
+        )
+
+    return self_written_sentences
