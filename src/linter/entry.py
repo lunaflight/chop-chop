@@ -2,6 +2,21 @@ import json
 from typing import Any, TypedDict
 
 
+class Attestation(TypedDict):
+    eg: str
+    src: str
+
+
+class DefinitionEntry(TypedDict):
+    definition: str
+    example: list[Attestation]
+    synonyms: list[str]
+    antonyms: list[str]
+
+
+PartOfSpeech = list[DefinitionEntry]
+
+
 # TODO: These fields may be empty -- this is well-defined behaviour and
 # should be supported
 class T(TypedDict):
@@ -9,6 +24,7 @@ class T(TypedDict):
     trieId: str
     sense: str
     etyNotes: str
+    meanings: dict[str, PartOfSpeech]
     usage: str
     category: list[str]
 
@@ -24,6 +40,7 @@ def create_exn(dict_: dict[str, Any]) -> T:
         trieId=dict_["trieId"],
         sense=dict_["sense"],
         etyNotes=dict_["etyNotes"],
+        meanings=dict_["meanings"],
         usage=dict_["usage"],
         category=dict_["category"],
     )
@@ -35,6 +52,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "trieId": "test word",
         "sense": "0",
         "etyNotes": "Etymology notes.",
+        "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
         "category": [],
     }

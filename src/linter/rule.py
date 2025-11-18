@@ -4,6 +4,7 @@ from src.linter import entry, rule_result
 from src.linter.rules import (
     hash_brace_contents,
     head_word_hash_number,
+    no_repeat_definitions,
     quotation_brace_has_caret,
     sense_is_int,
     sense_should_agree_with_trieId,
@@ -13,6 +14,7 @@ from src.linter.rules import (
 class T(Enum):
     HASH_BRACE_CONTENTS = auto()
     HEAD_WORD_HASH_NUMBER = auto()
+    NO_REPEAT_DEFINITIONS = auto()
     SENSE_IS_INT = auto()
     SENSE_SHOULD_AGREE_WITH_TRIEID = auto()
     QUOTATION_BRACE_HAS_CARET = auto()
@@ -31,6 +33,8 @@ def lint(t: T, entry: entry.T) -> rule_result.T:
             return hash_brace_contents.lint(entry)
         case T.HEAD_WORD_HASH_NUMBER:
             return head_word_hash_number.lint(entry)
+        case T.NO_REPEAT_DEFINITIONS:
+            return no_repeat_definitions.lint(entry)
         case T.QUOTATION_BRACE_HAS_CARET:
             return quotation_brace_has_caret.lint(entry)
         case T.SENSE_IS_INT:
