@@ -20,16 +20,16 @@ class LintResult(TypedDict):
     has_error: bool
 
 
-# TODO: Make [entries_and_file_names] not take a Path so this can be tested
-def lint_against_all_rules(
+def lint(
     entries_and_file_names: list[tuple[entry.T, Path]],
     minimum_rule_level: rule_level.T,
     trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None,
+    rules: list[rule.T],
 ) -> LintResult:
     output_strings: list[str] = []
     has_error = False
 
-    for (entry_, file_path), rule_ in product(entries_and_file_names, rule.ALL):
+    for (entry_, file_path), rule_ in product(entries_and_file_names, rules):
         trieId = entry_["trieId"]
         if (
             trieId_ignored_rule_codes_map is not None
@@ -68,12 +68,13 @@ def main() -> None:
             print(f"    {rule.description(rule_)}")  # noqa: T201
         sys.exit(0)
 
-    lint_result = lint_against_all_rules(
+    lint_result = lint(
         entries_and_file_names=parse_result["entries_and_file_names"],
         minimum_rule_level=parse_result["minimum_rule_level"],
         trieId_ignored_rule_codes_map=parse_result[
             "trieId_ignored_rule_codes_map"
         ],
+        rules=rule.ALL,
     )
     for output in lint_result["output_strings"]:
         print(output)  # noqa: T201
