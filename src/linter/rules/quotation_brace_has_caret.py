@@ -4,7 +4,10 @@ from src.linter import entry, rule_result
 
 
 def description() -> str:
-    return "Definitions should not be repeated in the same part of speech."
+    return (
+        "Braces linking to references like ^{1} must be preceded by the"
+        "caret (^)."
+    )
 
 
 OKAY_IF_AFTER_CHARACTERS = [" ", "@", "^"]
