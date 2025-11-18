@@ -25,7 +25,11 @@ has_error:
     {lint_result["has_error"]}"""
 
 
-FAKE_PATH_FOR_PRINTING = Path("fake/path/to/word.json")
+# Adding [/]s to the path will make the Windows CI fail since both platforms
+# expect something different: Linux wants /; Windows wants \\. The [expecttest]
+# setup will then need to be reconsidered.
+# Since this is not an important detail, a simple filename will suffice.
+FAKE_PATH_FOR_PRINTING = Path("word.json")
 FIXED_TRIE_ID = "fixed trieId"
 FIXED_SECOND_TRIE_ID = "fixed second trieId"
 
@@ -68,7 +72,7 @@ def test_bad_entry_returns_error() -> None:
         lint_result_str,
         """\
 output:
-    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "fake/path/to/word.json")']
+    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "word.json")']
 has_error:
     True""",
     )
@@ -109,7 +113,7 @@ def test_ignoring_unrelated_details_for_bad_entry() -> None:
         lint_result_str,
         """\
 output:
-    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "fake/path/to/word.json")']
+    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "word.json")']
 has_error:
     True""",
     )
