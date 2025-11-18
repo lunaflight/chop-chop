@@ -28,6 +28,22 @@ def to_code(t: T) -> str:
     return t.value
 
 
+def description(t: T) -> str:
+    match t:
+        case T.HASH_BRACE_CONTENTS:
+            return hash_brace_contents.description()
+        case T.HEAD_WORD_HASH_NUMBER:
+            return head_word_hash_number.description()
+        case T.NO_REPEAT_DEFINITIONS:
+            return no_repeat_definitions.description()
+        case T.QUOTATION_BRACE_HAS_CARET:
+            return quotation_brace_has_caret.description()
+        case T.SENSE_IS_INT:
+            return sense_is_int.description()
+        case T.SENSE_SHOULD_AGREE_WITH_TRIEID:
+            return sense_should_agree_with_trieId.description()
+
+
 ALL: list[T] = list(T)
 
 

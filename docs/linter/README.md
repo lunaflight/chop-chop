@@ -9,3 +9,4 @@ its ability. It does not guarantee that the JSON file is perfect.
 | Flag | Description |
 |------|-------------|
 | `--rule-level` | Set the minimum severity level for rules to be displayed. Choices: `all`, `suggestion`, `warning`, `error`. Default: `suggestion`. Shows rules greater than or equal to the specified level. |
+| `--list` | List all the linter rules with their codes and descriptions. |

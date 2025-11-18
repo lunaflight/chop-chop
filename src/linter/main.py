@@ -53,7 +53,7 @@ def lint_against_all_rules(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "json_file_paths", nargs="+", type=str, help="Paths to the JSON files"
+        "json_file_paths", nargs="*", type=str, help="Paths to the JSON files"
     )
     parser.add_argument(
         "--rule-level",
@@ -65,7 +65,22 @@ def main() -> None:
             "in terms of severity"
         ),
     )
+    parser.add_argument(
+        "--list", action="store_true", help="List all rules and descriptions"
+    )
+
     args = parser.parse_args()
+
+    if not args.list and not args.json_file_paths:
+        print(  # noqa: T201
+            (
+                "Error: When --list is not provided, "
+                "at least one JSON file path is required."
+            ),
+            file=sys.stderr,
+        )
+        parser.print_usage(file=sys.stderr)
+        sys.exit(1)
 
     rule_level_map = {
         "all": rule_level.T.OK,
@@ -74,6 +89,11 @@ def main() -> None:
         "error": rule_level.T.ERROR,
     }
     minimum_rule_level = rule_level_map[args.rule_level]
+
+    if args.list:
+        for rule_ in rule.ALL:
+            print(f"{rule.to_string(rule_)}[{rule.to_code(rule_)}]")  # noqa: T201
+            print(f"    {rule.description(rule_)}")  # noqa: T201
 
     entries_and_file_names = get_entries_and_file_names(
         [Path(file_path) for file_path in args.json_file_paths]

@@ -1,6 +1,10 @@
 from src.linter import entry, rule_result
 
 
+def description() -> str:
+    return "Definitions should not be repeated in the same part of speech."
+
+
 def lint(entry_: entry.T) -> rule_result.T:
     for part_of_speech in entry_["meanings"].values():
         seen_definitions: set[str] = set()

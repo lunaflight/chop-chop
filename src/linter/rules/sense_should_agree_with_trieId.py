@@ -2,6 +2,11 @@ import re
 
 from src.linter import entry, rule_result
 
+
+def description() -> str:
+    return "Sense and trieId should match."
+
+
 POST_HASH_REGEX = r"#(.*)"
 
 

@@ -3,14 +3,19 @@ import re
 from src.linter import entry, rule_result
 from src.linter.json_specs import CERTAINTY_LEVELS
 
-HASH_BRACE_CAPTURE = r"#\{(.*?)\}"
+
+def description() -> str:
+    return "The contents of #{} should spelled correctly."
+
+
+HASH_BRACE_CAPTURE_REGEX = r"#\{(.*?)\}"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
     sentences = entry.self_written_sentences(entry_)
 
     for sentence in sentences:
-        contents = re.findall(HASH_BRACE_CAPTURE, sentence)
+        contents = re.findall(HASH_BRACE_CAPTURE_REGEX, sentence)
         for content in contents:
             if content not in CERTAINTY_LEVELS:
                 return rule_result.error(

@@ -1,6 +1,10 @@
 from src.linter import entry, rule_result
 
 
+def description() -> str:
+    return "Senses should be a non-negative integer."
+
+
 def lint(entry_: entry.T) -> rule_result.T:
     sense = entry_["sense"]
 

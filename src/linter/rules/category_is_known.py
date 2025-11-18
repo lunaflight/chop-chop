@@ -2,6 +2,10 @@ from src.linter import entry, rule_result
 from src.linter.json_specs import CATEGORIES
 
 
+def description() -> str:
+    return "The categories should be spelled correctly."
+
+
 def lint(entry_: entry.T) -> rule_result.T:
     categories = entry_["category"]
 

@@ -2,6 +2,11 @@ import re
 
 from src.linter import entry, rule_result
 
+
+def description() -> str:
+    return "The head word should not have a #."
+
+
 REGEX = r".*(#[0-9]*)"
 
 

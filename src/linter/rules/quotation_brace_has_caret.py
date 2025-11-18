@@ -2,6 +2,11 @@ import re
 
 from src.linter import entry, rule_result
 
+
+def description() -> str:
+    return "Definitions should not be repeated in the same part of speech."
+
+
 OKAY_IF_AFTER_CHARACTERS = [" ", "@", "^"]
 escaped_chars = "".join(re.escape(char) for char in OKAY_IF_AFTER_CHARACTERS)
 MALFORMED_QUOTATION_BRACE_REGEX = rf"(?<![{escaped_chars}])\{{(\d+)\}}"
