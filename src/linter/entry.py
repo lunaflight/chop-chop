@@ -32,19 +32,14 @@ class T(TypedDict):
 
 
 def create_exn(dict_: dict[str, Any]) -> T:
-    for field in T.__annotations__:
-        if field not in dict_:
-            msg = f"Missing field in JSON data: '{field}'"
-            raise KeyError(msg)
-
     return T(
         word=dict_["word"],
         trieId=dict_["trieId"],
         sense=dict_["sense"],
-        etyNotes=dict_["etyNotes"],
+        etyNotes=dict_.get("etyNotes"),
         meanings=dict_["meanings"],
-        usage=dict_["usage"],
-        category=dict_["category"],
+        usage=dict_.get("usage"),
+        category=dict_.get("category"),
     )
 
 
