@@ -28,6 +28,15 @@ def to_code(t: T) -> str:
     return t.value
 
 
+def of_code(code: str) -> T:
+    for member in T:
+        if member.value.lower() == code.lower():
+            return member
+
+    msg = f"'{code}' is not a valid code for enum T."
+    raise ValueError(msg)
+
+
 def description(t: T) -> str:
     match t:
         case T.HASH_BRACE_CONTENTS:
