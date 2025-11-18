@@ -11,7 +11,7 @@ REGEX = r".*(#[0-9]*)"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    word = entry_["word"]
+    word = entry_.word
 
     match = re.search(REGEX, word)
     if match:

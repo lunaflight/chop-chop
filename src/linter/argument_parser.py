@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import TypedDict
 
 import yaml
+from pydantic import ValidationError
 
 from src.linter import entry, rule, rule_level
 
@@ -23,6 +24,7 @@ class LintEntries(TypedDict):
     entries_and_file_names: list[tuple[entry.T, Path]]
     minimum_rule_level: rule_level.T
     trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None
+    unparseable_jsons: list[tuple[ValidationError, Path]]
 
 
 def parse_arguments() -> Error | ListAllRules | LintEntries:
@@ -65,11 +67,16 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
 
     json_file_paths = [Path(file_path) for file_path in args.json_file_paths]
     entries_and_file_names: list[tuple[entry.T, Path]] = []
+    unparseable_jsons: list[tuple[ValidationError, Path]] = []
 
     for file_path in json_file_paths:
+        path = Path(file_path)
         with file_path.open(encoding="utf-8") as json_file:
-            entry_ = entry.create_from_json_exn(json_file.read())
-            entries_and_file_names.append((entry_, Path(file_path)))
+            entry_ = entry.create_from_json(json_file.read())
+            if isinstance(entry_, ValidationError):
+                unparseable_jsons.append((entry_, path))
+            else:
+                entries_and_file_names.append((entry_, path))
 
     rule_level_map = {
         "all": rule_level.T.OK,
@@ -94,4 +101,5 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
         entries_and_file_names=entries_and_file_names,
         minimum_rule_level=minimum_rule_level,
         trieId_ignored_rule_codes_map=trieId_ignored_rule_codes_map,
+        unparseable_jsons=unparseable_jsons,
     )

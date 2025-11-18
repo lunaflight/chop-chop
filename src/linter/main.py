@@ -30,7 +30,7 @@ def lint(
     has_error = False
 
     for (entry_, file_path), rule_ in product(entries_and_file_names, rules):
-        trieId = entry_["trieId"]
+        trieId = entry_.trieId
         if (
             trieId_ignored_rule_codes_map is not None
             and trieId in trieId_ignored_rule_codes_map
@@ -68,6 +68,11 @@ def main() -> None:
             print(f"    {rule.description(rule_)}")  # noqa: T201
         sys.exit(0)
 
+    # TODO: It might be nicer to handle this as a first-class [rule.T]?
+    for validation_error, path in parse_result["unparseable_jsons"]:
+        print(f"Could not parse file: {path}", file=sys.stderr)  # noqa: T201
+        print(validation_error, file=sys.stderr)  # noqa: T201
+
     lint_result = lint(
         entries_and_file_names=parse_result["entries_and_file_names"],
         minimum_rule_level=parse_result["minimum_rule_level"],
@@ -76,10 +81,14 @@ def main() -> None:
         ],
         rules=rule.ALL,
     )
+
     for output in lint_result["output_strings"]:
         print(output)  # noqa: T201
 
-    sys.exit(1 if lint_result["has_error"] else 0)
+    has_error = (
+        lint_result["has_error"] or len(parse_result["unparseable_jsons"]) > 0
+    )
+    sys.exit(1 if has_error else 0)
 
 
 if __name__ == "__main__":

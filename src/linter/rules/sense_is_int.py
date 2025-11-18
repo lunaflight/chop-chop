@@ -6,7 +6,7 @@ def description() -> str:
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    sense = entry_["sense"]
+    sense = entry_.sense
 
     def error_expecting(expectation: str) -> rule_result.T:
         return rule_result.error(f'Found "{sense}", expecting {expectation}')

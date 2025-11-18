@@ -1,46 +1,39 @@
 import json
-from dataclasses import dataclass
-from typing import Any, TypeAlias, TypedDict
+from typing import Any, TypeAlias
+
+from pydantic import BaseModel, ValidationError
 
 
-@dataclass
-class Attestation(TypedDict):
+class Attestation(BaseModel):
     eg: str
-    src: str | None
+    src: str | None = None
 
 
-@dataclass
-class DefinitionEntry(TypedDict):
+class DefinitionEntry(BaseModel):
     definition: str
-    example: list[Attestation] | None
-    synonyms: list[str] | None
-    antonyms: list[str] | None
+    example: list[Attestation] | None = None
+    synonyms: list[str] | None = None
+    antonyms: list[str] | None = None
 
 
 PartOfSpeech: TypeAlias = list[DefinitionEntry]
 
 
-@dataclass
-class T(TypedDict):
+class T(BaseModel):
     word: str
     trieId: str
     sense: str
-    etyNotes: str | None
+    etyNotes: str | None = None
     meanings: dict[str, PartOfSpeech]
-    usage: str | None
-    category: list[str] | None
+    usage: str | None = None
+    category: list[str] | None = None
 
 
-def create_exn(dict_: dict[str, Any]) -> T:
-    return T(
-        word=dict_["word"],
-        trieId=dict_["trieId"],
-        sense=dict_["sense"],
-        etyNotes=dict_.get("etyNotes"),
-        meanings=dict_["meanings"],
-        usage=dict_.get("usage"),
-        category=dict_.get("category"),
-    )
+def create(dict_: dict[str, Any]) -> T | ValidationError:
+    try:
+        return T(**dict_)
+    except ValidationError as e:
+        return e
 
 
 def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
@@ -54,25 +47,28 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "category": [],
     }
     default_data.update(kwargs)
-    return create_exn(default_data)
+    t = create(default_data)
+    if isinstance(t, ValidationError):
+        raise t
+
+    return t
 
 
-def create_from_json_exn(json_data: str) -> T:
+def create_from_json(json_data: str) -> T | ValidationError:
     json_dict = json.loads(json_data)
-    return create_exn(json_dict)
+    return create(json_dict)
 
 
 def self_written_sentences(t: T) -> list[str]:
     self_written_sentences = []
 
-    if t["etyNotes"] is not None:
-        self_written_sentences.append(t["etyNotes"])
-    if t["usage"] is not None:
-        self_written_sentences.append(t["usage"])
-    for part_of_speech in t["meanings"].values():
+    if t.etyNotes is not None:
+        self_written_sentences.append(t.etyNotes)
+    if t.usage is not None:
+        self_written_sentences.append(t.usage)
+    for part_of_speech in t.meanings.values():
         self_written_sentences.extend(
-            definition_entry["definition"]
-            for definition_entry in part_of_speech
+            definition_entry.definition for definition_entry in part_of_speech
         )
 
     return self_written_sentences

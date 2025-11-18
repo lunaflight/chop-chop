@@ -11,8 +11,8 @@ POST_HASH_REGEX = r"#(.*)"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    sense = entry_["sense"]
-    trieId = entry_["trieId"]
+    sense = entry_.sense
+    trieId = entry_.trieId
 
     if sense == "0":
         return rule_result.ok()
