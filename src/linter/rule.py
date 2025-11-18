@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum
 
 from src.linter import entry, rule_result
 from src.linter.rules import (
@@ -12,16 +12,20 @@ from src.linter.rules import (
 
 
 class T(Enum):
-    HASH_BRACE_CONTENTS = auto()
-    HEAD_WORD_HASH_NUMBER = auto()
-    NO_REPEAT_DEFINITIONS = auto()
-    SENSE_IS_INT = auto()
-    SENSE_SHOULD_AGREE_WITH_TRIEID = auto()
-    QUOTATION_BRACE_HAS_CARET = auto()
+    HASH_BRACE_CONTENTS = "HBC"
+    HEAD_WORD_HASH_NUMBER = "HWH"
+    NO_REPEAT_DEFINITIONS = "NRD"
+    SENSE_IS_INT = "SII"
+    SENSE_SHOULD_AGREE_WITH_TRIEID = "SSA"
+    QUOTATION_BRACE_HAS_CARET = "QBH"
 
 
 def to_string(t: T) -> str:
     return t.name.lower().replace("_", " ")
+
+
+def to_code(t: T) -> str:
+    return t.value
 
 
 ALL: list[T] = list(T)

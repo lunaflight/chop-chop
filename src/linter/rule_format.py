@@ -8,4 +8,8 @@ def for_stdout(
 ) -> str:
     rule_result_str = rule_result.to_string(rule_result_)
     rule_str = rule.to_string(rule_)
-    return f"{rule_result_str} (rule[{rule_str}] in file[{file_path}])"
+    rule_code = rule.to_code(rule_)
+    return (
+        f'{rule_result_str} (rule "{rule_str}" '
+        f'[{rule_code}] in file "{file_path}")'
+    )
