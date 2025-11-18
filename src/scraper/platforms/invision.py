@@ -100,16 +100,16 @@ class T:
         )
 
     def username(self) -> str:
-        return (
-            narrow_soup_to_comment_id(
-                # type: ignore[union-attr]
-                soup=self.soup,
-                comment_id=self.comment_id,
-            )
-            .find("h3", class_="cAuthorPane_author")
-            .find("a")
-            .text
-        )
+        h3_tag = narrow_soup_to_comment_id(  # type: ignore[union-attr]
+            soup=self.soup,
+            comment_id=self.comment_id,
+        ).find("h3", class_="cAuthorPane_author")
+
+        maybe_nested_a_tag = h3_tag.find("a")  # type: ignore[union-attr]
+
+        if maybe_nested_a_tag is not None:
+            return maybe_nested_a_tag.get_text(strip=True)  # type: ignore[union-attr]
+        return h3_tag.get_text(strip=True)  # type: ignore[union-attr]
 
     def credit(self) -> str:
         return citation_format.online_with_title(
