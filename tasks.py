@@ -47,6 +47,12 @@ def check(
 
 @task
 def fix(c: Context) -> None:
+    _ruff_check(c, fix=True)
+    fmt(c)
+
+
+@task
+def fix_all(c: Context) -> None:
     _pytest(c, fix=True)
     _ruff_check(c, fix=True)
     fmt(c)
