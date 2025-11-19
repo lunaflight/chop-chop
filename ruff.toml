@@ -39,4 +39,5 @@ ignore-names = [
 "*etyType*",
 "*etyScript*",
 "*etyPath*",
+"*exampleSource*",
 ]

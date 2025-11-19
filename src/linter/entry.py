@@ -32,6 +32,14 @@ class EtymologyEntry(BaseModel):
     etyLit: list[str]
 
 
+class ParticleEntry(BaseModel):
+    particle: str
+    effect: str
+    meaning: str
+    example: str | None = None
+    exampleSource: str | None = None
+
+
 PartOfSpeech: TypeAlias = list[DefinitionEntry]
 
 
@@ -44,6 +52,7 @@ class T(BaseModel):
     origLink: list[str] | None = None
     meanings: dict[str, PartOfSpeech]
     usage: str | None = None
+    particles: list[ParticleEntry] | None = None
     related: list[str] | None = None
     category: list[str] | None = None
     references: list[ReferenceEntry] | None = None
@@ -73,12 +82,21 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "origLink": [],
         "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
+        "particles": [
+            {
+                "particle": "lah",
+                "effect": "reassurance",
+                "meaning": "noun definition with nuance",
+            }
+        ],
         "related": ["word", "another word"],
         "category": ["locations"],
-        "references": [{
-            "name": "1970 Jan 1, Name. Reddit, \"Title\"",
-            "url": "https://www.reddit.com"
-            }],
+        "references": [
+            {
+                "name": '1970 Jan 1, Name. Reddit, "Title"',
+                "url": "https://www.reddit.com",
+            }
+        ],
         "credits": ["Name for the suggestion."],
     }
     default_data.update(kwargs)
