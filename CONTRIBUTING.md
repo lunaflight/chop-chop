@@ -12,13 +12,17 @@ If you would like to purge the cached HTMLs and try again,
 run `inv check --clear-cache`.
 
 # Formatting / Fixing
-Run `inv fmt` to fix formatting, or `inv fix` to fix ruff check errors.
+Run `inv fix` to fix ruff check errors.
+
+It can take a `--all` flag which accepts tests (see below).
+It can also take a `--unsafe` flag which fixes additional ruff check errors
+that are marked unsafe.
 
 # Accepting Tests
 This repository uses [expecttest](https://github.com/pytorch/expecttest), which
 inlines the expected output in the file.
 
-If there is a failing test, run `inv fix-all` to change the inlined
+If there is a failing test, run `inv fix --all` to change the inlined
 output to make it pass.
 
 # Adding new packages

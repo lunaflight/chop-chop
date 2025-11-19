@@ -15,10 +15,17 @@ def _pytest(c: Context, *, fix: bool) -> None:
     _run(c, cmd)
 
 
-def _ruff_check(c: Context, *, fix: bool, for_github: bool = False) -> None:
+def _ruff_check(
+    c: Context,
+    *,
+    fix: bool,
+    include_unsafe_fixes: bool = False,
+    for_github: bool = False,
+) -> None:
     fix_flag = "--fix" if fix else "--no-fix"
+    unsafe_flag = "--unsafe-fixes" if include_unsafe_fixes else ""
     output_flag = f"--output-format={'github' if for_github else 'full'}"
-    cmd = f"ruff check {fix_flag} {output_flag}"
+    cmd = f"ruff check {fix_flag} {unsafe_flag} {output_flag}"
     _run(c, cmd)
 
 
@@ -46,18 +53,9 @@ def check(
 
 
 @task
-def fix(c: Context) -> None:
-    _ruff_check(c, fix=True)
-    fmt(c)
+def fix(c: Context, *, all: bool = False, unsafe: bool = False) -> None:  # noqa: A002
+    if all:
+        _pytest(c, fix=True)
 
-
-@task
-def fix_all(c: Context) -> None:
-    _pytest(c, fix=True)
-    _ruff_check(c, fix=True)
-    fmt(c)
-
-
-@task
-def fmt(c: Context) -> None:
+    _ruff_check(c, fix=True, include_unsafe_fixes=unsafe)
     _ruff_format(c, fix=True)
