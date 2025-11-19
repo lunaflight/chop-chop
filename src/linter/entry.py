@@ -40,7 +40,7 @@ class ParticleEntry(BaseModel):
     exampleSource: str | None = None
 
 
-PartOfSpeech: TypeAlias = list[DefinitionEntry]
+PartOfSpeechEntry: TypeAlias = list[DefinitionEntry]
 
 
 class T(BaseModel):
@@ -50,7 +50,7 @@ class T(BaseModel):
     etyNotes: str | None = None
     origin: list[EtymologyEntry]
     origLink: list[str] | None = None
-    meanings: dict[str, PartOfSpeech]
+    meanings: dict[str, PartOfSpeechEntry]
     usage: str | None = None
     particles: list[ParticleEntry] | None = None
     related: list[str] | None = None
