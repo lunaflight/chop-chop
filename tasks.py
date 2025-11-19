@@ -58,5 +58,10 @@ def fix(c: Context, *, all: bool = False, unsafe: bool = False) -> None:  # noqa
     if all:
         _pytest(c, fix=True)
 
+    # Formatting before may be required to fix line too long things, which will
+    # fail on ruff check.
+    _ruff_format(c, fix=True)
     _ruff_check(c, fix=True, include_unsafe_fixes=unsafe)
+    # Formatting after may be required since ruff check fixes may not conform
+    # to the formatting requirement
     _ruff_format(c, fix=True)
