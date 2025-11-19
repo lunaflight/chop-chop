@@ -11,7 +11,8 @@ def _run(c: Context, cmd: str) -> None:
 def _pytest(c: Context, *, fix: bool) -> None:
     fix_env_var = "EXPECTTEST_ACCEPT=1" if fix else ""
     quiet_flag = "--quiet" if fix else ""
-    cmd = f"{fix_env_var} pytest {quiet_flag}"
+    parallel_flag = "-n auto"
+    cmd = f"{fix_env_var} pytest {parallel_flag} {quiet_flag}"
     _run(c, cmd)
 
 
