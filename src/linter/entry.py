@@ -16,6 +16,22 @@ class DefinitionEntry(BaseModel):
     antonyms: list[str] | None = None
 
 
+class ReferenceEntry(BaseModel):
+    name: str
+    link: str | None = None
+
+
+class EtymologyEntry(BaseModel):
+    etyPath: list[str]
+    etyScheme: list[str] | None = None
+    etyType: list[str] | None = None
+    special: list[str] | None = None
+    etyScript: list[str] | None = None
+    etyTrad: list[str] | None = None
+    etyRoman: list[str]
+    etyLit: list[str]
+
+
 PartOfSpeech: TypeAlias = list[DefinitionEntry]
 
 
@@ -24,9 +40,14 @@ class T(BaseModel):
     trieId: str
     sense: str
     etyNotes: str | None = None
+    origin: list[EtymologyEntry]
+    origLink: list[str] | None = None
     meanings: dict[str, PartOfSpeech]
     usage: str | None = None
+    related: list[str] | None = None
     category: list[str] | None = None
+    references: list[ReferenceEntry] | None = None
+    credits: list[str] | None = None
 
 
 def create(dict_: dict[str, Any]) -> T | ValidationError:
@@ -42,9 +63,20 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "trieId": "test word",
         "sense": "0",
         "etyNotes": "Etymology notes.",
+        "origin": [
+            {
+                "etyPath": ["language"],
+                "etyRoman": ["original word"],
+                "etyLit": ["its meaning"],
+            }
+        ],
+        "origLink": [],
         "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
+        "related": [],
         "category": [],
+        "references": [],
+        "credits": [],
     }
     default_data.update(kwargs)
     t = create(default_data)

@@ -28,4 +28,15 @@ ignore = [
 
 [lint.pep8-naming]
 # names loaned from JSON can violate the rule
-ignore-names = ["*trieId*", "*etyNotes*"]
+ignore-names = [
+"*trieId*",
+"*etyNotes*",
+"*origLink*",
+"*etyLit*",
+"*etyScheme*",
+"*etyRoman*",
+"*etyTrad*",
+"*etyType*",
+"*etyScript*",
+"*etyPath*",
+]
