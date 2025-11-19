@@ -73,10 +73,13 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "origLink": [],
         "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
-        "related": [],
-        "category": [],
-        "references": [],
-        "credits": [],
+        "related": ["word", "another word"],
+        "category": ["locations"],
+        "references": [{
+            "name": "1970 Jan 1, Name. Reddit, \"Title\"",
+            "url": "https://www.reddit.com"
+            }],
+        "credits": ["Name for the suggestion."],
     }
     default_data.update(kwargs)
     t = create(default_data)
