@@ -1,4 +1,5 @@
 import argparse
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict
@@ -22,6 +23,7 @@ class ListAllRules:
 @dataclass
 class LintEntries(TypedDict):
     entries_and_file_names: list[tuple[entry.T, Path]]
+    is_known_word: Callable[[str], bool] | None
     minimum_rule_level: rule_level.T
     trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None
     unparseable_jsons: list[tuple[ValidationError, Path]]
@@ -49,6 +51,11 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
         help="Path to an optional yaml file containing rules to ignore.",
     )
     parser.add_argument(
+        "--known-words",
+        help="Path to a text file containing known words, each on a new line",
+        type=str,
+    )
+    parser.add_argument(
         "--list", action="store_true", help="List all rules and descriptions"
     )
 
@@ -60,7 +67,7 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
     if not args.list and not args.json_file_paths:
         return Error(
             message=(
-                "Error: When --list is not provided, "
+                "When --list is not provided, "
                 "at least one JSON file path is required."
             )
         )
@@ -97,8 +104,17 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
     else:
         trieId_ignored_rule_codes_map = None
 
+    is_known_word: Callable[[str], bool] | None = None
+    if args.known_words:
+        with Path(args.known_words).open(encoding="utf-8") as file:
+            known_words = file.read().splitlines()
+
+        def is_known_word(word: str) -> bool:
+            return word in known_words
+
     return LintEntries(
         entries_and_file_names=entries_and_file_names,
+        is_known_word=is_known_word,
         minimum_rule_level=minimum_rule_level,
         trieId_ignored_rule_codes_map=trieId_ignored_rule_codes_map,
         unparseable_jsons=unparseable_jsons,

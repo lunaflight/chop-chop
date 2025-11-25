@@ -1,3 +1,4 @@
+<!-- TODO: This name is outdated now. -->
 # Credit Formatter
 The aim of this repository is to provide an easy way to credit people online
 for their linguistic attestations.

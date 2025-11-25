@@ -1,4 +1,6 @@
+import logging
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
 from itertools import product
 from pathlib import Path
@@ -13,6 +15,8 @@ from src.linter import (
     rule_result,
 )
 
+LOGGER = logging.getLogger(__name__)
+
 
 @dataclass
 class LintResult(TypedDict):
@@ -22,6 +26,7 @@ class LintResult(TypedDict):
 
 def lint(
     entries_and_file_names: list[tuple[entry.T, Path]],
+    is_known_word: Callable[[str], bool] | None,
     minimum_rule_level: rule_level.T,
     trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None,
     rules: list[rule.T],
@@ -38,7 +43,11 @@ def lint(
         ):
             continue
 
-        rule_result_ = rule.lint(rule_, entry_)
+        rule_result_ = rule.lint(rule_, entry_, is_known_word)
+        if isinstance(rule_result_, rule.LintRunError):
+            LOGGER.error(rule_result_.message)
+            continue
+
         rule_level_ = rule_result.get_level(rule_result_)
 
         is_severe_enough_to_log = rule_level.greater_than_or_equal_to(
@@ -58,8 +67,14 @@ def lint(
 def main() -> None:
     parse_result = argument_parser.parse_arguments()
 
+    # TODO: There is some re-use of logging boilerplate, especially [format].
+    logging.basicConfig(
+        level=logging.WARNING,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+    )
+
     if isinstance(parse_result, argument_parser.Error):
-        print(parse_result, file=sys.stderr)  # noqa: T201
+        LOGGER.error(parse_result.message)
         sys.exit(1)
 
     if isinstance(parse_result, argument_parser.ListAllRules):
@@ -68,13 +83,15 @@ def main() -> None:
             print(f"    {rule.description(rule_)}")  # noqa: T201
         sys.exit(0)
 
-    # TODO: It might be nicer to handle this as a first-class [rule.T]?
     for validation_error, path in parse_result["unparseable_jsons"]:
-        print(f"Could not parse file: {path}", file=sys.stderr)  # noqa: T201
-        print(validation_error, file=sys.stderr)  # noqa: T201
+        LOGGER.error(
+            "Could not parse file -- see validation error. %s",
+            {"path": path, "validation_error": validation_error},
+        )
 
     lint_result = lint(
         entries_and_file_names=parse_result["entries_and_file_names"],
+        is_known_word=parse_result["is_known_word"],
         minimum_rule_level=parse_result["minimum_rule_level"],
         trieId_ignored_rule_codes_map=parse_result[
             "trieId_ignored_rule_codes_map"

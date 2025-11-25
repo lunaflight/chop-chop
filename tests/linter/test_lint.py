@@ -13,6 +13,7 @@ def lint_and_get_result(
 ) -> str:
     lint_result = main.lint(
         entries_and_file_names=entries_and_file_names,
+        is_known_word=None,
         minimum_rule_level=minimum_rule_level,
         trieId_ignored_rule_codes_map=trieId_ignored_rule_codes_map,
         rules=rules,

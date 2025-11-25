@@ -16,8 +16,22 @@ of `trieId: [ rule code to ignore, rule code to ignore ... ]`
 
 An example of a yaml file looks like this:
 
+<!-- TODO: Allow a dummy word "ALL_" which will disable the rule for all words
+-->
 ```yaml
 lah: [ HBC, HWH, NRD, SII ]
 what#3: [ hbc, sii ]
 char siew pau: [ hbc ]
 ```
+
+## Providing a known word list
+You may use the flag `--known-words` with a `.txt` file containing known words
+separated by new lines. When checking if linked words such as in related fields
+as well as inline hyperlinked words with `@{}`, it does a naive 1-for-1
+membership check with the `.txt` file. For example, it naively checks if `what#3`,
+`what` or `lah` exists in the `.txt` file.
+
+This is somewhat of a hack and can be replaced easily with some other better
+method if required, as the code is implemented with a generic
+`Callable[[str], bool]` interface. As long as the function is implemented, it
+will be able to check if something is a known word.
