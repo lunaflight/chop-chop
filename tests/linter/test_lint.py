@@ -37,6 +37,7 @@ has_error:
 FAKE_PATH_FOR_PRINTING = Path("word.json")
 FIXED_TRIE_ID = "fixed trieId"
 FIXED_SECOND_TRIE_ID = "fixed second trieId"
+ALL = ignored_rules_map.ALL_RESERVED_WORD
 
 
 def append_fake_file_names(
@@ -90,6 +91,25 @@ def test_ignoring_rule_for_bad_entry_is_ok() -> None:
         ),
         minimum_rule_level=rule_level.T.OK,
         ignored_rules_dict={FIXED_TRIE_ID: [rule.T.SENSE_IS_INT]},
+        rules=[rule.T.SENSE_IS_INT],
+    )
+    assert_expected_inline(
+        lint_result_str,
+        """\
+output:
+    []
+has_error:
+    False""",
+    )
+
+
+def test_ignoring_all_for_bad_entry_is_ok() -> None:
+    lint_result_str = lint_and_get_result(
+        entries_and_file_names=append_fake_file_names(
+            [entry.create_for_testing(trieId=FIXED_TRIE_ID, sense="non-number")]
+        ),
+        minimum_rule_level=rule_level.T.OK,
+        ignored_rules_dict={ALL: [rule.T.SENSE_IS_INT]},
         rules=[rule.T.SENSE_IS_INT],
     )
     assert_expected_inline(

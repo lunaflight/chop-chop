@@ -16,12 +16,15 @@ of `trieId: [ rule code to ignore, rule code to ignore ... ]`
 
 An example of a yaml file looks like this:
 
-<!-- TODO: Allow a dummy word "ALL_" which will disable the rule for all words
--->
 ```yaml
 lah: [ HBC, HWH, NRD, SII ]
 what#3: [ hbc, sii ]
 char siew pau: [ hbc ]
+```
+
+One may use the reserved word `ALL_` to suppress all rules like this:
+```yaml
+ALL_: [ LWA ]
 ```
 
 ## Providing a known word list
