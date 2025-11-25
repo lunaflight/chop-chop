@@ -4,10 +4,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict
 
-import yaml
 from pydantic import ValidationError
 
-from src.linter import entry, rule, rule_level
+from src.linter import entry, ignored_rules_map, rule_level
 
 
 @dataclass(frozen=True)
@@ -25,7 +24,7 @@ class LintEntries(TypedDict):
     entries_and_file_names: list[tuple[entry.T, Path]]
     is_known_word: Callable[[str], bool] | None
     minimum_rule_level: rule_level.T
-    trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None
+    trieId_ignored_rule_codes_map: ignored_rules_map.T | None
     unparseable_jsons: list[tuple[ValidationError, Path]]
 
 
@@ -94,13 +93,9 @@ def parse_arguments() -> Error | ListAllRules | LintEntries:
     minimum_rule_level = rule_level_map[args.rule_level]
 
     if args.ignore_yaml:
-        with Path(args.ignore_yaml).open(encoding="utf-8") as f:
-            ignored_rules_data = yaml.safe_load(f)
-
-        trieId_ignored_rule_codes_map = {
-            trie_id: [rule.of_code(code) for code in code_list]
-            for trie_id, code_list in ignored_rules_data.items()
-        }
+        trieId_ignored_rule_codes_map = ignored_rules_map.of_yaml(
+            Path(args.ignore_yaml)
+        )
     else:
         trieId_ignored_rule_codes_map = None
 

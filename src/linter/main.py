@@ -9,6 +9,7 @@ from typing import TypedDict
 from src.linter import (
     argument_parser,
     entry,
+    ignored_rules_map,
     rule,
     rule_format,
     rule_level,
@@ -28,7 +29,7 @@ def lint(
     entries_and_file_names: list[tuple[entry.T, Path]],
     is_known_word: Callable[[str], bool] | None,
     minimum_rule_level: rule_level.T,
-    trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None,
+    trieId_ignored_rule_codes_map: ignored_rules_map.T | None,
     rules: list[rule.T],
 ) -> LintResult:
     output_strings: list[str] = []
@@ -38,8 +39,9 @@ def lint(
         trieId = entry_.trieId
         if (
             trieId_ignored_rule_codes_map is not None
-            and trieId in trieId_ignored_rule_codes_map
-            and rule_ in trieId_ignored_rule_codes_map[trieId]
+            and ignored_rules_map.is_ignored(
+                trieId_ignored_rule_codes_map, trieId, rule_
+            )
         ):
             continue
 

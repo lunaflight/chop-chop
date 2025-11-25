@@ -2,20 +2,24 @@ from pathlib import Path
 
 from expecttest import assert_expected_inline
 
-from src.linter import entry, main, rule, rule_level
+from src.linter import entry, ignored_rules_map, main, rule, rule_level
 
 
 def lint_and_get_result(
     entries_and_file_names: list[tuple[entry.T, Path]],
     minimum_rule_level: rule_level.T,
-    trieId_ignored_rule_codes_map: dict[str, list[rule.T]] | None,
+    ignored_rules_dict: dict[str, list[rule.T]] | None,
     rules: list[rule.T],
 ) -> str:
     lint_result = main.lint(
         entries_and_file_names=entries_and_file_names,
         is_known_word=None,
         minimum_rule_level=minimum_rule_level,
-        trieId_ignored_rule_codes_map=trieId_ignored_rule_codes_map,
+        trieId_ignored_rule_codes_map=ignored_rules_map.create_from_dict(
+            ignored_rules_dict
+        )
+        if ignored_rules_dict is not None
+        else None,
         rules=rules,
     )
 
@@ -47,7 +51,7 @@ def test_good_entry_returns_all_ok() -> None:
             [entry.create_for_testing()]
         ),
         minimum_rule_level=rule_level.T.SUGGESTION,
-        trieId_ignored_rule_codes_map={},
+        ignored_rules_dict={},
         rules=rule.ALL,
     )
     assert_expected_inline(
@@ -66,7 +70,7 @@ def test_bad_entry_returns_error() -> None:
             [entry.create_for_testing(sense="non-number")]
         ),
         minimum_rule_level=rule_level.T.SUGGESTION,
-        trieId_ignored_rule_codes_map={},
+        ignored_rules_dict={},
         rules=[rule.T.SENSE_IS_INT],
     )
     assert_expected_inline(
@@ -85,7 +89,7 @@ def test_ignoring_rule_for_bad_entry_is_ok() -> None:
             [entry.create_for_testing(trieId=FIXED_TRIE_ID, sense="non-number")]
         ),
         minimum_rule_level=rule_level.T.OK,
-        trieId_ignored_rule_codes_map={FIXED_TRIE_ID: [rule.T.SENSE_IS_INT]},
+        ignored_rules_dict={FIXED_TRIE_ID: [rule.T.SENSE_IS_INT]},
         rules=[rule.T.SENSE_IS_INT],
     )
     assert_expected_inline(
@@ -104,7 +108,7 @@ def test_ignoring_unrelated_details_for_bad_entry() -> None:
             [entry.create_for_testing(trieId=FIXED_TRIE_ID, sense="non-number")]
         ),
         minimum_rule_level=rule_level.T.OK,
-        trieId_ignored_rule_codes_map={
+        ignored_rules_dict={
             FIXED_TRIE_ID: [rule.T.SENSE_SHOULD_AGREE_WITH_TRIEID],
             FIXED_SECOND_TRIE_ID: [rule.T.SENSE_IS_INT],
         },
