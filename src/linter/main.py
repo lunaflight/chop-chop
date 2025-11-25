@@ -6,6 +6,7 @@ from itertools import product
 from pathlib import Path
 from typing import TypedDict
 
+from src import logging_format
 from src.linter import (
     argument_parser,
     entry,
@@ -69,10 +70,9 @@ def lint(
 def main() -> None:
     parse_result = argument_parser.parse_arguments()
 
-    # TODO: There is some re-use of logging boilerplate, especially [format].
     logging.basicConfig(
         level=logging.WARNING,
-        format="%(asctime)s - %(levelname)s - %(message)s",
+        format=logging_format.DEFAULT,
     )
 
     if isinstance(parse_result, argument_parser.Error):

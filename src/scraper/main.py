@@ -3,7 +3,7 @@
 import logging
 from argparse import ArgumentParser
 
-from src import sanitizer, windows_hacks
+from src import logging_format, sanitizer, windows_hacks
 from src.scraper import assertation, platform
 
 windows_hacks.set_stdin_stdout_encoding_if_windows()
@@ -28,10 +28,12 @@ def main() -> None:
     if args.enable_logging:
         logging.basicConfig(
             level=logging.DEBUG,
-            format="%(asctime)s - %(levelname)s - %(message)s",
+            format=logging_format.DEFAULT,
         )
     else:
-        logging.basicConfig(level=logging.WARNING)
+        logging.basicConfig(
+            level=logging.WARNING, format=logging_format.DEFAULT
+        )
 
     assertation_ = read_url_from_stdin()
 
