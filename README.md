@@ -1,10 +1,9 @@
-<!-- TODO: This name is outdated now. -->
-# Credit Formatter
-The aim of this repository is to provide an easy way to credit people online
-for their linguistic attestations.
+# Chop Chop Linguistic Compilation Tool
+The aim of this repository is to provide tools for making compilation for the
+[Chimbridge Singlish Dictionary](https://singlishdict.app/) easier.
 
-It employs Python and web scraping. See below for the disclaimer on ethicality
-of web scraping.
+It consists of some tools, which are outlined further below in this `README.md`
+file.
 
 # Installation
 Ensure that you are using `Python 3.13`, but I suspect any sufficiently
