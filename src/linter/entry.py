@@ -158,9 +158,11 @@ def get_linked_words(t: T) -> list[str]:  # noqa: C901
                 linked_words.extend(definition_entry.antonyms)
 
     if t.particles is not None:
-        for particle_entry in t.particles:
-            if particle_entry.example is not None:
-                sentences_with_at_words.extend(particle_entry.example)
+        sentences_with_at_words.extend(
+            particle_entry.example
+            for particle_entry in t.particles
+            if particle_entry.example is not None
+        )
     if t.related is not None:
         linked_words.extend(t.related)
 
