@@ -17,6 +17,7 @@ def clean_unicode_for_output(string: str) -> str:
         "\u2019": "'",
         "\u201c": '"',
         "\u201d": '"',
+        "，": ", ",  # noqa: RUF001
     }
 
     for key, val in replacements.items():
