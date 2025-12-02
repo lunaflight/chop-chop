@@ -1,47 +1,15 @@
 import json
-import re
-from typing import Any, TypeAlias
+from typing import Any
 
 from pydantic import BaseModel, ValidationError
 
-
-class AttestationEntry(BaseModel):
-    eg: str
-    src: str | None = None
-
-
-class DefinitionEntry(BaseModel):
-    definition: str
-    example: list[AttestationEntry] | None = None
-    synonyms: list[str] | None = None
-    antonyms: list[str] | None = None
-
-
-class ReferenceEntry(BaseModel):
-    name: str
-    link: str | None = None
-
-
-class EtymologyEntry(BaseModel):
-    etyPath: list[str]
-    etyScheme: list[str] | None = None
-    etyType: list[str] | None = None
-    special: list[str] | None = None
-    etyScript: list[str] | None = None
-    etyTrad: list[str] | None = None
-    etyRoman: list[str]
-    etyLit: list[str]
-
-
-class ParticleEntry(BaseModel):
-    particle: str
-    effect: str
-    meaning: str
-    example: str | None = None
-    exampleSource: str | None = None
-
-
-PartOfSpeechEntry: TypeAlias = list[DefinitionEntry]
+from src.linter.json import (
+    etymology_entry,
+    part_of_speech_entry,
+    particle_entry,
+    reference_entry,
+    specs,
+)
 
 
 class T(BaseModel):
@@ -49,14 +17,14 @@ class T(BaseModel):
     trieId: str
     sense: str
     etyNotes: str | None = None
-    origin: list[EtymologyEntry]
+    origin: list[etymology_entry.T]
     origLink: list[str] | None = None
-    meanings: dict[str, PartOfSpeechEntry]
+    meanings: dict[str, part_of_speech_entry.T]
     usage: str | None = None
-    particles: list[ParticleEntry] | None = None
+    particles: list[particle_entry.T] | None = None
     related: list[str] | None = None
     category: list[str] | None = None
-    references: list[ReferenceEntry] | None = None
+    references: list[reference_entry.T] | None = None
     credits: list[str] | None = None
 
 
@@ -128,46 +96,21 @@ def self_written_sentences(t: T) -> list[str]:
     return self_written_sentences
 
 
-# TODO: C901 should not be ignored because the below function is indeed
-# very hard to read. What should be done is a split out of all the entries
-# to their own files, and each of the types should implement a
-# get_linked_words, get_self_written_sentences among other things.
-#
-# This would miscellaneously mean that AT_WORD_CAPTURE_REGEX should be
-# part of json_specs.
-def get_linked_words(t: T) -> list[str]:  # noqa: C901
-    at_word_capture_regex = r"@\{(?:[^|}]+\|)?([^}]+)\}"
-
-    sentences_with_at_words: list[str] = []
+def get_linked_words(t: T) -> list[str]:
     linked_words = []
 
-    if t.etyNotes is not None:
-        sentences_with_at_words.append(t.etyNotes)
-    if t.usage is not None:
-        sentences_with_at_words.append(t.usage)
-    for part_of_speech in t.meanings.values():
-        for definition_entry in part_of_speech:
-            sentences_with_at_words.append(definition_entry.definition)
-            if definition_entry.example is not None:
-                sentences_with_at_words.extend(
-                    example.eg for example in definition_entry.example
-                )
-            if definition_entry.synonyms is not None:
-                linked_words.extend(definition_entry.synonyms)
-            if definition_entry.antonyms is not None:
-                linked_words.extend(definition_entry.antonyms)
-
-    if t.particles is not None:
-        sentences_with_at_words.extend(
-            particle_entry.example
-            for particle_entry in t.particles
-            if particle_entry.example is not None
+    linked_words.extend(specs.get_linked_words(t.etyNotes or ""))
+    linked_words.extend(specs.get_linked_words(t.usage or ""))
+    for part_of_speech_entry_ in t.meanings.values():
+        linked_words.extend(
+            part_of_speech_entry.get_linked_words(part_of_speech_entry_)
         )
-    if t.related is not None:
-        linked_words.extend(t.related)
-
-    for sentence_with_at_words in sentences_with_at_words:
-        matches = re.findall(at_word_capture_regex, sentence_with_at_words)
-        linked_words.extend(matches)
+    for etymology_entry_ in t.origin or []:
+        linked_words.extend(etymology_entry.get_linked_words(etymology_entry_))
+    for particle_entry_ in t.particles or []:
+        linked_words.extend(particle_entry.get_linked_words(particle_entry_))
+    linked_words.extend(t.related or [])
+    for reference_entry_ in t.references or []:
+        linked_words.extend(reference_entry.get_linked_words(reference_entry_))
 
     return linked_words

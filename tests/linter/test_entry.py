@@ -22,7 +22,7 @@ def test_linked_words() -> None:
             {
                 "particle": PURPOSELY_EMPTY,
                 "effect": PURPOSELY_EMPTY,
-                "meaning": PURPOSELY_EMPTY,
+                "meaning": "@{particles meaning}",
                 "example": "@{particles example}",
             }
         ],
@@ -33,5 +33,5 @@ def test_linked_words() -> None:
     linked_words = entry.get_linked_words(entry_)
     assert_expected_inline(
         ", ".join(linked_words),
-        """synonym, antonym, related, etyNotes, usage, definition, eg, particles example""",
+        """etyNotes, usage, definition, eg, synonym, antonym, particles meaning, particles example, related""",
     )
