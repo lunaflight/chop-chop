@@ -24,7 +24,7 @@ def self_written_sentences(_t: T) -> list[str]:
 
 
 def all_strings(t: T) -> list[str]:
-    arr: list[str | None] = [
+    return [
         *t.etyPath,
         *(t.etyScheme or []),
         *(t.etyType or []),
@@ -34,4 +34,3 @@ def all_strings(t: T) -> list[str]:
         *t.etyRoman,
         *t.etyLit,
     ]
-    return [s for s in arr if s]

@@ -17,5 +17,4 @@ def self_written_sentences(_t: T) -> list[str]:
 
 
 def all_strings(t: T) -> list[str]:
-    arr: list[str | None] = [t.eg, t.src]
-    return [s for s in arr if s]
+    return [t.eg, *([t.src] if t.src is not None else [])]

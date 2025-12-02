@@ -16,12 +16,11 @@ def get_linked_words(t: T) -> list[str]:
 
 
 def self_written_sentences(t: T) -> list[str]:
-    self_written_sentences = []
-    for definition_entry_ in t:
-        self_written_sentences.extend(
-            definition_entry.self_written_sentences(definition_entry_)
-        )
-    return self_written_sentences
+    return [
+        *chain.from_iterable(
+            definition_entry.self_written_sentences(e) for e in t
+        ),
+    ]
 
 
 def all_strings(t: T) -> list[str]:

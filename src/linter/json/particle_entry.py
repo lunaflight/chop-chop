@@ -14,8 +14,7 @@ class T(BaseModel):
 def get_linked_words(t: T) -> list[str]:
     linked_words = []
     linked_words.extend(specs.get_linked_words(t.meaning))
-    if t.example:
-        linked_words.extend(specs.get_linked_words(t.example))
+    linked_words.extend(specs.get_linked_words(t.example or ""))
     return linked_words
 
 
@@ -24,11 +23,10 @@ def self_written_sentences(t: T) -> list[str]:
 
 
 def all_strings(t: T) -> list[str]:
-    arr: list[str | None] = [
+    return [
         t.particle,
         t.effect,
         t.meaning,
-        t.example,
-        t.exampleSource,
+        *([t.example] if t.example is not None else []),
+        *([t.exampleSource] if t.exampleSource is not None else []),
     ]
-    return [s for s in arr if s]

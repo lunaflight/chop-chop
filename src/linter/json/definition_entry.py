@@ -13,18 +13,14 @@ class T(BaseModel):
 
 
 def get_linked_words(t: T) -> list[str]:
-    linked_words = []
-    linked_words.extend(specs.get_linked_words(t.definition))
-    if t.example:
-        for attestation_entry_ in t.example:
-            linked_words.extend(
-                attestation_entry.get_linked_words(attestation_entry_)
-            )
-    if t.synonyms:
-        linked_words.extend(t.synonyms)
-    if t.antonyms:
-        linked_words.extend(t.antonyms)
-    return linked_words
+    return [
+        *specs.get_linked_words(t.definition),
+        *chain.from_iterable(
+            attestation_entry.get_linked_words(e) for e in (t.example or [])
+        ),
+        *(t.synonyms or []),
+        *(t.antonyms or []),
+    ]
 
 
 def self_written_sentences(t: T) -> list[str]:
@@ -32,7 +28,7 @@ def self_written_sentences(t: T) -> list[str]:
 
 
 def all_strings(t: T) -> list[str]:
-    arr: list[str | None] = [
+    return [
         t.definition,
         *chain.from_iterable(
             attestation_entry.all_strings(e) for e in (t.example or [])
@@ -40,4 +36,3 @@ def all_strings(t: T) -> list[str]:
         *(t.synonyms or []),
         *(t.antonyms or []),
     ]
-    return [s for s in arr if s]

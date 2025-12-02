@@ -83,47 +83,46 @@ def create_from_json(json_data: str) -> T | ValidationError:
 
 
 def self_written_sentences(t: T) -> list[str]:
-    self_written_sentences: list[str] = []
-
-    self_written_sentences.extend((t.etyNotes or "", t.usage or ""))
-    for part_of_speech_entry_ in t.meanings.values():
-        self_written_sentences.extend(
-            part_of_speech_entry.self_written_sentences(part_of_speech_entry_)
-        )
-    for etymology_entry_ in t.origin or []:
-        self_written_sentences.extend(
-            etymology_entry.self_written_sentences(etymology_entry_)
-        )
-    for particle_entry_ in t.particles or []:
-        self_written_sentences.extend(
-            particle_entry.self_written_sentences(particle_entry_)
-        )
-    for reference_entry_ in t.references or []:
-        self_written_sentences.extend(
-            reference_entry.self_written_sentences(reference_entry_)
-        )
-
-    return self_written_sentences
+    return [
+        *([t.etyNotes] if t.etyNotes is not None else []),
+        *([t.usage] if t.usage is not None else []),
+        *chain.from_iterable(
+            part_of_speech_entry.self_written_sentences(e)
+            for e in t.meanings.values()
+        ),
+        *chain.from_iterable(
+            etymology_entry.self_written_sentences(e) for e in t.origin
+        ),
+        *chain.from_iterable(
+            particle_entry.self_written_sentences(e)
+            for e in (t.particles or [])
+        ),
+        *chain.from_iterable(
+            reference_entry.self_written_sentences(e)
+            for e in (t.references or [])
+        ),
+    ]
 
 
 def get_linked_words(t: T) -> list[str]:
-    linked_words = []
-
-    linked_words.extend(specs.get_linked_words(t.etyNotes or ""))
-    linked_words.extend(specs.get_linked_words(t.usage or ""))
-    for part_of_speech_entry_ in t.meanings.values():
-        linked_words.extend(
-            part_of_speech_entry.get_linked_words(part_of_speech_entry_)
-        )
-    for etymology_entry_ in t.origin or []:
-        linked_words.extend(etymology_entry.get_linked_words(etymology_entry_))
-    for particle_entry_ in t.particles or []:
-        linked_words.extend(particle_entry.get_linked_words(particle_entry_))
-    linked_words.extend(t.related or [])
-    for reference_entry_ in t.references or []:
-        linked_words.extend(reference_entry.get_linked_words(reference_entry_))
-
-    return linked_words
+    return [
+        *specs.get_linked_words(t.etyNotes or ""),
+        *specs.get_linked_words(t.usage or ""),
+        *chain.from_iterable(
+            part_of_speech_entry.get_linked_words(e)
+            for e in t.meanings.values()
+        ),
+        *chain.from_iterable(
+            etymology_entry.get_linked_words(e) for e in t.origin
+        ),
+        *chain.from_iterable(
+            particle_entry.get_linked_words(e) for e in (t.particles or [])
+        ),
+        *(t.related or []),
+        *chain.from_iterable(
+            reference_entry.get_linked_words(e) for e in (t.references or [])
+        ),
+    ]
 
 
 def all_strings(t: T) -> list[str]:
@@ -131,13 +130,13 @@ def all_strings(t: T) -> list[str]:
         t.word,
         t.trieId,
         t.sense,
-        *([] if t.etyNotes is None else [t.etyNotes]),
+        *([t.etyNotes] if t.etyNotes is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
         *(t.origLink or []),
         *chain.from_iterable(
             part_of_speech_entry.all_strings(e) for e in t.meanings.values()
         ),
-        *([] if t.usage is None else [t.usage]),
+        *([t.usage] if t.usage is not None else []),
         *chain.from_iterable(
             particle_entry.all_strings(e) for e in (t.particles or [])
         ),
