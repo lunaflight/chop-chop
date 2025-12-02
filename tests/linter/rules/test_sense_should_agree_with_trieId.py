@@ -29,3 +29,8 @@ def test_does_not_agree() -> None:
         lint_and_get_result(entry_),
         """ERROR: Expected sense '1' and trieId 'word#2' to matchbecause sense is not 0.""",
     )
+    entry_ = entry.create_for_testing(sense="0", trieId="word#2")
+    assert_expected_inline(
+        lint_and_get_result(entry_),
+        """ERROR: Expected sense '0' and trieId 'word#2' to matchbecause sense is not 0.""",
+    )
