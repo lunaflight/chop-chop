@@ -21,3 +21,14 @@ def get_linked_words(t: T) -> list[str]:
 
 def self_written_sentences(t: T) -> list[str]:
     return [t.meaning]
+
+
+def all_strings(t: T) -> list[str]:
+    arr: list[str | None] = [
+        t.particle,
+        t.effect,
+        t.meaning,
+        t.example,
+        t.exampleSource,
+    ]
+    return [s for s in arr if s]

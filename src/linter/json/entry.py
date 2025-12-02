@@ -1,4 +1,5 @@
 import json
+from itertools import chain
 from typing import Any
 
 from pydantic import BaseModel, ValidationError
@@ -63,7 +64,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "references": [
             {
                 "name": '1970 Jan 1, Name. Reddit, "Title"',
-                "url": "https://www.reddit.com",
+                "link": "https://www.reddit.com",
             }
         ],
         "credits": ["Name for the suggestion."],
@@ -123,3 +124,27 @@ def get_linked_words(t: T) -> list[str]:
         linked_words.extend(reference_entry.get_linked_words(reference_entry_))
 
     return linked_words
+
+
+def all_strings(t: T) -> list[str]:
+    return [
+        t.word,
+        t.trieId,
+        t.sense,
+        *([] if t.etyNotes is None else [t.etyNotes]),
+        *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
+        *(t.origLink or []),
+        *chain.from_iterable(
+            part_of_speech_entry.all_strings(e) for e in t.meanings.values()
+        ),
+        *([] if t.usage is None else [t.usage]),
+        *chain.from_iterable(
+            particle_entry.all_strings(e) for e in (t.particles or [])
+        ),
+        *(t.related or []),
+        *(t.category or []),
+        *chain.from_iterable(
+            reference_entry.all_strings(e) for e in (t.references or [])
+        ),
+        *(t.credits or []),
+    ]

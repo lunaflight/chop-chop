@@ -1,3 +1,4 @@
+from itertools import chain
 from typing import TypeAlias
 
 from src.linter.json import definition_entry
@@ -21,3 +22,9 @@ def self_written_sentences(t: T) -> list[str]:
             definition_entry.self_written_sentences(definition_entry_)
         )
     return self_written_sentences
+
+
+def all_strings(t: T) -> list[str]:
+    return [
+        *chain.from_iterable(definition_entry.all_strings(e) for e in t),
+    ]

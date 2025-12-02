@@ -1,3 +1,5 @@
+from itertools import chain
+
 from pydantic import BaseModel
 
 from src.linter.json import attestation_entry, specs
@@ -27,3 +29,15 @@ def get_linked_words(t: T) -> list[str]:
 
 def self_written_sentences(t: T) -> list[str]:
     return [t.definition]
+
+
+def all_strings(t: T) -> list[str]:
+    arr: list[str | None] = [
+        t.definition,
+        *chain.from_iterable(
+            attestation_entry.all_strings(e) for e in (t.example or [])
+        ),
+        *(t.synonyms or []),
+        *(t.antonyms or []),
+    ]
+    return [s for s in arr if s]

@@ -21,3 +21,17 @@ def get_linked_words(_t: T) -> list[str]:
 
 def self_written_sentences(_t: T) -> list[str]:
     return []
+
+
+def all_strings(t: T) -> list[str]:
+    arr: list[str | None] = [
+        *t.etyPath,
+        *(t.etyScheme or []),
+        *(t.etyType or []),
+        *(t.special or []),
+        *(t.etyScript or []),
+        *(t.etyTrad or []),
+        *t.etyRoman,
+        *t.etyLit,
+    ]
+    return [s for s in arr if s]
