@@ -10,3 +10,7 @@ class T(BaseModel):
 
 def get_linked_words(t: T) -> list[str]:
     return specs.get_linked_words(t.eg)
+
+
+def self_written_sentences(_t: T) -> list[str]:
+    return []

@@ -23,3 +23,7 @@ def get_linked_words(t: T) -> list[str]:
     if t.antonyms:
         linked_words.extend(t.antonyms)
     return linked_words
+
+
+def self_written_sentences(t: T) -> list[str]:
+    return [t.definition]

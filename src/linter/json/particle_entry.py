@@ -17,3 +17,7 @@ def get_linked_words(t: T) -> list[str]:
     if t.example:
         linked_words.extend(specs.get_linked_words(t.example))
     return linked_words
+
+
+def self_written_sentences(t: T) -> list[str]:
+    return [t.meaning]

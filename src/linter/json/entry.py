@@ -82,15 +82,24 @@ def create_from_json(json_data: str) -> T | ValidationError:
 
 
 def self_written_sentences(t: T) -> list[str]:
-    self_written_sentences = []
+    self_written_sentences: list[str] = []
 
-    if t.etyNotes is not None:
-        self_written_sentences.append(t.etyNotes)
-    if t.usage is not None:
-        self_written_sentences.append(t.usage)
-    for part_of_speech in t.meanings.values():
+    self_written_sentences.extend((t.etyNotes or "", t.usage or ""))
+    for part_of_speech_entry_ in t.meanings.values():
         self_written_sentences.extend(
-            definition_entry.definition for definition_entry in part_of_speech
+            part_of_speech_entry.self_written_sentences(part_of_speech_entry_)
+        )
+    for etymology_entry_ in t.origin or []:
+        self_written_sentences.extend(
+            etymology_entry.self_written_sentences(etymology_entry_)
+        )
+    for particle_entry_ in t.particles or []:
+        self_written_sentences.extend(
+            particle_entry.self_written_sentences(particle_entry_)
+        )
+    for reference_entry_ in t.references or []:
+        self_written_sentences.extend(
+            reference_entry.self_written_sentences(reference_entry_)
         )
 
     return self_written_sentences

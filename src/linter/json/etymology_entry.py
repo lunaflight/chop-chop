@@ -17,3 +17,7 @@ def get_linked_words(_t: T) -> list[str]:
     # This can very well contain linked words especially in etyRoman,
     # and should be updated if required.
     return []
+
+
+def self_written_sentences(_t: T) -> list[str]:
+    return []
