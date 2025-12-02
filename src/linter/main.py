@@ -9,13 +9,13 @@ from typing import TypedDict
 from src import logging_format
 from src.linter import (
     argument_parser,
-    entry,
     ignored_rules_map,
     rule,
     rule_format,
     rule_level,
     rule_result,
 )
+from src.linter.json import entry
 
 LOGGER = logging.getLogger(__name__)
 

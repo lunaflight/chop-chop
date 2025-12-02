@@ -2,7 +2,8 @@ from pathlib import Path
 
 from expecttest import assert_expected_inline
 
-from src.linter import entry, ignored_rules_map, main, rule, rule_level
+from src.linter import ignored_rules_map, main, rule, rule_level
+from src.linter.json import entry
 
 
 def lint_and_get_result(

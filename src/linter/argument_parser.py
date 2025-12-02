@@ -6,7 +6,8 @@ from typing import TypedDict
 
 from pydantic import ValidationError
 
-from src.linter import entry, ignored_rules_map, rule_level
+from src.linter import ignored_rules_map, rule_level
+from src.linter.json import entry
 
 
 @dataclass(frozen=True)

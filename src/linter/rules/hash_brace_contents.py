@@ -1,7 +1,8 @@
 import re
 
-from src.linter import entry, rule_result
-from src.linter.json_specs import CERTAINTY_LEVELS
+from src.linter import rule_result
+from src.linter.json import entry
+from src.linter.json.specs import CERTAINTY_LEVELS
 
 
 def description() -> str:

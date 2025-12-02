@@ -1,6 +1,6 @@
 from expecttest import assert_expected_inline
 
-from src.linter import entry
+from src.linter.json import entry
 
 PURPOSELY_EMPTY = "empty for testing"
 

@@ -2,7 +2,8 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 
-from src.linter import entry, rule_result
+from src.linter import rule_result
+from src.linter.json import entry
 from src.linter.rules import (
     hash_brace_contents,
     head_word_hash_number,

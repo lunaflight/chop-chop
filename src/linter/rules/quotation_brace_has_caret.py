@@ -1,6 +1,7 @@
 import re
 
-from src.linter import entry, rule_result
+from src.linter import rule_result
+from src.linter.json import entry
 
 
 def description() -> str:
