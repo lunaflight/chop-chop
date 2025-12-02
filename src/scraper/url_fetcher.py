@@ -12,6 +12,7 @@ NOT_FOUND = 404
 TOO_MANY_REQUESTS = 429
 
 DEFAULT_RETRY_AFTER_DELAY_SEC = 5
+MAX_RETRY_AFTER_DELAY_SEC = 20
 
 USER_AGENT = UserAgent()
 
@@ -31,7 +32,7 @@ def get_soup(url: str, cookies: dict | None = None) -> BeautifulSoup:
     if response.status_code != OK_RESPONSE:
         retry_after_header = response.headers.get("Retry-After")
         retry_after_delay = (
-            int(retry_after_header)
+            min(int(retry_after_header), MAX_RETRY_AFTER_DELAY_SEC)
             if (
                 response.status_code == TOO_MANY_REQUESTS
                 and retry_after_header is not None
