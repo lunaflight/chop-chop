@@ -28,7 +28,7 @@ def lint(entry_: entry.T) -> rule_result.T:
 
     if trieId_sense is not sense:
         return rule_result.error(
-            f"Expected sense '{sense}' and trieId '{trieId}' to match"
+            f"Expected sense '{sense}' and trieId '{trieId}' to match "
             "because sense is not 0."
         )
 
