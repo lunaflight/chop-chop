@@ -1,7 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class T(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     etyPath: list[str]
     etyScheme: list[str] | None = None
     etyType: list[str] | None = None

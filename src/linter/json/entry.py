@@ -2,7 +2,7 @@ import json
 from itertools import chain
 from typing import Any
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ConfigDict, ValidationError
 
 from src.linter.json import (
     etymology_entry,
@@ -12,14 +12,25 @@ from src.linter.json import (
     specs,
 )
 
+# This is required because Pydantic will not recognise a underscore-prefixed
+# field as a public field.
+FIELD_ALIASES = {"_id": "id"}
+
 
 class T(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    # Fields added after prod
+    forms: list[str] | None = None
+    formsClean: list[str] | None = None
+
+    id: int | None = None
     word: str
     trieId: str
     sense: str
     etyNotes: str | None = None
     origin: list[etymology_entry.T]
-    origLink: list[str] | None = None
+    origlink: list[str] | None = None
     meanings: dict[str, part_of_speech_entry.T]
     usage: str | None = None
     particles: list[particle_entry.T] | None = None
@@ -31,7 +42,12 @@ class T(BaseModel):
 
 def create(dict_: dict[str, Any]) -> T | ValidationError:
     try:
-        return T(**dict_)
+        processed_dict = dict_.copy()
+        for old_key, new_key in FIELD_ALIASES.items():
+            if old_key in processed_dict:
+                processed_dict[new_key] = processed_dict.pop(old_key)
+
+        return T(**processed_dict)
     except ValidationError as e:
         return e
 
@@ -49,7 +65,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
                 "etyLit": ["its meaning"],
             }
         ],
-        "origLink": [],
+        "origlink": [],
         "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
         "particles": [
@@ -132,7 +148,7 @@ def all_strings(t: T) -> list[str]:
         t.sense,
         *([t.etyNotes] if t.etyNotes is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
-        *(t.origLink or []),
+        *(t.origlink or []),
         *chain.from_iterable(
             part_of_speech_entry.all_strings(e) for e in t.meanings.values()
         ),

@@ -38,6 +38,6 @@ ignore-names = [
 "*etyTrad*",
 "*etyType*",
 "*exampleSource*",
-"*origLink*",
 "*trieId*",
+"*formsClean*",
 ]

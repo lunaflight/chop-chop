@@ -1,9 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from src.linter.json import specs
 
 
 class T(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     particle: str
     effect: str
     meaning: str

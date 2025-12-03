@@ -1,11 +1,13 @@
 from itertools import chain
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from src.linter.json import attestation_entry, specs
 
 
 class T(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     definition: str
     example: list[attestation_entry.T] | None = None
     synonyms: list[str] | None = None

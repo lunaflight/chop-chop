@@ -1,7 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class T(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     name: str
     link: str | None = None
 
