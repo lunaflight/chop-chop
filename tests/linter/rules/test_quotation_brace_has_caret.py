@@ -5,44 +5,40 @@ from src.linter.json import entry
 from src.linter.rules import quotation_brace_has_caret
 
 
-def lint_and_get_result(entry_: entry.T) -> str:
+def lint_and_get_result(string: str) -> str:
+    entry_ = entry.create_for_testing(etyNotes=string)
     return rule_result.to_string(quotation_brace_has_caret.lint(entry_))
 
 
 def test_ok() -> None:
-    entry_ = entry.create_for_testing(
-        etyNotes="Quoting correctly.^{1} This should not be punished,^{2} "
-        "as an example!^{2147483647}"
-    )
     assert_expected_inline(
-        lint_and_get_result(entry_),
+        lint_and_get_result(
+            string="Correct.^{1} Also correct,^{2} Also correct!^{2147483647}"
+        ),
         """OK""",
     )
 
 
 def test_hyperlinks_are_ok() -> None:
-    entry_ = entry.create_for_testing(
-        etyNotes="@{96} people normally do not sign @{1206}."
-    )
     assert_expected_inline(
-        lint_and_get_result(entry_),
+        lint_and_get_result(
+            string="@{96} people normally do not sign @{1206}."
+        ),
         """OK""",
     )
 
 
 def test_after_space_is_ok() -> None:
-    entry_ = entry.create_for_testing(
-        etyNotes="Quoting a mathematical construct like {2147483643}."
-    )
     assert_expected_inline(
-        lint_and_get_result(entry_),
+        lint_and_get_result(
+            string="Quoting a mathematical construct like {2147483643}."
+        ),
         """OK""",
     )
 
 
 def test_missing_caret() -> None:
-    entry_ = entry.create_for_testing(etyNotes="Genuine mistake.{1}")
     assert_expected_inline(
-        lint_and_get_result(entry_),
+        lint_and_get_result(string="Genuine mistake.{1}"),
         """WARNING: Found "{1}", did you forget a "^" for a citation?""",
     )

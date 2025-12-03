@@ -5,6 +5,7 @@ from src.linter.json import entry
 from src.linter.rules import no_todos
 
 PURPOSELY_EMPTY = "empty for testing"
+TODO = "TODO undone"
 
 
 def lint_and_get_result(entry_: entry.T) -> str:
@@ -19,7 +20,7 @@ def test_clean_entry_is_ok() -> None:
 def test_todo_triggers_error() -> None:
     entry_ = entry.create_for_testing(
         meanings={
-            "noun": [{"definition": "TODO undone"}],
+            "noun": [{"definition": TODO}],
         }
     )
     assert_expected_inline(
@@ -31,7 +32,7 @@ def test_todo_triggers_error() -> None:
 def test_todo_in_key_triggers_error() -> None:
     entry_ = entry.create_for_testing(
         meanings={
-            "TODO undone": [{"definition": PURPOSELY_EMPTY}],
+            TODO: [{"definition": PURPOSELY_EMPTY}],
         }
     )
     assert_expected_inline(
