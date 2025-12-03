@@ -14,10 +14,10 @@ class T(BaseModel):
 
 
 def get_linked_words(t: T) -> list[str]:
-    linked_words = []
-    linked_words.extend(specs.get_linked_words(t.meaning))
-    linked_words.extend(specs.get_linked_words(t.example or ""))
-    return linked_words
+    return [
+        *specs.get_linked_words(t.meaning),
+        *specs.get_linked_words(t.example or ""),
+    ]
 
 
 def self_written_sentences(t: T) -> list[str]:
