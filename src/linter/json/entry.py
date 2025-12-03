@@ -149,6 +149,7 @@ def all_strings(t: T) -> list[str]:
         *([t.etyNotes] if t.etyNotes is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
         *(t.origlink or []),
+        *t.meanings.keys(),
         *chain.from_iterable(
             part_of_speech_entry.all_strings(e) for e in t.meanings.values()
         ),
