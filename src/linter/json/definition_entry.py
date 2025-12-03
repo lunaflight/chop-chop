@@ -38,3 +38,7 @@ def all_strings(t: T) -> list[str]:
         *(t.synonyms or []),
         *(t.antonyms or []),
     ]
+
+
+def get_attestations(t: T) -> list[attestation_entry.T]:
+    return t.example if t.example is not None else []

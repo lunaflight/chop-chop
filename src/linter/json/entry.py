@@ -5,6 +5,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, ValidationError
 
 from src.linter.json import (
+    attestation_entry,
     etymology_entry,
     part_of_speech_entry,
     particle_entry,
@@ -163,4 +164,17 @@ def all_strings(t: T) -> list[str]:
             reference_entry.all_strings(e) for e in (t.references or [])
         ),
         *(t.credits or []),
+    ]
+
+
+def head_word_forms(t: T) -> list[str]:
+    return [t.word, *(t.formsClean if t.formsClean is not None else [])]
+
+
+def get_attestations(t: T) -> list[attestation_entry.T]:
+    return [
+        *chain.from_iterable(
+            part_of_speech_entry.get_attestations(e)
+            for e in t.meanings.values()
+        ),
     ]

@@ -1,7 +1,7 @@
 from itertools import chain
 from typing import TypeAlias
 
-from src.linter.json import definition_entry
+from src.linter.json import attestation_entry, definition_entry
 
 T: TypeAlias = list[definition_entry.T]
 
@@ -26,4 +26,10 @@ def self_written_sentences(t: T) -> list[str]:
 def all_strings(t: T) -> list[str]:
     return [
         *chain.from_iterable(definition_entry.all_strings(e) for e in t),
+    ]
+
+
+def get_attestations(t: T) -> list[attestation_entry.T]:
+    return [
+        *chain.from_iterable(definition_entry.get_attestations(e) for e in t)
     ]
