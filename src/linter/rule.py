@@ -12,6 +12,7 @@ from src.linter.rules import (
     no_repeat_definitions,
     no_todos,
     quotation_brace_has_caret,
+    references_exist,
     sense_is_int,
     sense_should_agree_with_trieId,
 )
@@ -24,9 +25,10 @@ class T(Enum):
     LINKED_WORDS_ARE_KNOWN = "LWA"
     NO_REPEAT_DEFINITIONS = "NRD"
     NO_TODOS = "NTD"
+    QUOTATION_BRACE_HAS_CARET = "QBH"
+    REFERENCES_EXIST = "REX"
     SENSE_IS_INT = "SII"
     SENSE_SHOULD_AGREE_WITH_TRIEID = "SSA"
-    QUOTATION_BRACE_HAS_CARET = "QBH"
 
 
 def to_string(t: T) -> str:
@@ -46,7 +48,7 @@ def of_code(code: str) -> T:
     raise ValueError(msg)
 
 
-def description(t: T) -> str:  # noqa: PLR0911
+def description(t: T) -> str:  # noqa: PLR0911, C901
     match t:
         case T.ATTESTATIONS_CONTAIN_WORD:
             return attestations_contain_word.description()
@@ -62,6 +64,8 @@ def description(t: T) -> str:  # noqa: PLR0911
             return no_todos.description()
         case T.QUOTATION_BRACE_HAS_CARET:
             return quotation_brace_has_caret.description()
+        case T.REFERENCES_EXIST:
+            return references_exist.description()
         case T.SENSE_IS_INT:
             return sense_is_int.description()
         case T.SENSE_SHOULD_AGREE_WITH_TRIEID:
@@ -100,6 +104,8 @@ def lint(  # noqa: PLR0911, C901
             return no_todos.lint(entry_)
         case T.QUOTATION_BRACE_HAS_CARET:
             return quotation_brace_has_caret.lint(entry_)
+        case T.REFERENCES_EXIST:
+            return references_exist.lint(entry_)
         case T.SENSE_IS_INT:
             return sense_is_int.lint(entry_)
         case T.SENSE_SHOULD_AGREE_WITH_TRIEID:

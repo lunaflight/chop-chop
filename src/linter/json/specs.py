@@ -29,6 +29,9 @@ CATEGORIES = [
 CERTAINTY_LEVELS = ["likely", "poss", "dubious", "warn"]
 
 
+REFERENCE_CAPTURE_REGEX = r"\^\{(\d+)\}"
+
+
 def get_linked_words(s: str) -> list[str]:
     at_word_capture_regex = r"@\{(?:[^|}]+\|)?([^}]+)\}"
 
