@@ -3,6 +3,7 @@ from expecttest import assert_expected_inline
 from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import attestations_contain_word
+from tests.linter.commons import IRRELEVANT
 
 
 def lint_and_get_result(
@@ -11,7 +12,9 @@ def lint_and_get_result(
     entry_ = entry.create_for_testing(
         word=word,
         formsClean=[alternate_form] if alternate_form else [],
-        meanings={"noun": [{"definition": "", "example": [{"eg": sentence}]}]},
+        meanings={
+            "noun": [{"definition": IRRELEVANT, "example": [{"eg": sentence}]}]
+        },
     )
     return rule_result.to_string(attestations_contain_word.lint(entry_))
 

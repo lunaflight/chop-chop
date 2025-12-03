@@ -3,8 +3,8 @@ from expecttest import assert_expected_inline
 from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import no_todos
+from tests.linter.commons import IRRELEVANT
 
-PURPOSELY_EMPTY = "empty for testing"
 TODO = "TODO undone"
 
 
@@ -32,7 +32,7 @@ def test_todo_triggers_error() -> None:
 def test_todo_in_key_triggers_error() -> None:
     entry_ = entry.create_for_testing(
         meanings={
-            TODO: [{"definition": PURPOSELY_EMPTY}],
+            TODO: [{"definition": IRRELEVANT}],
         }
     )
     assert_expected_inline(

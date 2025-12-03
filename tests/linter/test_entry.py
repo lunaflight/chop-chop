@@ -5,8 +5,7 @@ from expecttest import assert_expected_inline
 from pydantic import ValidationError
 
 from src.linter.json import entry
-
-PURPOSELY_EMPTY = "empty for testing"
+from tests.linter.commons import IRRELEVANT
 
 
 def test_missing_fields_raises_error() -> None:
@@ -35,7 +34,7 @@ meanings
 
 def test_superfluous_field_raises_error() -> None:
     with pytest.raises(ValidationError) as exc_info:
-        entry.create_for_testing(superfluous_field=PURPOSELY_EMPTY)
+        entry.create_for_testing(superfluous_field=IRRELEVANT)
     assert_expected_inline(
         str(exc_info.value),
         """\
@@ -52,8 +51,8 @@ def test_nested_superfluous_field_raises_error() -> None:
             meanings={
                 "noun": [
                     {
-                        "definition": PURPOSELY_EMPTY,
-                        "superfluous_field": PURPOSELY_EMPTY,
+                        "definition": IRRELEVANT,
+                        "superfluous_field": IRRELEVANT,
                     }
                 ]
             }
@@ -83,8 +82,8 @@ def test_linked_words() -> None:
         },
         particles=[
             {
-                "particle": PURPOSELY_EMPTY,
-                "effect": PURPOSELY_EMPTY,
+                "particle": IRRELEVANT,
+                "effect": IRRELEVANT,
                 "meaning": "@{particles meaning}",
                 "example": "@{particles example}",
             }

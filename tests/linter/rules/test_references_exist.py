@@ -3,15 +3,12 @@ from expecttest import assert_expected_inline
 from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import references_exist
-
-# TODO: This string is repeated over and over for tests, some commons
-# file should be created
-PURPOSELY_EMPTY = "empty for testing"
+from tests.linter.commons import IRRELEVANT
 
 
 def lint_and_get_result(references_quoted: int, references_sourced: int) -> str:
     usage = "".join(f"^{{{i}}}" for i in range(1, references_quoted + 1))
-    references = [{"name": PURPOSELY_EMPTY} for _ in range(references_sourced)]
+    references = [{"name": IRRELEVANT} for _ in range(references_sourced)]
 
     entry_ = entry.create_for_testing(usage=usage, references=references)
 

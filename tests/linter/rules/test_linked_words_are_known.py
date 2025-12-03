@@ -5,9 +5,7 @@ from expecttest import assert_expected_inline
 from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import linked_words_are_known
-
-PURPOSELY_EMPTY = "empty for testing"
-FIXED_WORD = "fixed word"
+from tests.linter.commons import FIXED_WORD, IRRELEVANT
 
 
 def lint_and_get_result(
@@ -23,7 +21,7 @@ def lint_and_get_result(
 
     if synonym is not None:
         kwargs["meanings"] = {
-            "noun": [{"definition": PURPOSELY_EMPTY, "synonyms": [synonym]}]
+            "noun": [{"definition": IRRELEVANT, "synonyms": [synonym]}]
         }
 
     if quoted_word is not None:
@@ -46,7 +44,7 @@ def test_related() -> None:
     )
     assert_expected_inline(
         lint_and_get_result(related_word=FIXED_WORD, known_words=[]),
-        """ERROR: Found "fixed word", which does not link to a valid word.""",
+        """ERROR: Found "word", which does not link to a valid word.""",
     )
 
 
@@ -57,7 +55,7 @@ def test_synonyms() -> None:
     )
     assert_expected_inline(
         lint_and_get_result(synonym=FIXED_WORD, known_words=[]),
-        """ERROR: Found "fixed word", which does not link to a valid word.""",
+        """ERROR: Found "word", which does not link to a valid word.""",
     )
 
 
@@ -68,5 +66,5 @@ def test_quoted() -> None:
     )
     assert_expected_inline(
         lint_and_get_result(quoted_word=FIXED_WORD, known_words=[]),
-        """ERROR: Found "fixed word", which does not link to a valid word.""",
+        """ERROR: Found "word", which does not link to a valid word.""",
     )

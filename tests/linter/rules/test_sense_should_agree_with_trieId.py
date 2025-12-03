@@ -3,8 +3,7 @@ from expecttest import assert_expected_inline
 from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import sense_should_agree_with_trieId
-
-FIXED_WORD = "word"
+from tests.linter.commons import FIXED_WORD
 
 
 def lint_and_get_result(
