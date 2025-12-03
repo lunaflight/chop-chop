@@ -79,7 +79,7 @@ def test_bad_entry_returns_error() -> None:
         lint_result_str,
         """\
 output:
-    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "word.json")']
+    ['[SII] (sense is int) in <word.json>\\nERROR: Found "non-number", expecting number']
 has_error:
     True""",
     )
@@ -139,7 +139,7 @@ def test_ignoring_unrelated_details_for_bad_entry() -> None:
         lint_result_str,
         """\
 output:
-    ['ERROR: Found "non-number", expecting number (rule "sense is int" [SII] in file "word.json")']
+    ['[SII] (sense is int) in <word.json>\\nERROR: Found "non-number", expecting number']
 has_error:
     True""",
     )
