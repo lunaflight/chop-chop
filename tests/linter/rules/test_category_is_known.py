@@ -23,5 +23,5 @@ def test_empty_is_ok() -> None:
 def test_unknown_category() -> None:
     assert_expected_inline(
         lint_and_get_result(categories=["unknown"]),
-        """ERROR: Found "unknown", known categories are [abbreviations, brands & companies, childish, conserved english, cuisine, cultural, drinks, education, games, insults, kueh, locations, meme-derived, nature, ns, online slang, onomatopoeia, particles, rhyming slang, sayings, snowclones, terms of address, units of measure, vulgar]""",
+        """ERROR: Found "unknown", known categories are [abbreviations, brands & companies, childish, conserved english, cuisine, cultural, drinks, education, games, insults, kueh, lgbtq+, locations, meme-derived, nature, ns, online slang, onomatopoeia, particles, politics, rhyming slang, sayings, snowclones, terms of address, units of measure, vulgar]""",
     )
