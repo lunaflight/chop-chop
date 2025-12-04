@@ -27,12 +27,12 @@ def test_equal_quoted_is_ok() -> None:
 # Test added to show behaviour, can be tweaked
 def test_less_quoted_is_ok() -> None:
     assert_expected_inline(
-        lint_and_get_result(references_quoted=2, references_sourced=5), """OK"""
+        lint_and_get_result(references_quoted=1, references_sourced=2), """OK"""
     )
 
 
 def test_more_quoted_is_bad() -> None:
     assert_expected_inline(
-        lint_and_get_result(references_quoted=5, references_sourced=2),
-        """ERROR: The largest reference number found is 5 but insufficient references (2) exist.""",
+        lint_and_get_result(references_quoted=2, references_sourced=1),
+        """ERROR: The largest reference number found is 2 but insufficient references (1) exist.""",
     )
