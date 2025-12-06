@@ -11,6 +11,7 @@ from src.linter.rules import (
     linked_words_are_known,
     no_repeat_definitions,
     no_todos,
+    origlink_has_no_plus,
     quotation_brace_has_caret,
     references_exist,
     references_have_no_links,
@@ -26,6 +27,7 @@ class T(Enum):
     LINKED_WORDS_ARE_KNOWN = "LWA"
     NO_REPEAT_DEFINITIONS = "NRD"
     NO_TODOS = "NTD"
+    ORIGLINK_HAS_NO_PLUS = "OHN"
     QUOTATION_BRACE_HAS_CARET = "QBH"
     REFERENCES_EXIST = "REX"
     REFERENCES_HAVE_NO_LINKS = "RHN"
@@ -60,6 +62,8 @@ def description(t: T) -> str:  # noqa: PLR0911, C901
             return head_word_hash_number.description()
         case T.LINKED_WORDS_ARE_KNOWN:
             return linked_words_are_known.description()
+        case T.ORIGLINK_HAS_NO_PLUS:
+            return origlink_has_no_plus.description()
         case T.NO_REPEAT_DEFINITIONS:
             return no_repeat_definitions.description()
         case T.NO_TODOS:
@@ -84,7 +88,7 @@ class LintRunError:
     message: str
 
 
-def lint(  # noqa: PLR0911, C901
+def lint(  # noqa: PLR0911, PLR0912, C901
     t: T, entry_: entry.T, is_known_word: Callable[[str], bool] | None
 ) -> rule_result.T | LintRunError:
     match t:
@@ -102,6 +106,8 @@ def lint(  # noqa: PLR0911, C901
                 )
 
             return linked_words_are_known.lint(entry_, is_known_word)
+        case T.ORIGLINK_HAS_NO_PLUS:
+            return origlink_has_no_plus.lint(entry_)
         case T.NO_REPEAT_DEFINITIONS:
             return no_repeat_definitions.lint(entry_)
         case T.NO_TODOS:
