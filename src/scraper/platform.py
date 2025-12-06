@@ -9,6 +9,7 @@ from src.scraper.platforms import invision, reddit, xenforo
 
 class SiteName(Enum):
     BLOWINGWIND = auto()
+    BMWSG = auto()
     HARDWAREZONE = auto()
     MYCARFORUM = auto()
     REDDIT = auto()
@@ -27,6 +28,8 @@ def to_stylised_string(t: T) -> str:  # noqa: PLR0911
     match t.site_name:
         case SiteName.BLOWINGWIND:
             return "Blowing Wind"
+        case SiteName.BMWSG:
+            return "BMW.SG"
         case SiteName.HARDWAREZONE:
             return "HardwareZone"
         case SiteName.MYCARFORUM:
@@ -51,6 +54,8 @@ def identifying_url_substring(site_name: SiteName) -> str:  # noqa: PLR0911
     match site_name:
         case SiteName.BLOWINGWIND:
             return "blowingwind.io"
+        case SiteName.BMWSG:
+            return "bmw-sg.com"
         case SiteName.HARDWAREZONE:
             return "hardwarezone.com.sg"
         case SiteName.MYCARFORUM:
@@ -81,7 +86,8 @@ def get_assertation(t: T) -> assertation.T:
         case SiteName.REDDIT:
             return reddit.of_url(t.url).assertation()
         case (
-            SiteName.HARDWAREZONE
+            SiteName.BMWSG
+            | SiteName.HARDWAREZONE
             | SiteName.SINGAPOREBRIDES
             | SiteName.SINGAPOREMOTHERHOOD
             | SiteName.SOFT
@@ -96,7 +102,8 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
         case SiteName.REDDIT:
             return reddit.of_url(t.url).soup_from_old
         case (
-            SiteName.HARDWAREZONE
+            SiteName.BMWSG
+            | SiteName.HARDWAREZONE
             | SiteName.SINGAPOREBRIDES
             | SiteName.SINGAPOREMOTHERHOOD
             | SiteName.SOFT
@@ -113,7 +120,8 @@ def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
                 url=t.url, soup_from_old=soup
             ).assertation()
         case (
-            SiteName.HARDWAREZONE
+            SiteName.BMWSG
+            | SiteName.HARDWAREZONE
             | SiteName.SINGAPOREBRIDES
             | SiteName.SINGAPOREMOTHERHOOD
             | SiteName.SOFT
