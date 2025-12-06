@@ -13,6 +13,7 @@ from src.linter.rules import (
     no_todos,
     quotation_brace_has_caret,
     references_exist,
+    references_have_no_links,
     sense_is_int,
     sense_should_agree_with_trieId,
 )
@@ -27,6 +28,7 @@ class T(Enum):
     NO_TODOS = "NTD"
     QUOTATION_BRACE_HAS_CARET = "QBH"
     REFERENCES_EXIST = "REX"
+    REFERENCES_HAVE_NO_LINKS = "RHN"
     SENSE_IS_INT = "SII"
     SENSE_SHOULD_AGREE_WITH_TRIEID = "SSA"
 
@@ -66,6 +68,8 @@ def description(t: T) -> str:  # noqa: PLR0911, C901
             return quotation_brace_has_caret.description()
         case T.REFERENCES_EXIST:
             return references_exist.description()
+        case T.REFERENCES_HAVE_NO_LINKS:
+            return references_have_no_links.description()
         case T.SENSE_IS_INT:
             return sense_is_int.description()
         case T.SENSE_SHOULD_AGREE_WITH_TRIEID:
@@ -106,6 +110,8 @@ def lint(  # noqa: PLR0911, C901
             return quotation_brace_has_caret.lint(entry_)
         case T.REFERENCES_EXIST:
             return references_exist.lint(entry_)
+        case T.REFERENCES_HAVE_NO_LINKS:
+            return references_have_no_links.lint(entry_)
         case T.SENSE_IS_INT:
             return sense_is_int.lint(entry_)
         case T.SENSE_SHOULD_AGREE_WITH_TRIEID:
