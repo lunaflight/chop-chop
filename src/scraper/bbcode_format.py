@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-
 def join_with_br(strings: list[str]) -> str:
     all_parts: list[str] = []
 

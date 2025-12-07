@@ -1,8 +1,8 @@
-from __future__ import annotations
-
 from datetime import datetime
-from typing import TYPE_CHECKING, cast
+from typing import cast
 from urllib.parse import parse_qs, urlparse
+
+from bs4 import BeautifulSoup, Tag
 
 from src.scraper import (
     assertation,
@@ -11,9 +11,6 @@ from src.scraper import (
     platform,
     url_fetcher,
 )
-
-if TYPE_CHECKING:
-    from bs4 import BeautifulSoup, Tag
 
 
 def comment_id(url: str) -> int | None:
