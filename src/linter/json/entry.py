@@ -27,6 +27,7 @@ class T(BaseModel):
     formsClean: list[str] | None = None
 
     id: int | None = None
+    sss: str | None = None
     word: str
     trieId: str
     sense: str
@@ -153,6 +154,7 @@ def get_linked_words(t: T) -> list[str]:
 
 def all_strings(t: T) -> list[str]:
     return [
+        *([t.sss] if t.sss is not None else []),
         t.word,
         t.trieId,
         t.sense,
