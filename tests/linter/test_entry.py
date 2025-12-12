@@ -120,6 +120,7 @@ def test_all_strings() -> None:
                 }
             ],
             "origlink": [next(ints)],
+            "audio": [{"speaker": next(ints), "file": next(ints)}],
             "meanings": {
                 next(ints): [
                     {
@@ -127,6 +128,7 @@ def test_all_strings() -> None:
                         "example": [{"eg": next(ints), "src": next(ints)}],
                         "synonyms": [next(ints)],
                         "antonyms": [next(ints)],
+                        "image": [{"src": next(ints), "caption": next(ints)}],
                     }
                 ]
             },
@@ -156,5 +158,5 @@ def test_all_strings() -> None:
     all_strings = entry.all_strings(entry_)
     assert_expected_inline(
         ", ".join(all_strings),
-        """0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29""",
+        """0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33""",
     )

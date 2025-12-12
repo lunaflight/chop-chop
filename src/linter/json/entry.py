@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, ValidationError
 
 from src.linter.json import (
     attestation_entry,
+    audio_entry,
     etymology_entry,
     part_of_speech_entry,
     particle_entry,
@@ -32,6 +33,7 @@ class T(BaseModel):
     etyNotes: str | None = None
     origin: list[etymology_entry.T]
     origlink: list[str] | None = None
+    audio: list[audio_entry.T] | None = None
     meanings: dict[str, part_of_speech_entry.T]
     usage: str | None = None
     particles: list[particle_entry.T] | None = None
@@ -67,6 +69,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
             }
         ],
         "origlink": [],
+        "audio": [{"speaker": "me", "file": "@"}],
         "meanings": {"noun": [{"definition": "noun definition"}]},
         "usage": "Usage notes.",
         "particles": [
@@ -111,6 +114,9 @@ def self_written_sentences(t: T) -> list[str]:
             etymology_entry.self_written_sentences(e) for e in t.origin
         ),
         *chain.from_iterable(
+            audio_entry.self_written_sentences(e) for e in (t.audio or [])
+        ),
+        *chain.from_iterable(
             particle_entry.self_written_sentences(e)
             for e in (t.particles or [])
         ),
@@ -133,6 +139,9 @@ def get_linked_words(t: T) -> list[str]:
             etymology_entry.get_linked_words(e) for e in t.origin
         ),
         *chain.from_iterable(
+            audio_entry.get_linked_words(e) for e in (t.audio or [])
+        ),
+        *chain.from_iterable(
             particle_entry.get_linked_words(e) for e in (t.particles or [])
         ),
         *(t.related or []),
@@ -150,6 +159,9 @@ def all_strings(t: T) -> list[str]:
         *([t.etyNotes] if t.etyNotes is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
         *(t.origlink or []),
+        *chain.from_iterable(
+            audio_entry.all_strings(e) for e in (t.audio or [])
+        ),
         *t.meanings.keys(),
         *chain.from_iterable(
             part_of_speech_entry.all_strings(e) for e in t.meanings.values()
