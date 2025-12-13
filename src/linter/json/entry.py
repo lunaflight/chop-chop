@@ -27,10 +27,11 @@ class T(BaseModel):
     formsClean: list[str] | None = None
 
     id: int | None = None
-    sss: str | None = None
     word: str
     trieId: str
     sense: str
+    sss: str | None = None
+    phonetics: str | None = None
     etyNotes: str | None = None
     origin: list[etymology_entry.T]
     origlink: list[str] | None = None
@@ -154,10 +155,11 @@ def get_linked_words(t: T) -> list[str]:
 
 def all_strings(t: T) -> list[str]:
     return [
-        *([t.sss] if t.sss is not None else []),
         t.word,
         t.trieId,
         t.sense,
+        *([t.sss] if t.sss is not None else []),
+        *([t.phonetics] if t.phonetics is not None else []),
         *([t.etyNotes] if t.etyNotes is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
         *(t.origlink or []),

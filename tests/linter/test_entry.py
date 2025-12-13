@@ -103,10 +103,11 @@ def test_all_strings() -> None:
     ints = (str(i) for i in count())
     entry_ = entry.create(
         {
-            "sss": next(ints),
             "word": next(ints),
             "trieId": next(ints),
             "sense": next(ints),
+            "sss": next(ints),
+            "phonetics": next(ints),
             "etyNotes": next(ints),
             "origin": [
                 {
@@ -159,5 +160,5 @@ def test_all_strings() -> None:
     number_of_strings = len(entry.all_strings(entry_))
     assert_expected_inline(
         str(number_of_strings),
-        """35""",
+        """36""",
     )
