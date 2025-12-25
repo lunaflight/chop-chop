@@ -6,6 +6,7 @@ from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import (
     attestations_contain_word,
+    ety_lengths_equal,
     hash_brace_contents,
     head_word_hash_number,
     linked_words_are_known,
@@ -22,6 +23,7 @@ from src.linter.rules import (
 
 class T(Enum):
     ATTESTATIONS_CONTAIN_WORD = "ACW"
+    ETY_LENGTHS_EQUAL = "ETE"
     HASH_BRACE_CONTENTS = "HBC"
     HEAD_WORD_HASH_NUMBER = "HWH"
     LINKED_WORDS_ARE_KNOWN = "LWA"
@@ -52,10 +54,12 @@ def of_code(code: str) -> T:
     raise ValueError(msg)
 
 
-def description(t: T) -> str:  # noqa: PLR0911, C901
+def description(t: T) -> str:  # noqa: PLR0911, C901, PLR0912
     match t:
         case T.ATTESTATIONS_CONTAIN_WORD:
             return attestations_contain_word.description()
+        case T.ETY_LENGTHS_EQUAL:
+            return ety_lengths_equal.description()
         case T.HASH_BRACE_CONTENTS:
             return hash_brace_contents.description()
         case T.HEAD_WORD_HASH_NUMBER:
@@ -94,6 +98,8 @@ def lint(  # noqa: PLR0911, PLR0912, C901
     match t:
         case T.ATTESTATIONS_CONTAIN_WORD:
             return attestations_contain_word.lint(entry_)
+        case T.ETY_LENGTHS_EQUAL:
+            return ety_lengths_equal.lint(entry_)
         case T.HASH_BRACE_CONTENTS:
             return hash_brace_contents.lint(entry_)
         case T.HEAD_WORD_HASH_NUMBER:
