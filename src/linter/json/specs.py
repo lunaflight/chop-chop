@@ -10,6 +10,7 @@ CATEGORIES = [
     "drinks",
     "education",
     "games",
+    "healthcare",
     "insults",
     "kueh",
     "lgbtq+",
