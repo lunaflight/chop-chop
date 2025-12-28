@@ -23,7 +23,7 @@ from src.linter.rules import (
 
 class T(Enum):
     ATTESTATIONS_CONTAIN_WORD = "ACW"
-    ETY_LENGTHS_EQUAL = "ETE"
+    ETY_LENGTHS_EQUAL = "ELE"
     HASH_BRACE_CONTENTS = "HBC"
     HEAD_WORD_HASH_NUMBER = "HWH"
     LINKED_WORDS_ARE_KNOWN = "LWA"
