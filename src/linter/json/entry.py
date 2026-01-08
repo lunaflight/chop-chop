@@ -33,6 +33,7 @@ class T(BaseModel):
     sss: str | None = None
     phonetics: str | None = None
     etyNotes: str | None = None
+    ngram: str | None = None
     origin: list[etymology_entry.T]
     origlink: list[str] | None = None
     audio: list[audio_entry.T] | None = None
@@ -63,6 +64,7 @@ def create_for_testing(**kwargs: Any) -> T:  # noqa: ANN401
         "trieId": "test word",
         "sense": "0",
         "etyNotes": "Etymology notes.",
+        "ngram": "https://ngram.link/",
         "origin": [
             {
                 "etyPath": ["language"],
@@ -161,6 +163,7 @@ def all_strings(t: T) -> list[str]:
         *([t.sss] if t.sss is not None else []),
         *([t.phonetics] if t.phonetics is not None else []),
         *([t.etyNotes] if t.etyNotes is not None else []),
+        *([t.ngram] if t.ngram is not None else []),
         *chain.from_iterable(etymology_entry.all_strings(e) for e in t.origin),
         *(t.origlink or []),
         *chain.from_iterable(

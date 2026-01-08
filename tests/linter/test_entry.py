@@ -109,6 +109,7 @@ def test_all_strings() -> None:
             "sss": next(ints),
             "phonetics": next(ints),
             "etyNotes": next(ints),
+            "ngram": next(ints),
             "origin": [
                 {
                     "etyPath": [next(ints)],
@@ -160,5 +161,5 @@ def test_all_strings() -> None:
     number_of_strings = len(entry.all_strings(entry_))
     assert_expected_inline(
         str(number_of_strings),
-        """36""",
+        """37""",
     )
