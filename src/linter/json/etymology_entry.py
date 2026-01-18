@@ -8,6 +8,7 @@ class T(BaseModel):
     etyScheme: list[str] | None = None
     etyType: list[str] | None = None
     special: list[str] | None = None
+    internal: list[bool] | None = None
     etyScript: list[str] | None = None
     etyTrad: list[str] | None = None
     etyRoman: list[str]
