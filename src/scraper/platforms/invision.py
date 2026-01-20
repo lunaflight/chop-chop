@@ -1,12 +1,11 @@
 from datetime import datetime
-from typing import cast
 from urllib.parse import parse_qs, urlparse
 
 from bs4 import BeautifulSoup, Tag
 
 from src.scraper import (
     assertation,
-    bbcode_format,
+    body_format,
     citation_format,
     platform,
     url_fetcher,
@@ -52,7 +51,7 @@ class T:
         self.url = url
 
     def post(self) -> str:
-        contents = (
+        body_with_children = (
             narrow_soup_to_comment_id(
                 # type: ignore[union-attr]
                 soup=self.soup,
@@ -60,19 +59,14 @@ class T:
             )
             .find("div", class_="cPost_contentWrap")
             .find("div", {"data-role": "commentContent"})
-            .find_all("p", recursive=False)
         )
 
-        paragraphs = []
-
-        if self.comment_id is None:
-            paragraphs.append(self.title())
-
-        body_paragraphs = cast("list[str]", [p.text for p in contents])
-
-        paragraphs.extend(body_paragraphs)
-
-        return bbcode_format.join_with_br(paragraphs)
+        return body_format.create(
+            title=self.title(),
+            body_with_children=body_with_children,
+            is_reply=self.comment_id is not None,
+            only_use_br_as_line_break=False,
+        )
 
     def timestamp(self) -> datetime:
         datetime_str = (

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup, Tag
 
 from src.scraper import (
     assertation,
-    bbcode_format,
+    body_format,
     citation_format,
     platform,
     url_fetcher,
@@ -51,38 +51,19 @@ class T:
         self.url = url
 
     def post(self) -> str:
-        contents = (
-            narrow_soup_to_post_id(
-                # type: ignore[union-attr]
-                soup=self.soup,
-                post_id=self.post_id,
-            )
-            .find("div", {"data-role": "commentContent"})
-            .children
+        body_with_children = narrow_soup_to_post_id(
+            # type: ignore[union-attr]
+            soup=self.soup,
+            post_id=self.post_id,
+        ).find("div", {"data-role": "commentContent"})
+        assert isinstance(body_with_children, Tag)
+
+        return body_format.create(
+            title=self.title(),
+            body_with_children=body_with_children,
+            is_reply=self.post_id is not None,
+            only_use_br_as_line_break=False,
         )
-
-        paragraphs = []
-        if self.post_id is None:
-            paragraphs.append(self.title())
-
-        # TODO: remove duped code
-        accumulated_paragraph = ""
-        for element in contents:
-            # "user said:" blockquotes are bloat information that are not
-            # attributed to this author
-            if hasattr(element, "name") and element.name == "blockquote":
-                continue
-            # every logical paragraph is separated by <br> in HardwareZone
-            if hasattr(element, "name") and element.name == "br":
-                paragraphs.append(accumulated_paragraph)
-                accumulated_paragraph = ""
-            elif hasattr(element, "get_text"):
-                accumulated_paragraph += element.get_text()
-            else:
-                accumulated_paragraph += str(element)
-        paragraphs.append(accumulated_paragraph)
-
-        return bbcode_format.join_with_br(paragraphs)
 
     def timestamp(self) -> datetime:
         datetime_str = (

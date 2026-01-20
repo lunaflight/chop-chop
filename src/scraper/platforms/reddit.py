@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup, Tag
 
 from src.scraper import (
     assertation,
-    bbcode_format,
+    body_format,
     citation_format,
     url_fetcher,
 )
@@ -40,26 +40,24 @@ class T:
         self.is_reply = is_reply
 
     def post(self) -> str:
-        paragraphs = [] if self.is_reply else [self.title()]
-
         try:
-            elements = (
+            body_with_children = (
                 narrow_soup(  # type: ignore[union-attr]
                     self.soup_from_old, is_reply=self.is_reply
                 )
                 .find("div", class_="usertext-body")
-                .find_all(["p", "li"])
+                .find("div")
             )
         except AttributeError:
-            elements = []
+            body_with_children = None
+        assert isinstance(body_with_children, Tag | None)
 
-        for element in elements:
-            if element.name == "p":
-                paragraphs.append(element.get_text())
-            elif element.name == "li":
-                paragraphs.append(f" - {element.get_text()}")
-
-        return bbcode_format.join_with_br(paragraphs)
+        return body_format.create(
+            title=self.title(),
+            body_with_children=body_with_children,
+            is_reply=self.is_reply,
+            only_use_br_as_line_break=False,
+        )
 
     def subreddit(self) -> str:
         path = urlparse(self.modern_url).path.split("/")

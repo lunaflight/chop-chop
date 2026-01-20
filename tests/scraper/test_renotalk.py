@@ -33,7 +33,7 @@ def test_main_post() -> None:
         json,
         """\
 {
-    "eg": "Housewarming Invite<br>Dear Friends! Finally after putting up the pictures of my done-up place, I can call a chapter to this fabulous time spent in researching and chit-chatting with my RT friends. As i mentioned before in my RT blog... I won't be coming in much or even at all in the future, I've arranged a gathering over at my place during CNY. I hope you guys and gals who have been tagged were able to receive the PM.I didn't extend the invite to everyone my apologies because some ppl rather not attend. Do let me know if you can or cannot make it! or drop me a PM if you wanna come by but somehow you were not informed and i'll send you the details. Cheers!",
+    "eg": "Housewarming Invite<br>Dear Friends!<br>Finally after putting up the pictures of my done-up place, I can call a chapter to this fabulous time spent in researching and chit-chatting with my RT friends. As i mentioned before in my RT blog... I won't be coming in much or even at all in the future, I've arranged a gathering over at my place during CNY.<br>I hope you guys and gals who have been tagged were able to receive the PM.<br>I didn't extend the invite to everyone my apologies because some ppl rather not attend. Do let me know if you can or cannot make it! or drop me a PM if you wanna come by but somehow you were not informed and i'll send you the details.<br>Cheers!",
     "src": "2008 Jan 6, Phantom. RenoTalk, \\"Housewarming Invite\\". https://www.renotalk.com/forum/topic/11895-housewarming-invite/"
 }""",
     )
