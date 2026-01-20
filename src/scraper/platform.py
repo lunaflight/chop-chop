@@ -4,7 +4,7 @@ from enum import Enum, auto
 from bs4 import BeautifulSoup
 
 from src.scraper import assertation
-from src.scraper.platforms import invision, reddit, xenforo
+from src.scraper.platforms import invision, reddit, renotalk, xenforo
 
 
 class SiteName(Enum):
@@ -13,6 +13,7 @@ class SiteName(Enum):
     HARDWAREZONE = auto()
     MYCARFORUM = auto()
     REDDIT = auto()
+    RENOTALK = auto()
     SINGAPOREBRIDES = auto()
     SINGAPOREMOTHERHOOD = auto()
     SOFT = auto()
@@ -36,6 +37,8 @@ def to_stylised_string(t: T) -> str:  # noqa: PLR0911
             return "Mycarforum"
         case SiteName.REDDIT:
             return "Reddit"
+        case SiteName.RENOTALK:
+            return "RenoTalk"
         case SiteName.SINGAPOREBRIDES:
             return "SingaporeBrides"
         case SiteName.SINGAPOREMOTHERHOOD:
@@ -62,6 +65,8 @@ def identifying_url_substring(site_name: SiteName) -> str:  # noqa: PLR0911
             return "mycarforum.com"
         case SiteName.REDDIT:
             return "reddit.com"
+        case SiteName.RENOTALK:
+            return "renotalk.com"
         case SiteName.SINGAPOREBRIDES:
             return "singaporebrides.com"
         case SiteName.SINGAPOREMOTHERHOOD:
@@ -93,6 +98,8 @@ def get_assertation(t: T) -> assertation.T:
             | SiteName.SOFT
         ):
             return xenforo.of_url(t.url).assertation()
+        case SiteName.RENOTALK:
+            return renotalk.of_url(t.url).assertation()
 
 
 def get_soup_for_testing(t: T) -> BeautifulSoup:
@@ -109,6 +116,8 @@ def get_soup_for_testing(t: T) -> BeautifulSoup:
             | SiteName.SOFT
         ):
             return xenforo.of_url(t.url).soup
+        case SiteName.RENOTALK:
+            return renotalk.of_url(t.url).soup
 
 
 def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
@@ -127,3 +136,5 @@ def get_assertation_for_testing(t: T, soup: BeautifulSoup) -> assertation.T:
             | SiteName.SOFT
         ):
             return xenforo.of_url_with_soup(url=t.url, soup=soup).assertation()
+        case SiteName.RENOTALK:
+            return renotalk.of_url_with_soup(url=t.url, soup=soup).assertation()
