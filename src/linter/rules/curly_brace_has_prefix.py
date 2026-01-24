@@ -14,7 +14,7 @@ PREFIXLESS_BRACE_REGEX = rf"(?<![{escaped_chars}])\{{(.*)\}}"
 
 
 def lint(entry_: entry.T) -> rule_result.T:
-    sentences = entry.self_written_sentences(entry_)
+    sentences = entry.all_strings(entry_)
 
     for sentence in sentences:
         match = re.search(PREFIXLESS_BRACE_REGEX, sentence)
