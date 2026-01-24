@@ -16,6 +16,10 @@ def test_ok() -> None:
     )
 
 
+def test_not_case_sensitive() -> None:
+    assert_expected_inline(lint_and_get_result(categories=["Ns"]), """OK""")
+
+
 def test_empty_is_ok() -> None:
     assert_expected_inline(lint_and_get_result(categories=[]), """OK""")
 

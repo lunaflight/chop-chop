@@ -14,7 +14,7 @@ def lint(entry_: entry.T) -> rule_result.T:
         return rule_result.ok()
 
     for category in categories:
-        if category not in CATEGORIES:
+        if category.lower() not in (c.lower() for c in CATEGORIES):
             return rule_result.error(
                 f'Found "{category}", known categories are '
                 f"[{', '.join(CATEGORIES)}]"
