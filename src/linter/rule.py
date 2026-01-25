@@ -6,6 +6,7 @@ from src.linter import rule_result
 from src.linter.json import entry
 from src.linter.rules import (
     attestations_contain_word,
+    brackets_are_balanced,
     category_is_known,
     curly_brace_has_prefix,
     ety_lengths_equal,
@@ -25,6 +26,7 @@ from src.linter.rules import (
 
 class T(Enum):
     ATTESTATIONS_CONTAIN_WORD = "ACW"
+    BRACKETS_ARE_BALANCED = "BAB"
     CATEGORY_IS_KNOWN = "CIK"
     CURLY_BRACE_HAS_PREFIX = "CBP"
     ETY_LENGTHS_EQUAL = "ELE"
@@ -62,6 +64,8 @@ def description(t: T) -> str:  # noqa: PLR0911, C901, PLR0912
     match t:
         case T.ATTESTATIONS_CONTAIN_WORD:
             return attestations_contain_word.description()
+        case T.BRACKETS_ARE_BALANCED:
+            return brackets_are_balanced.description()
         case T.CATEGORY_IS_KNOWN:
             return category_is_known.description()
         case T.CURLY_BRACE_HAS_PREFIX:
@@ -106,6 +110,8 @@ def lint(  # noqa: PLR0911, PLR0912, C901
     match t:
         case T.ATTESTATIONS_CONTAIN_WORD:
             return attestations_contain_word.lint(entry_)
+        case T.BRACKETS_ARE_BALANCED:
+            return brackets_are_balanced.lint(entry_)
         case T.CATEGORY_IS_KNOWN:
             return category_is_known.lint(entry_)
         case T.CURLY_BRACE_HAS_PREFIX:
