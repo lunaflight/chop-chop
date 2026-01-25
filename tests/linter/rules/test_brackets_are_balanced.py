@@ -24,6 +24,34 @@ def test_blank_is_ok() -> None:
     )
 
 
+def test_starts_in_smiley() -> None:
+    assert_expected_inline(
+        lint_and_get_result(string="(: my sentence"),
+        """OK""",
+    )
+
+
+def test_ends_in_smiley() -> None:
+    assert_expected_inline(
+        lint_and_get_result(string="my sentence :)"),
+        """OK""",
+    )
+
+
+def test_ends_in_smiley_and_quote() -> None:
+    assert_expected_inline(
+        lint_and_get_result(string='"quoted my sentence :)"'),
+        """OK""",
+    )
+
+
+def test_fake_smiley() -> None:
+    assert_expected_inline(
+        lint_and_get_result(string="they (plural);"),
+        """OK""",
+    )
+
+
 def test_unclosed_bracket_sequence() -> None:
     assert_expected_inline(
         lint_and_get_result(string="("),
