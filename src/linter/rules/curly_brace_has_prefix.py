@@ -5,10 +5,10 @@ from src.linter.json import entry
 
 
 def description() -> str:
-    return "Braces should be preceded by a caret (^) or at sign (@)."
+    return "Braces should be preceded by ^, @ or #."
 
 
-OKAY_IF_AFTER_CHARACTERS = ["@", "^"]
+OKAY_IF_AFTER_CHARACTERS = ["@", "^", "#"]
 escaped_chars = "".join(re.escape(char) for char in OKAY_IF_AFTER_CHARACTERS)
 PREFIXLESS_BRACE_REGEX = rf"(?<![{escaped_chars}])\{{(.*)\}}"
 

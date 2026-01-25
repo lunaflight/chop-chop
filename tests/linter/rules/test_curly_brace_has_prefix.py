@@ -34,6 +34,13 @@ def test_has_caret() -> None:
     )
 
 
+def test_has_pound() -> None:
+    assert_expected_inline(
+        lint_and_get_result(quoted_str="#{likely}"),
+        """OK""",
+    )
+
+
 def test_no_prefix() -> None:
     assert_expected_inline(
         lint_and_get_result(quoted_str="{word}"),
