@@ -14,6 +14,7 @@ from src.linter.rules import (
     head_word_hash_number,
     linked_words_are_known,
     no_repeat_definitions,
+    no_repeat_references,
     no_todos,
     origlink_has_no_plus,
     quotation_brace_has_caret,
@@ -34,6 +35,7 @@ class T(Enum):
     HEAD_WORD_HASH_NUMBER = "HWH"
     LINKED_WORDS_ARE_KNOWN = "LWA"
     NO_REPEAT_DEFINITIONS = "NRD"
+    NO_REPEAT_REFERENCES = "NRF"
     NO_TODOS = "NTD"
     ORIGLINK_HAS_NO_PLUS = "OHN"
     QUOTATION_BRACE_HAS_CARET = "QBH"
@@ -82,6 +84,8 @@ def description(t: T) -> str:  # noqa: PLR0911, C901, PLR0912
             return origlink_has_no_plus.description()
         case T.NO_REPEAT_DEFINITIONS:
             return no_repeat_definitions.description()
+        case T.NO_REPEAT_REFERENCES:
+            return no_repeat_references.description()
         case T.NO_TODOS:
             return no_todos.description()
         case T.QUOTATION_BRACE_HAS_CARET:
@@ -134,6 +138,8 @@ def lint(  # noqa: PLR0911, PLR0912, C901
             return origlink_has_no_plus.lint(entry_)
         case T.NO_REPEAT_DEFINITIONS:
             return no_repeat_definitions.lint(entry_)
+        case T.NO_REPEAT_REFERENCES:
+            return no_repeat_references.lint(entry_)
         case T.NO_TODOS:
             return no_todos.lint(entry_)
         case T.QUOTATION_BRACE_HAS_CARET:
