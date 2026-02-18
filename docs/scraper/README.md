@@ -18,7 +18,7 @@ certain posts, as outlined
 
 To be able to scrape these posts, you must create an account on HardwareZone
 and verify your identity via SingPass. Then, you need to provide your username
-and password in `config/`. See the [README](README.md) in the root
+and password in `config/`. See the [README](../../README.md) in the root
 directory for more details about initialising this.
 
 To confirm the health of your script, run `inv check --clear-cache`, to ensure
