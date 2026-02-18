@@ -47,6 +47,12 @@ relative path issues:
 4. `python -m src.scraper.main`
     - Run the script.
 
+# Credentials
+You may wish to copy `config/credentials_template.json` to `config/credentials.json`,
+containing various configuration details.
+This file is not committed and should not be shared; `.gitignore` ensures that
+`credentials.json` will not be committed.
+
 # Tools
 ## Scraper
 This tool helps scrape posts off the internet and format and credit the post in

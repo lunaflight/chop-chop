@@ -90,3 +90,21 @@ def test_emoji_image_not_captured() -> None:
     "src": "2025 Jan 26, ezowulf. HardwareZone, \\"Value dollar store made me realised how overcharged other shops are [NO referral links]\\". https://forums.hardwarezone.com.sg/threads/value-dollar-store-made-me-realised-how-overcharged-other-shops-are-no-referral-links.6020067/post-155126104"
 }""",
     )
+
+
+def test_able_to_log_in_and_read_age_restricted_post() -> None:
+    test_suffix_for_caching = "login_required"
+    url = "https://forums.hardwarezone.com.sg/threads/whats-the-thread-that-have-all-the-scammers-faces-revealed-alon-with-their-name-and-summary.6938055/"
+    json = src_interfacer.get_assertation_as_json(
+        url=url,
+        test_suffix_for_caching=test_suffix_for_caching,
+    )
+
+    assert_expected_inline(
+        json,
+        """\
+{
+    "eg": "Whats the thread that have all the scammers faces revealed, alon with their name and summary?<br>There was one has the scammers profile listed one by one. I cant seem to find back that thread",
+    "src": "2023 Aug 18, TimsTom. HardwareZone, \\"Whats the thread that have all the scammers faces revealed, alon with their name and summary?\\". https://forums.hardwarezone.com.sg/threads/whats-the-thread-that-have-all-the-scammers-faces-revealed-alon-with-their-name-and-summary.6938055/"
+}""",
+    )

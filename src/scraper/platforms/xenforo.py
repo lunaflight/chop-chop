@@ -1,8 +1,10 @@
+import logging
 from datetime import datetime
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup, Tag
 
+from config import credentials
 from src.scraper import (
     assertation,
     body_format,
@@ -10,6 +12,9 @@ from src.scraper import (
     platform,
     url_fetcher,
 )
+from src.scraper.platforms import hardwarezone_session
+
+LOGGER = logging.getLogger(__name__)
 
 
 # Returns the post_id in the format [post-NNNNN]
@@ -112,5 +117,12 @@ def of_url_with_soup(url: str, soup: BeautifulSoup) -> T:
 
 
 def of_url(url: str) -> T:
-    soup = url_fetcher.get_soup(url)
+    cookie_or_error = hardwarezone_session.get_session_cookie(credentials.get())
+    if isinstance(cookie_or_error, ValueError):
+        LOGGER.warning(str(cookie_or_error))
+        hardwarezone_cookie = None
+    else:
+        hardwarezone_cookie = cookie_or_error
+
+    soup = url_fetcher.get_soup(url, cookies=hardwarezone_cookie)
     return of_url_with_soup(url=url, soup=soup)

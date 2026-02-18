@@ -11,6 +11,19 @@ how to obtain a URL for the platform.
 | RenoTalk | RenoTalk | https://www.renotalk.com/forum/topic/11895-housewarming-invite/page/588/?tab=comments#comment-304037 | Click the share button in the top-right corner. |
 | Xenforo | BMW.SG, HardwareZone, SingaporeBrides, SingaporeMotherhood, S.O.F.T. | https://singaporemotherhood.com/forum/threads/female-obgyn-recommendations.298237/post-8821891 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
 
+# HardwareZone Age Restriction
+Around late 2025 / early 2026, HardwareZone introduced an age restriction on
+certain posts, as outlined
+[here](https://forums.hardwarezone.com.sg/help/minimum_age/).
+
+To be able to scrape these posts, you must create an account on HardwareZone
+and verify your identity via SingPass. Then, you need to provide your username
+and password in `config/`. See the [README](README.md) in the root
+directory for more details about initialising this.
+
+To confirm the health of your script, run `inv check --clear-cache`, to ensure
+that it attempts to re-fetch the age-restricted thread.
+
 # Disclaimer on Web Scraping
 For ethical reasons, the use of scraping in this repository is limited.
 
