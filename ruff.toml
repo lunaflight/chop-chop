@@ -17,8 +17,28 @@ ignore = [
 "D212",
 "EM101",
 "FIX002",
+"PLC1901",
 "S101",
 "TD002",
 "TD003",
 "TRY003",
+]
+
+[lint.per-file-ignores]
+"tests/**/test_*.py" = ["E501"]  # expecttest is used, so this line too long is ok
+
+[lint.pep8-naming]
+# names loaned from JSON can violate the rule
+ignore-names = [
+"*etyLit*",
+"*etyNotes*",
+"*etyPath*",
+"*etyRoman*",
+"*etyScheme*",
+"*etyScript*",
+"*etyTrad*",
+"*etyType*",
+"*exampleSource*",
+"*trieId*",
+"*formsClean*",
 ]

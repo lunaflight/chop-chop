@@ -1,0 +1,15 @@
+from datetime import datetime
+
+from src.windows_hacks import AM_WINDOWS
+
+# Windows uses Microsoft strftime format, others use GNU strftime format
+YYYY_MMM_D_FMT = "%Y %b %#d" if AM_WINDOWS else "%Y %b %-d"
+
+
+def online_with_title(
+    timestamp: datetime, name: str, platform_name: str, title: str, url: str
+) -> str:
+    return (
+        f"{timestamp.strftime(YYYY_MMM_D_FMT)}, {name}. "
+        f'{platform_name}, "{title}". {url}'
+    )

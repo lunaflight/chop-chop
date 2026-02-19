@@ -1,13 +1,14 @@
-# Credit Formatter
-The aim of this repository is to provide an easy way to credit people online
-for their linguistic attestations.
+# Chop Chop Linguistic Compilation Tool
+The aim of this repository is to provide tools for making compilation for the
+[Chimbridge Singlish Dictionary](https://singlishdict.app/) easier.
 
-It employs Python and web scraping. Since we expect to query the website only
-once for the information, web scraping is kept to a minimum, responsibly.
+It consists of some tools, which are outlined further below in this `README.md`
+file.
 
 # Installation
 Ensure that you are using `Python 3.13`, but I suspect any sufficiently
 modern version should work fine.
+
 `Python 3.10` and below will not work as it does not support some ISO date formats. 
 
 Clone this repository and do the following from the **project root** to avoid
@@ -24,9 +25,8 @@ relative path issues:
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
 
-5. `make args=--help`
-    - Run the script. Note the `PYTHONPATH` environment variable to help it
-    locate packages.
+4. `chmod +x scripts/*.sh`
+    - This ensures that the scripts are executable.
 	
 ## Windows
 ### Automatic:
@@ -44,17 +44,23 @@ relative path issues:
 3. `pip install -r requirements.txt`
     - This installs the required dependencies for the project.
 
-5. `python -m src.main`
+4. `python -m src.scraper.main`
     - Run the script.
 
-# Quick Start
-Run `./src/main.py`.
+# Credentials
+You may wish to copy `config/credentials_template.json` to `config/credentials.json`,
+containing various configuration details.
+This file is not committed and should not be shared; `.gitignore` ensures that
+`credentials.json` will not be committed.
 
-The following table describes the list of supported platforms and notes on
-how to obtain a URL for the platform.
+# Tools
+## Scraper
+This tool helps scrape posts off the internet and format and credit the post in
+a nice format conveniently.
 
-| **Platform** | **Examples** | **Sample Link to Copy and Use** | **Notes** |
-|--------------|--------------|---------------------------------|-----------|
-| Mycarforum | Mycarforum | https://www.mycarforum.com/forums/topic/2111034-bringbuy-beer-from-sg-to-bintan-resorts/?do=findComment&comment=2114128 | Click on the 3 dots, then Share, then copy the link shown. |
-| Reddit | Reddit | https://www.reddit.com/r/singapore/comments/1o5i3fl/contract_for_marine_parade_free_shuttle_bus/nj9euqx/ | Click `permalink` on the comment to obtain a direct link. |
-| Xenforo Websites | HardwareZone, SingaporeBrides, SingaporeMotherhood, S.O.F.T. | https://singaporemotherhood.com/forum/threads/female-obgyn-recommendations.298237/post-8821891 | Hover the link icon on the comment and click the copy icon to obtain a direct link. |
+See its [README](docs/scraper/README.md) for more details.
+
+## Linter
+This tool runs some rules against JSON files to check for mistakes automatically.
+
+See its [README](docs/linter/README.md) for more details.

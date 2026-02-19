@@ -1,13 +1,17 @@
 name: Continuous Integration
+
 on: 
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,4 +27,4 @@ jobs:
           pip install -r requirements.txt
           
       - name: Run Checks
-        run: make ci-check
+        run: inv check --am-github

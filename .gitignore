@@ -3,5 +3,7 @@ __pycache__/
 .ruff_cache/
 .pytest_cache/
 
-source/
 venv/
+config/credentials.json
+
+*.bak
